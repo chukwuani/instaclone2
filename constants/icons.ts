@@ -6,7 +6,7 @@ import explore from "public/icons/explore.svg";
 import reels from "public/icons/reel.svg";
 import message from "public/icons/message.svg";
 import notification from "public/icons/notification.svg";
-import notificationActive from "public/icons/notificationFilled.svg";
+import notificationActive from "public/icons/notificationfilled.svg";
 import create from "public/icons/createPost.svg";
 import more from "public/icons/moreOptions.svg";
 import moreActive from "public/icons/moreOptionsFilled.svg";

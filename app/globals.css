@@ -893,6 +893,10 @@ aside {
     --border-separator: transparent;
   }
 
+  [data-theme='dark']:root {
+  --border-separator: transparent;
+}
+
   .nav{
     display: none;
   }

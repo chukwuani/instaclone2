@@ -5,6 +5,7 @@ import MoreOption from "./MoreOption";
 
 import { icons } from "@/constants";
 import { useState } from "react";
+import ProfileAvatar from "./ProfileAvatar";
 
 const Navbar = ({ active }: { active: string }) => {
 	const [activeLink, setActiveLink] = useState(active);
@@ -117,14 +118,7 @@ const Navbar = ({ active }: { active: string }) => {
 
 					<Link className="nav-links" href="/profile">
 						<span className="flex items-center gap-4">
-							<Image
-								className="profile-pic"
-								src="/images/placeholder.png"
-								alt="Profile picture"
-								width={24}
-								height={24}
-								title="Profile"
-							/>
+							<ProfileAvatar size={24} />
 							<p className="nav-links-text">Profile</p>
 						</span>
 					</Link>

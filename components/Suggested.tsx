@@ -1,8 +1,10 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
+import { useUser } from "@clerk/nextjs";
 
 const Suggested = () => {
+	const { user } = useUser();
 	const currentYear = new Date().getFullYear();
 	const suggestion = [
 		{
@@ -41,7 +43,7 @@ const Suggested = () => {
 		<aside>
 			<section className="flex items-center px-4">
 				<Image
-					src="/images/placeholder.png"
+					src={user?.imageUrl ?? "/images/placeholder.png"}
 					alt="Profile picture"
 					width={44}
 					height={44}

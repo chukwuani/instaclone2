@@ -5,6 +5,7 @@ import Link from "next/link";
 import LoginForm from "@/components/LoginForm";
 import { currentUser } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
+import LoginWithGoogle from "@/components/LoginWithGoogle";
 
 export const metadata: Metadata = {
 	title: "Login • Instagram",
@@ -37,10 +38,7 @@ export default async function Home() {
 				</section>
 
 				<section className="other-login-option">
-					<button className="flex items-center justify-center font-semibold text-sm">
-						<Image className="mr-2 w-4 h-4" src={icons.google} alt="Google-logo" />
-						Log in with Google
-					</button>
+					<LoginWithGoogle />
 
 					<Link href="#" className="text-xs font-normal">
 						Forgot password?

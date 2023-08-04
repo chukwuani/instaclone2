@@ -7,6 +7,7 @@ import { useSignUp } from "@clerk/nextjs";
 import { icons } from "@/constants";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import SignUpWithGoogle from "./SignUpWithGoogle";
 
 const SignupForm = () => {
 	const router = useRouter();
@@ -48,10 +49,7 @@ const SignupForm = () => {
 			method="post"
 			onSubmit={handleSignUp}
 			className="flex flex-col justify-center w-full mb-6 !mt-0 signin-form">
-			<button className="google-login-btn" type="button">
-				<Image className="w-4 h-4 mr-2" src={icons.googleWithBg} alt="Google logo" />
-				Log in with Google
-			</button>
+			<SignUpWithGoogle />
 
 			<section className="or-seperator">
 				<div className="left-seperator" />

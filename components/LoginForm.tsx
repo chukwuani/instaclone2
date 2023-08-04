@@ -7,12 +7,13 @@ import { toast } from "sonner";
 
 const LoginForm = () => {
 	const router = useRouter();
-	const { signIn, setActive } = useSignIn();
+	const { signIn, setActive, isLoaded } = useSignIn();
 	const [userName, setUserName] = useState("");
 	const [password, setPassword] = useState("");
 
 	const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
+		if (!isLoaded) return;
 		try {
 			const result = await signIn.create({
 				identifier: userName,

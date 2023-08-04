@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation";
 
 const SignupForm = () => {
 	const router = useRouter();
-	const { signUp, setActive } = useSignUp();
+	const { signUp, setActive, isLoaded } = useSignUp();
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [fullName, setFullName] = useState("");
@@ -18,9 +18,9 @@ const SignupForm = () => {
 
 	const handleSignUp = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-
+		if (!isLoaded) return;
 		try {
-			const result = await signUp.create({
+			const result = await signUp?.create({
 				emailAddress: email,
 				password: password,
 				username: userName,
@@ -28,7 +28,7 @@ const SignupForm = () => {
 				lastName: fullName.split(" ")[1],
 			});
 
-			if (result.status === "complete") {
+			if (result?.status === "complete") {
 				await setActive({ session: result.createdSessionId });
 
 				router.push(`${window.location.origin}/`);

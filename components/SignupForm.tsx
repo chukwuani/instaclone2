@@ -2,18 +2,45 @@
 
 import Terms from "./Terms";
 import Image from "next/image";
-
+import { toast } from "sonner";
+import { useSignUp } from "@clerk/nextjs";
 import { icons } from "@/constants";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 const SignupForm = () => {
+	const router = useRouter();
+	const { signUp, setActive } = useSignUp();
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [fullName, setFullName] = useState("");
 	const [userName, setUserName] = useState("");
 
-	const handleSignUp = async () => {
-		console.log("Doing stuff");
+	const handleSignUp = async (e: React.FormEvent<HTMLFormElement>) => {
+		e.preventDefault();
+
+		try {
+			const result = await signUp.create({
+				emailAddress: email,
+				password: password,
+				username: userName,
+				firstName: fullName.split(" ")[0],
+				lastName: fullName.split(" ")[1],
+			});
+
+			if (result.status === "complete") {
+				await setActive({ session: result.createdSessionId });
+
+				router.push(`${window.location.origin}/`);
+			} else {
+				/*Investigate why the login hasn't completed */
+				console.log(result);
+			}
+		} catch (err: any) {
+			err.errors.map((msg: { message: string }) => {
+				toast.error(msg.message);
+			});
+		}
 	};
 
 	return (
@@ -26,13 +53,13 @@ const SignupForm = () => {
 				Log in with Google
 			</button>
 
-			<div className="or-seperator">
+			<section className="or-seperator">
 				<div className="left-seperator" />
 				<p>OR</p>
 				<div className="right-seperator" />
-			</div>
+			</section>
 
-			<div className="form-col">
+			<section className="form-col">
 				<label htmlFor="email" className={email.length > 0 ? "login-label" : undefined}>
 					Email
 				</label>
@@ -46,9 +73,9 @@ const SignupForm = () => {
 					value={email}
 					onChange={(e) => setEmail(e.target.value)}
 				/>
-			</div>
+			</section>
 
-			<div className="form-col">
+			<section className="form-col">
 				<label htmlFor="fullname" className={fullName.length > 0 ? "login-label" : undefined}>
 					Full Name
 				</label>
@@ -61,9 +88,9 @@ const SignupForm = () => {
 					value={fullName}
 					onChange={(e) => setFullName(e.target.value)}
 				/>
-			</div>
+			</section>
 
-			<div className="form-col">
+			<section className="form-col">
 				<label htmlFor="username" className={userName.length > 0 ? "login-label" : undefined}>
 					Username
 				</label>
@@ -76,9 +103,9 @@ const SignupForm = () => {
 					value={userName}
 					onChange={(e) => setUserName(e.target.value)}
 				/>
-			</div>
+			</section>
 
-			<div className="form-col">
+			<section className="form-col">
 				<label htmlFor="password" className={password.length > 0 ? "login-label" : undefined}>
 					Password
 				</label>
@@ -91,7 +118,7 @@ const SignupForm = () => {
 					value={password}
 					onChange={(e) => setPassword(e.target.value)}
 				/>
-			</div>
+			</section>
 
 			<Terms />
 

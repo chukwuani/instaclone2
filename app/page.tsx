@@ -5,7 +5,7 @@ import Feed from "@/components/Feed";
 
 export default async function Home() {
 	return (
-		<section>
+		<>
 			<Navbar active="home" />
 
 			<main className="main-content">
@@ -16,6 +16,6 @@ export default async function Home() {
 
 				<Suggested />
 			</main>
-		</section>
+		</>
 	);
 }

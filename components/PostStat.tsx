@@ -1,4 +1,8 @@
 import Link from "next/link";
+type Person = {
+	image: string;
+	username: string;
+};
 
 const PostStat = ({
 	likeCount,
@@ -7,13 +11,13 @@ const PostStat = ({
 	createdAt,
 }: {
 	likeCount: number;
-	user: any;
+	user: Person;
 	caption: string;
 	createdAt: string;
 }) => {
 	return (
-		<section className="flex flex-col gap-[13px] py-2 px-3">
-			<p className="like-count">{likeCount?.toLocaleString()} likes</p>
+		<article className="flex flex-col gap-[13px] py-2 px-3">
+			<h3 className="like-count">{likeCount?.toLocaleString()} likes</h3>
 
 			<p className="caption">
 				<Link className="mr-1" href="#">
@@ -26,8 +30,10 @@ const PostStat = ({
 				View all 42,958 comments
 			</Link>
 
-			<p className="post-time">{createdAt?.toUpperCase()}</p>
-		</section>
+			<time dateTime="03-07-2023" className="post-time">
+				{createdAt?.toUpperCase()}
+			</time>
+		</article>
 	);
 };
 

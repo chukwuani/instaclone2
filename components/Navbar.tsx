@@ -33,7 +33,12 @@ const Navbar = ({ active }: { active: string }) => {
 
 	return (
 		<header>
-			<nav className={activeSideBar === "search" || activeSideBar === "notification" ? "sidebar-is-active nav" : "nav"}>
+			<nav
+				className={
+					activeSideBar === "search" || activeSideBar === "notification"
+						? "sidebar-is-active nav"
+						: "nav"
+				}>
 				<Link href="/" className="logo-wrapper min-h-[77px]">
 					<Image className="logo textlogo" src={icons.textLogo} alt="Instagram" priority />
 					<Image className="logo camlogo" src={icons.camLogo} alt="Instagram camera logo" />
@@ -112,7 +117,14 @@ const Navbar = ({ active }: { active: string }) => {
 
 					<Link className="nav-links" href="/profile">
 						<span className="flex items-center gap-4">
-							<Image className="profile-pic" src="/images/placeholder.png" alt="Profile picture" width={24} height={24} title="Profile" />
+							<Image
+								className="profile-pic"
+								src="/images/placeholder.png"
+								alt="Profile picture"
+								width={24}
+								height={24}
+								title="Profile"
+							/>
 							<p className="nav-links-text">Profile</p>
 						</span>
 					</Link>

@@ -2,7 +2,7 @@ import Image from "next/image";
 
 const PostContent = ({ posts }: { posts: Array<string> }) => {
 	return (
-		<div className="post-content-wrapper">
+		<section className="post-content-wrapper">
 			<button className="back-btn" aria-label="Go back" />
 
 			<ul className="post-content">
@@ -18,7 +18,7 @@ const PostContent = ({ posts }: { posts: Array<string> }) => {
 			</ul>
 
 			<button className="next-btn" aria-label="See Next" />
-		</div>
+		</section>
 	);
 };
 

@@ -3,8 +3,8 @@ import { icons } from "@/constants";
 
 const PostReaction = () => {
 	return (
-		<div className="flex items-center justify-between mt-1">
-			<div className="flex items-center">
+		<section className="flex items-center justify-between mt-1">
+			<section className="flex items-center">
 				<button className="like-btn p-2">
 					<Image src={icons.like} alt="Button for liking post" />
 				</button>
@@ -16,12 +16,12 @@ const PostReaction = () => {
 				<button className="share-btn p-2">
 					<Image src={icons.share} alt="Button for sharing post" />
 				</button>
-			</div>
+			</section>
 
 			<button className="save-btn p-2">
 				<Image src={icons.saved} alt="Button for saving post" />
 			</button>
-		</div>
+		</section>
 	);
 };
 

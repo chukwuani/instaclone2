@@ -29,7 +29,7 @@ export default function Feed() {
 	return (
 		<>
 			{feed.map((item) => (
-				<div key={item.id} className="feed-post">
+				<article key={item.id} className="feed-post">
 					<PostHead user={item.user} />
 
 					<PostContent posts={item.posts} />
@@ -44,7 +44,7 @@ export default function Feed() {
 					/>
 
 					<AddComment />
-				</div>
+				</article>
 			))}
 		</>
 	);

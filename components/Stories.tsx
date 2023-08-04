@@ -49,7 +49,7 @@ const Stories = () => {
 	];
 
 	return (
-		<div className="story-section">
+		<section className="story-section">
 			<button className="back-btn" aria-label="Go back" />
 
 			<ul className="story-slides">
@@ -61,6 +61,7 @@ const Stories = () => {
 									<Image src={story.image} alt="profile-pic" width={56} height={56} quality={100} />
 								</span>
 							</span>
+
 							<p>{story.username}</p>
 						</Link>
 					</li>
@@ -68,7 +69,7 @@ const Stories = () => {
 			</ul>
 
 			<button className="next-btn" aria-label="See next" />
-		</div>
+		</section>
 	);
 };
 

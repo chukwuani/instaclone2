@@ -2,9 +2,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { icons } from "@/constants";
 
-const PostHead = ({ user }: { user: any }) => {
+type Person = {
+	image: string;
+	username: string;
+};
+
+const PostHead = ({ user }: { user: Person }) => {
 	return (
-		<div className="flex items-center justify-between my-2 mx-2">
+		<section className="flex items-center justify-between my-2 mx-2">
 			<Link href="/profile" className="flex gap-[3px] items-center">
 				<span className="post-story-ring">
 					<span className="post-profile-pic">
@@ -12,16 +17,16 @@ const PostHead = ({ user }: { user: any }) => {
 					</span>
 				</span>
 
-				<span className="flex items-center gap-[2px] ml-[10px]">
+				<section className="flex items-center gap-[2px] ml-[10px]">
 					<p className="post-username">{user?.username}</p>
 					<Image className="ml-1" src={icons.verifiedBadge} alt="verified badge" />
-				</span>
+				</section>
 			</Link>
 
 			<button>
 				<Image src={icons.dotMenu} alt="menu" />
 			</button>
-		</div>
+		</section>
 	);
 };
 

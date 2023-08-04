@@ -4,6 +4,8 @@ import SignupForm from "@/components/SignupForm";
 
 import type { Metadata } from "next";
 import { icons } from "@/constants";
+import { currentUser } from "@clerk/nextjs";
+import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
 	title: "Sign up • Instagram",
@@ -14,7 +16,14 @@ export const metadata: Metadata = {
 	},
 };
 
-const Home = () => {
+const Home = async () => {
+	const user = await currentUser();
+
+	// if user manually enters this URL send them back to home if user exists
+	if (user) {
+		redirect("/");
+	}
+
 	return (
 		<section className="w-full min-h-full flex flex-col justify-center items-center">
 			<section className="signin-form-section">
@@ -25,11 +34,11 @@ const Home = () => {
 				<SignupForm />
 			</section>
 
-			<div className="switch-signin-method">
+			<section className="switch-signin-method">
 				<p>
 					Have an account? <Link href="/login">Log in</Link>
 				</p>
-			</div>
+			</section>
 		</section>
 	);
 };

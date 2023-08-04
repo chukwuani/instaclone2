@@ -1,7 +1,9 @@
 import ThemeProviders from "../utils/ThemeProviders";
+import { ClerkProvider } from "@clerk/nextjs";
 import "./globals.css";
 
 import type { Metadata } from "next";
+import { Toaster } from "@/utils/Toaster";
 export const metadata: Metadata = {
 	title: "Instagram",
 	description:
@@ -14,10 +16,13 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 	return (
-		<html lang="en" suppressHydrationWarning>
-			<body>
-				<ThemeProviders>{children}</ThemeProviders>
-			</body>
-		</html>
+		<ClerkProvider>
+			<html lang="en" suppressHydrationWarning>
+				<body>
+					<ThemeProviders>{children}</ThemeProviders>
+					<Toaster />
+				</body>
+			</html>
+		</ClerkProvider>
 	);
 }

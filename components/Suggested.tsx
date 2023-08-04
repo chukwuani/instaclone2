@@ -1,11 +1,9 @@
 "use client";
-
 import Link from "next/link";
 import Image from "next/image";
 
 const Suggested = () => {
 	const currentYear = new Date().getFullYear();
-
 	const suggestion = [
 		{
 			id: crypto.randomUUID(),
@@ -41,7 +39,7 @@ const Suggested = () => {
 
 	return (
 		<aside>
-			<div className="flex items-center px-4">
+			<section className="flex items-center px-4">
 				<Image
 					src="/images/placeholder.png"
 					alt="Profile picture"
@@ -50,34 +48,42 @@ const Suggested = () => {
 					className="object-cover mr-3  cursor-pointer rounded-full"
 				/>
 
-				<div className="account-info">
+				<article className="flex-auto flex flex-col text-sm">
 					<Link className="font-semibold" href="/profile">
 						the_wylde
 					</Link>
 					<p className="full-name">Allen Brown</p>
-				</div>
-			</div>
+				</article>
+			</section>
 
-			<span className="my-2 mt-6">
-				<div className="flex items-center py-2 px-4">
-					<p className="suggest">Suggested for you</p>
-				</div>
+			<article className="my-2 mt-6">
+				<h4 className="suggest flex items-center py-2 px-4">Suggested for you</h4>
 
 				{suggestion.map((list) => (
-					<div key={list.id} className="suggested-account">
-						<Image src={list.image} alt="avatar" width={38} height={38} quality={100} />
+					<section key={list.id} className="flex items-center py-2 px-4">
+						<Image
+							className="suggested-account-img"
+							src={list.image}
+							alt="avatar"
+							width={38}
+							height={38}
+							quality={100}
+						/>
 
-						<div className="suggested-account-info">
-							<p>{list.username}</p>
-							<p className="suggested-account-cto">{list.followedBy}</p>
-						</div>
+						<article className="ml-3 flex-auto flex flex-col text-sm">
+							<Link className="font-semibold" href="/profile">
+								{list.username}
+							</Link>
+
+							<p className="followedby">{list.followedBy}</p>
+						</article>
 
 						<Link className="follow-suggested-account" href="#">
 							Follow
 						</Link>
-					</div>
+					</section>
 				))}
-			</span>
+			</article>
 
 			<p className="aside-footer-title px-4">© {currentYear} Instagram clone from me</p>
 		</aside>

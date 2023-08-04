@@ -6,6 +6,7 @@ import MoreOption from "./MoreOption";
 import { icons } from "@/constants";
 import { useState } from "react";
 import ProfileAvatar from "./ProfileAvatar";
+import MobileNavbar from "./MobileNavbar";
 
 const Navbar = ({ active }: { active: string }) => {
 	const [activeLink, setActiveLink] = useState(active);
@@ -140,6 +141,8 @@ const Navbar = ({ active }: { active: string }) => {
 					{menuOpen && <MoreOption />}
 				</button>
 			</nav>
+
+			<MobileNavbar activeLink={activeLink} />
 		</header>
 	);
 };

@@ -7,11 +7,13 @@ import { useSignUp } from "@clerk/nextjs";
 import { icons } from "@/constants";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+
 import SignUpWithGoogle from "./SignUpWithGoogle";
 
 const SignupForm = () => {
 	const router = useRouter();
 	const { signUp, setActive, isLoaded } = useSignUp();
+	const [loading, setLoading] = useState(false);
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [fullName, setFullName] = useState("");
@@ -19,7 +21,9 @@ const SignupForm = () => {
 
 	const handleSignUp = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
+
 		if (!isLoaded) return;
+
 		try {
 			const result = await signUp?.create({
 				emailAddress: email,
@@ -28,6 +32,8 @@ const SignupForm = () => {
 				firstName: fullName.split(" ")[0],
 				lastName: fullName.split(" ")[1],
 			});
+
+			setLoading(true);
 
 			if (result?.status === "complete") {
 				await setActive({ session: result.createdSessionId });
@@ -38,6 +44,7 @@ const SignupForm = () => {
 				console.log(result);
 			}
 		} catch (err: any) {
+			setLoading(false);
 			err.errors.map((msg: { message: string }) => {
 				toast.error(msg.message);
 			});
@@ -121,6 +128,9 @@ const SignupForm = () => {
 			<Terms />
 
 			<button className="!opacity-70" type="submit">
+				{loading && (
+					<Image className="mr-2 w-4 h-4 animate-spin" src={icons.spinner} alt="Google-logo" />
+				)}
 				Sign up
 			</button>
 		</form>

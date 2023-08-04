@@ -814,6 +814,11 @@ aside {
   text-transform: capitalize;
 }
 
+.mobile-nav{
+  display: none;
+}
+
+
 @media screen and (max-width: 1264px) {
   .nav {
     max-width: 73px;
@@ -858,6 +863,8 @@ aside {
 
   .main-content{
     max-width: 100%;
+    position: relative;
+    margin-bottom: 50px;
   }
 
   .comment-form {
@@ -865,6 +872,21 @@ aside {
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
 }
+
+  /* HORIZONTAL NAVBAR BOTTOM */
+  .mobile-nav {
+    display: flex;
+    width: 100vw;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    position: fixed;
+    bottom: 0;
+    z-index: 1000;
+    border-top: 1px solid var(--divider);
+    background-color: var(--primary-background);
+  }
 }
 
 @media screen and (max-width: 500px) {

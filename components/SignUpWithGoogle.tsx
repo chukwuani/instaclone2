@@ -27,7 +27,7 @@ const SignUpWithGoogle = () => {
 	return (
 		<button onClick={() => OAuthSignUp("oauth_google")} className="google-login-btn" type="button">
 			<Image className="w-4 h-4 mr-2" src={icons.googleWithBg} alt="Google logo" />
-			Log in with Google
+			Sign up with Google
 		</button>
 	);
 };

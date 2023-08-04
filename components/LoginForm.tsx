@@ -4,10 +4,13 @@ import { useState } from "react";
 import { useSignIn } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+import Image from "next/image";
+import { icons } from "@/constants";
 
 const LoginForm = () => {
 	const router = useRouter();
 	const { signIn, setActive, isLoaded } = useSignIn();
+	const [loading, setLoading] = useState(false);
 	const [userName, setUserName] = useState("");
 	const [password, setPassword] = useState("");
 
@@ -28,7 +31,10 @@ const LoginForm = () => {
 				/*Investigate why the login hasn't completed */
 				console.log(result);
 			}
+
+			setLoading(true);
 		} catch (err: any) {
+			setLoading(false);
 			err.errors.map((msg: { message: string }) => {
 				toast.error(msg.message);
 			});
@@ -68,7 +74,12 @@ const LoginForm = () => {
 				/>
 			</section>
 
-			<button type="submit">Log in</button>
+			<button type="submit" className={loading ? "opacity-50" : ""}>
+				{loading && (
+					<Image className="mr-2 w-4 h-4 animate-spin" src={icons.spinner} alt="Google-logo" />
+				)}
+				Log in
+			</button>
 		</form>
 	);
 };

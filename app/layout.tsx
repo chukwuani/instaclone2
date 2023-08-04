@@ -1,9 +1,11 @@
 import ThemeProviders from "../utils/ThemeProviders";
+
 import { ClerkProvider } from "@clerk/nextjs";
 import "./globals.css";
 
 import type { Metadata } from "next";
 import { Toaster } from "@/utils/Toaster";
+import { ProgressBar } from "@/utils/ProgressBar";
 export const metadata: Metadata = {
 	title: "Instagram",
 	description:
@@ -14,8 +16,6 @@ export const metadata: Metadata = {
 	// manifest: "/manifest.json",
 };
 
-const clerk_pub_key = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
-
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 	return (
 		<ClerkProvider>
@@ -23,6 +23,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 				<body>
 					<ThemeProviders>{children}</ThemeProviders>
 					<Toaster />
+					<ProgressBar />
 				</body>
 			</html>
 		</ClerkProvider>

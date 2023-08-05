@@ -18,7 +18,9 @@ const PostHead = ({ user }: { user: Person }) => {
 				</span>
 
 				<section className="flex items-center gap-[2px] ml-[10px]">
-					<p className="post-username">{user?.username}</p>
+					<p className="primary-text text-ellipsis text-sm leading-[18px] font-semibold">
+						{user?.username}
+					</p>
 					<Image className="ml-1" src={icons.verifiedBadge} alt="verified badge" />
 				</section>
 			</Link>

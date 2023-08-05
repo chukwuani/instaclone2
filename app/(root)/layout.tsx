@@ -1,11 +1,13 @@
-import ThemeProviders from "../utils/ThemeProviders";
+import "../globals.css";
+
+import ThemeProviders from "../../utils/ThemeProviders";
+import Navbar from "@/components/Navbar";
 
 import { ClerkProvider } from "@clerk/nextjs";
-import "./globals.css";
+import { Toaster } from "@/utils/Toaster";
 
 import type { Metadata } from "next";
-import { Toaster } from "@/utils/Toaster";
-import { ProgressBar } from "@/utils/ProgressBar";
+
 export const metadata: Metadata = {
 	title: "Instagram",
 	description:
@@ -21,9 +23,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 		<ClerkProvider>
 			<html lang="en" suppressHydrationWarning>
 				<body>
-					<ThemeProviders>{children}</ThemeProviders>
+					<ThemeProviders>
+						<Navbar />
+						{children}
+					</ThemeProviders>
 					<Toaster />
-					<ProgressBar />
 				</body>
 			</html>
 		</ClerkProvider>

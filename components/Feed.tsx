@@ -29,7 +29,9 @@ export default function Feed() {
 	return (
 		<>
 			{feed.map((item) => (
-				<article key={item.id} className="feed-post">
+				<article
+					key={item.id}
+					className="max-w-[470px] w-full h-auto overflow-hidden flex flex-col primary-bg rounded-[8px] border-seperator mb-3">
 					<PostHead user={item.user} />
 
 					<PostContent posts={item.posts} />

@@ -6,6 +6,7 @@ import LoginForm from "@/components/LoginForm";
 import { currentUser } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 import LoginWithGoogle from "@/components/LoginWithGoogle";
+import FormDivider from "@/components/FormDivider";
 
 export const metadata: Metadata = {
 	title: "Login • Instagram",
@@ -26,29 +27,28 @@ export default async function Home() {
 
 	return (
 		<section className="w-full min-h-full flex flex-col justify-center items-center">
-			<section className="signin-form-section">
+			<section className="border-seperator rounded-[1px] mb-[10px] mt-3 py-[10px] flex flex-col items-center max-w-[350px] w-full">
 				<Image className="w-[175px] h-auto mt-9 mb-3" src={icons.textLogo} alt="Instagram" />
 
 				<LoginForm />
 
-				<section className="or-seperator">
-					<div className="left-seperator" />
-					<p>OR</p>
-					<div className="right-seperator" />
-				</section>
+				<FormDivider />
 
-				<section className="other-login-option">
+				<section className="flex flex-col items-center justify-center gap-[10px] mb-[10px] py-[10px]">
 					<LoginWithGoogle />
 
-					<Link href="#" className="text-xs font-normal">
+					<Link href="#" className="text-xs font-normal link">
 						Forgot password?
 					</Link>
 				</section>
 			</section>
 
-			<section className="switch-signin-method">
-				<p>
-					Don&apos;t have an account? <Link href="/signup">Sign up</Link>
+			<section className="flex justify-center max-w-[350px] w-full items-center border-seperator rounded-[1px] mb-[10px] py-[5px]">
+				<p className="text-sm leading-normal text-center m-[15px]">
+					Don&apos;t have an account?{" "}
+					<Link className="primary-btn font-semibold" href="/signup">
+						Sign up
+					</Link>
 				</p>
 			</section>
 		</section>

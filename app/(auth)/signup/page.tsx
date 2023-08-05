@@ -26,17 +26,22 @@ const Home = async () => {
 
 	return (
 		<section className="w-full min-h-full flex flex-col justify-center items-center">
-			<section className="signin-form-section">
+			<section className="border-seperator rounded-[1px] mb-[10px] mt-3 py-[10px] flex flex-col items-center max-w-[350px] w-full">
 				<Image className="w-[175px] h-auto mt-9 mb-3" src={icons.textLogo} alt="Instagram" />
 
-				<p className="signup-info">Sign up to see photos and videos from your friends.</p>
+				<p className="secondary-text text-[17px] font-semibold leading-5 mt-0 mx-10 mb-[10px] text-center">
+					Sign up to see photos and videos from your friends.
+				</p>
 
 				<SignupForm />
 			</section>
 
-			<section className="switch-signin-method">
-				<p>
-					Have an account? <Link href="/login">Log in</Link>
+			<section className="flex justify-center max-w-[350px] w-full items-center border-seperator rounded-[1px] mb-[10px] py-[5px]">
+				<p className="text-sm leading-normal text-center m-[15px]">
+					Have an account?{" "}
+					<Link className="primary-btn font-semibold" href="/login">
+						Log in
+					</Link>
 				</p>
 			</section>
 		</section>

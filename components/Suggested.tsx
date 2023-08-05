@@ -1,88 +1,55 @@
-"use client";
-import Link from "next/link";
-import Image from "next/image";
-import ProfileAvatar from "./ProfileAvatar";
+import { currentUser } from "@clerk/nextjs";
 
-const Suggested = () => {
+import Link from "next/link";
+import ProfileAvatar from "./ProfileAvatar";
+import SuggestedCard from "./SuggestedCard";
+
+interface suggestion {
+	id: number;
+	username: string;
+	image: string;
+}
+
+const Suggested = async () => {
+	const user = await currentUser();
 	const currentYear = new Date().getFullYear();
-	const suggestion = [
-		{
-			id: crypto.randomUUID(),
-			image: "/images/alessia-russo.jpg",
-			username: "alessiarusso99",
-			followedBy: "Followed by de_real_teddy",
-		},
-		{
-			id: crypto.randomUUID(),
-			image: "/images/alessia-russo.jpg",
-			username: "alessiarusso99",
-			followedBy: "Followed by de_real_teddy",
-		},
-		{
-			id: crypto.randomUUID(),
-			image: "/images/alessia-russo.jpg",
-			username: "alessiarusso99",
-			followedBy: "Followed by de_real_teddy",
-		},
-		{
-			id: crypto.randomUUID(),
-			image: "/images/alessia-russo.jpg",
-			username: "alessiarusso99",
-			followedBy: "Followed by de_real_teddy",
-		},
-		{
-			id: crypto.randomUUID(),
-			image: "/images/alessia-russo.jpg",
-			username: "alessiarusso99",
-			followedBy: "Followed by de_real_teddy",
-		},
-	];
+
+	const data = await fetch(
+		"https://dummyjson.com/users?limit=5&skip=20&select=username,image, id"
+	).then((res) => res.json());
+
+	const suggestion: suggestion[] = data?.users;
 
 	return (
-		<aside>
+		<aside className="w-[319px] mt-9 ml-16 flex flex-col max-[999px]:hidden">
 			<section className="flex items-center px-4">
 				<Link href="/profile">
 					<ProfileAvatar size={44} />
 				</Link>
 
 				<article className="flex-auto flex flex-col text-sm ml-3">
-					<Link className="font-semibold" href="/profile">
-						the_wylde
+					<Link className="font-semibold lowercase" href="/profile">
+						{user?.username ?? user?.firstName}
 					</Link>
-					<p className="full-name">Allen Brown</p>
+					<p className="secondary-text">
+						{user?.firstName} {user?.lastName}
+					</p>
 				</article>
 			</section>
 
 			<article className="my-2 mt-6">
-				<h4 className="suggest flex items-center py-2 px-4">Suggested for you</h4>
+				<h4 className="flex-auto text-[14px] font-semibold secondary-text flex items-center py-2 px-4">
+					Suggested for you
+				</h4>
 
 				{suggestion.map((list) => (
-					<section key={list.id} className="flex items-center py-2 px-4">
-						<Image
-							className="suggested-account-img"
-							src={list.image}
-							alt="avatar"
-							width={38}
-							height={38}
-							quality={100}
-						/>
-
-						<article className="ml-3 flex-auto flex flex-col text-sm">
-							<Link className="font-semibold" href="/profile">
-								{list.username}
-							</Link>
-
-							<p className="followedby">{list.followedBy}</p>
-						</article>
-
-						<Link className="follow-suggested-account" href="#">
-							Follow
-						</Link>
-					</section>
+					<SuggestedCard user={list} key={list.id} />
 				))}
 			</article>
 
-			<p className="aside-footer-title px-4">© {currentYear} Instagram clone from me</p>
+			<p className="opacity-50 mt-[11px] secondary-text font-normal text-[12px] uppercase px-4">
+				© {currentYear} Instagram clone from me
+			</p>
 		</aside>
 	);
 };

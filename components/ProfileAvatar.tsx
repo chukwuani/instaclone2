@@ -5,11 +5,9 @@ import Image from "next/image";
 
 const ProfileAvatar = ({ size }: { size: number }) => {
 	const { user } = useUser();
-	console.log(user);
-
 	return (
 		<Image
-			className="profile-pic"
+			className="rounded-full"
 			src={user ? user?.imageUrl : "/images/placeholder.png"}
 			alt="Profile picture"
 			width={size}

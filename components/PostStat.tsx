@@ -17,20 +17,22 @@ const PostStat = ({
 }) => {
 	return (
 		<article className="flex flex-col gap-[13px] py-2 px-3">
-			<h3 className="like-count">{likeCount?.toLocaleString()} likes</h3>
+			<h3 className="text-sm leading-normal font-semibold primary-text">
+				{likeCount?.toLocaleString()} likes
+			</h3>
 
-			<p className="caption">
-				<Link className="mr-1" href="#">
+			<p className="text-sm leading-[23px] primary-text">
+				<Link className="mr-1 caption-username" href="#">
 					{user?.username}
 				</Link>
 				{caption}
 			</p>
 
-			<Link className="comment-count" href="/post/comment">
+			<Link className="text-sm leading-normal no-underline secondary-text" href="/post/comment">
 				View all 42,958 comments
 			</Link>
 
-			<time dateTime="03-07-2023" className="post-time">
+			<time dateTime="03-07-2023" className="secondary-text text-[10px]">
 				{createdAt?.toUpperCase()}
 			</time>
 		</article>

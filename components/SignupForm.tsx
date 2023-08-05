@@ -9,6 +9,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 import SignUpWithGoogle from "./SignUpWithGoogle";
+import FormDivider from "./FormDivider";
 
 const SignupForm = () => {
 	const router = useRouter();
@@ -58,18 +59,17 @@ const SignupForm = () => {
 			className="flex flex-col justify-center w-full mb-6 !mt-0 signin-form">
 			<SignUpWithGoogle />
 
-			<section className="or-seperator">
-				<div className="left-seperator" />
-				<p>OR</p>
-				<div className="right-seperator" />
-			</section>
+			<FormDivider />
 
-			<section className="form-col">
-				<label htmlFor="email" className={email.length > 0 ? "login-label" : undefined}>
+			<section className="min-h-[38px] divider secondary-bg rounded-[3px] flex flex-col mx-10 mb-[6px] w-auto text-sm leading-normal relative">
+				<label
+					htmlFor="email"
+					className={email.length > 0 ? "login-label form-label" : "form-label"}>
 					Email
 				</label>
+
 				<input
-					className={email.length > 0 ? "login-input" : undefined}
+					className={email.length > 0 ? "login-input form-input" : "form-input"}
 					type="email"
 					id="email"
 					name="email"
@@ -80,12 +80,14 @@ const SignupForm = () => {
 				/>
 			</section>
 
-			<section className="form-col">
-				<label htmlFor="fullname" className={fullName.length > 0 ? "login-label" : undefined}>
+			<section className="min-h-[38px] divider secondary-bg rounded-[3px] flex flex-col mx-10 mb-[6px] w-auto text-sm leading-normal relative">
+				<label
+					htmlFor="fullname"
+					className={fullName.length > 0 ? "login-label form-label" : "form-label"}>
 					Full Name
 				</label>
 				<input
-					className={fullName.length > 0 ? "login-input" : undefined}
+					className={fullName.length > 0 ? "login-input form-input" : "form-input"}
 					type="text"
 					id="fullname"
 					required
@@ -95,12 +97,14 @@ const SignupForm = () => {
 				/>
 			</section>
 
-			<section className="form-col">
-				<label htmlFor="username" className={userName.length > 0 ? "login-label" : undefined}>
+			<section className="min-h-[38px] divider secondary-bg rounded-[3px] flex flex-col mx-10 mb-[6px] w-auto text-sm leading-normal relative">
+				<label
+					htmlFor="username"
+					className={userName.length > 0 ? "login-label form-label" : "form-label"}>
 					Username
 				</label>
 				<input
-					className={userName.length > 0 ? "login-input" : undefined}
+					className={userName.length > 0 ? "login-input form-input" : "form-input"}
 					type="text"
 					id="username"
 					required
@@ -110,12 +114,14 @@ const SignupForm = () => {
 				/>
 			</section>
 
-			<section className="form-col">
-				<label htmlFor="password" className={password.length > 0 ? "login-label" : undefined}>
+			<section className="min-h-[38px] divider secondary-bg rounded-[3px] flex flex-col mx-10 mb-[6px] w-auto text-sm leading-normal relative">
+				<label
+					htmlFor="password"
+					className={password.length > 0 ? "login-label form-label" : "form-label"}>
 					Password
 				</label>
 				<input
-					className={password.length > 0 ? "login-input" : undefined}
+					className={password.length > 0 ? "login-input form-input" : "form-input"}
 					type="password"
 					id="password"
 					required
@@ -127,7 +133,7 @@ const SignupForm = () => {
 
 			<Terms />
 
-			<button className="!opacity-70" type="submit">
+			<button className="!opacity-70 login-btn" type="submit">
 				{loading && (
 					<Image className="mr-2 w-4 h-4 animate-spin" src={icons.spinner} alt="Google-logo" />
 				)}

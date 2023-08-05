@@ -2,7 +2,7 @@ import Image from "next/image";
 
 const PostContent = ({ posts }: { posts: Array<string> }) => {
 	return (
-		<section className="post-content-wrapper">
+		<section className="overflow-hidden max-w-[470px] w-full h-auto flex relative">
 			<button className="back-btn" aria-label="Go back" />
 
 			<ul className="post-content">

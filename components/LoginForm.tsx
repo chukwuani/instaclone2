@@ -42,9 +42,11 @@ const LoginForm = () => {
 	};
 
 	return (
-		<form onSubmit={handleLogin} method="post" className="signin-form">
-			<section className="form-col">
-				<label className={userName.length > 0 ? "login-label" : undefined} htmlFor="text">
+		<form onSubmit={handleLogin} method="post" className="flex flex-col justify-center w-full mt-6">
+			<section className="min-h-[38px] divider secondary-bg rounded-[3px] flex flex-col mx-10 mb-[6px] w-auto text-sm leading-normal relative">
+				<label
+					className={userName.length > 0 ? "login-label form-label" : "form-label"}
+					htmlFor="text">
 					Username or email
 				</label>
 
@@ -55,12 +57,14 @@ const LoginForm = () => {
 					id="text"
 					name="text"
 					autoComplete="true"
-					className={userName.length > 0 ? "login-input" : undefined}
+					className={userName.length > 0 ? "login-input form-input" : "form-input"}
 				/>
 			</section>
 
-			<section className="form-col">
-				<label className={password.length > 0 ? "login-label" : undefined} htmlFor="password">
+			<section className="min-h-[38px] divider secondary-bg rounded-[3px] flex flex-col mx-10 mb-[6px] w-auto text-sm leading-normal relative">
+				<label
+					className={password.length > 0 ? "login-label form-label" : "form-label"}
+					htmlFor="password">
 					Password
 				</label>
 
@@ -70,11 +74,11 @@ const LoginForm = () => {
 					value={password}
 					onChange={(e) => setPassword(e.target.value)}
 					name="password"
-					className={password.length > 0 ? "login-input" : undefined}
+					className={password.length > 0 ? "login-input form-input" : "form-input"}
 				/>
 			</section>
 
-			<button type="submit" className={loading ? "opacity-50" : ""}>
+			<button type="submit" className="login-btn">
 				{loading && (
 					<Image className="mr-2 w-4 h-4 animate-spin" src={icons.spinner} alt="Google-logo" />
 				)}

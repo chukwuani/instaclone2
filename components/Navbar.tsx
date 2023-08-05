@@ -2,21 +2,32 @@
 import Image from "next/image";
 import Link from "next/link";
 import MoreOption from "./MoreOption";
+import { usePathname } from "next/navigation";
 
 import { icons } from "@/constants";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ProfileAvatar from "./ProfileAvatar";
 import MobileNavbar from "./MobileNavbar";
+import NotificationBar from "./NotificationBar";
+import SearchSideBar from "./SearchSideBar";
 
-const Navbar = ({ active }: { active: string }) => {
-	const [activeLink, setActiveLink] = useState(active);
+const Navbar = () => {
+	const pathname = usePathname();
+
+	const [activeLink, setActiveLink] = useState(pathname);
 	const [activeSideBar, setActiveSideBar] = useState("");
 	const [menuOpen, setMenuOpen] = useState(false);
+
+	useEffect(() => {
+		setActiveLink(pathname);
+		setActiveSideBar("");
+		// console.log(activeSideBar);
+	}, [pathname]);
 
 	const toggleSearchbar = () => {
 		if (activeSideBar === "search") {
 			setActiveSideBar("");
-			setActiveLink(active);
+			setActiveLink(pathname);
 		} else {
 			setActiveSideBar("search");
 			setActiveLink("search");
@@ -26,7 +37,7 @@ const Navbar = ({ active }: { active: string }) => {
 	const toggleNotification = () => {
 		if (activeSideBar === "notification") {
 			setActiveSideBar("");
-			setActiveLink(active);
+			setActiveLink(pathname);
 		} else {
 			setActiveSideBar("notification");
 			setActiveLink("notification");
@@ -41,14 +52,14 @@ const Navbar = ({ active }: { active: string }) => {
 						? "sidebar-is-active nav"
 						: "nav"
 				}>
-				<Link href="/" className="logo-wrapper min-h-[77px]">
+				<Link href="/" className="logo-wrapper h-[73px]">
 					<Image className="logo textlogo" src={icons.textLogo} alt="Instagram" priority />
 					<Image className="logo camlogo" src={icons.camLogo} alt="Instagram camera logo" />
 				</Link>
 
 				<span className="flex-auto flex flex-col">
 					<Link className="nav-links" href="/">
-						{activeLink === "home" ? (
+						{activeLink === "/" ? (
 							<span className="flex items-center gap-4">
 								<Image src={icons.homeActive} alt="Home" title="Home" />
 								<p className="font-bold nav-links-text">Home</p>
@@ -118,10 +129,20 @@ const Navbar = ({ active }: { active: string }) => {
 					</Link>
 
 					<Link className="nav-links" href="/profile">
-						<span className="flex items-center gap-4">
-							<ProfileAvatar size={24} />
-							<p className="nav-links-text">Profile</p>
-						</span>
+						{pathname === "/profile" ? (
+							<span className="flex items-center gap-4">
+								<span className="profile-active">
+									<ProfileAvatar size={24} />
+								</span>
+
+								<p className="font-bold nav-links-text">Profile</p>
+							</span>
+						) : (
+							<span className="flex items-center gap-4">
+								<ProfileAvatar size={24} />
+								<p className="nav-links-text">Profile</p>
+							</span>
+						)}
 					</Link>
 				</span>
 
@@ -142,7 +163,11 @@ const Navbar = ({ active }: { active: string }) => {
 				</button>
 			</nav>
 
-			<MobileNavbar activeLink={activeLink} />
+			<NotificationBar activeLink={activeLink} />
+
+			<SearchSideBar activeLink={activeLink} />
+
+			<MobileNavbar activeLink={pathname} toggleSearch={toggleSearchbar} />
 		</header>
 	);
 };

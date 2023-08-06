@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 :root {
+	--black: #000;
 	--primary-background: rgb(255, 255, 255);
 	--secondary-background: rgb(250, 250, 250);
 	--banner-background: rgb(255, 255, 255);
@@ -25,6 +26,7 @@
 }
 
 [data-theme="dark"]:root {
+	--black: #fff;
 	--primary-background: rgb(0, 0, 0);
 	--secondary-background: rgb(18, 18, 18);
 	--hover-overlay: rgba(255, 255, 255, 0.1);
@@ -37,6 +39,10 @@
 	--link: rgb(224, 241, 255);
 	--secondary-button: rgb(250, 250, 250);
 	--highlight-background: rgb(38, 38, 38);
+}
+
+[data-theme="dark"] .icons{
+	filter: invert(1);
 }
 
 * {

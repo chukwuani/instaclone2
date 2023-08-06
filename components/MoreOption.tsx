@@ -21,28 +21,28 @@ const MoreOption = () => {
 	return (
 		<nav className="more-option-list">
 			<Link href="/profile/setting" className="more-option">
-				<Image src={icons.gear} alt="" />
+				<Image className="icons" src={icons.gear} alt="" />
 				<p>setting</p>
 			</Link>
 
 			<Link href="/notification" className="more-option">
-				<Image src={icons.clock} alt="" />
+				<Image className="icons" src={icons.clock} alt="" />
 				<p>Your activity</p>
 			</Link>
 
 			<Link href="profile/saved" className="more-option">
-				<Image src={icons.saved} alt="" />
+				<Image className="icons" src={icons.saved} alt="" />
 				<p>saved</p>
 			</Link>
 
 			<span className="more-option" onClick={toggleTheme}>
-				<Image className="sun" src={icons.sun} alt="" />
-				<Image className="moon" src={icons.moon} alt="" />
+				<Image className="icons sun" src={icons.sun} alt="" />
+				<Image className="icons moon" src={icons.moon} alt="" />
 				<p>Switch appearance</p>
 			</span>
 
 			<Link href="https://github.com/chukwuani" className="more-option">
-				<Image src={icons.report} alt="" />
+				<Image className="icons" src={icons.report} alt="" />
 				<p>Report a problem</p>
 			</Link>
 

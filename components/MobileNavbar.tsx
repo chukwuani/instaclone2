@@ -15,11 +15,11 @@ const MobileNavbar = ({
 			<Link href="/" className="p-3">
 				{activeLink === "/" ? (
 					<span className="flex items-center gap-4">
-						<Image src={icons.homeActive} alt="Home" title="Home" />
+						<Image className="icons" src={icons.homeActive} alt="Home" title="Home" />
 					</span>
 				) : (
 					<span className="flex items-center gap-4">
-						<Image src={icons.home} alt="Home" title="Home" />
+						<Image className="icons" src={icons.home} alt="Home" title="Home" />
 					</span>
 				)}
 			</Link>
@@ -27,24 +27,24 @@ const MobileNavbar = ({
 			<button onClick={() => toggleSearch()} className="p-3">
 				{activeLink === "search" ? (
 					<span className="flex items-center gap-4">
-						<Image src={icons.searchActive} alt="Home" title="Search" />
+						<Image className="icons" src={icons.searchActive} alt="Home" title="Search" />
 					</span>
 				) : (
 					<span className="flex items-center gap-4">
-						<Image src={icons.search} alt="Search" title="Search" />
+						<Image className="icons" src={icons.search} alt="Search" title="Search" />
 					</span>
 				)}
 			</button>
 
 			<Link href="/reels" className="p-3">
 				<span className="flex items-center gap-4">
-					<Image src={icons.reels} alt="Reels" title="Reels" />
+					<Image className="icons" src={icons.reels} alt="Reels" title="Reels" />
 				</span>
 			</Link>
 
-			<Link href="/message" className="p-3">
+			<Link href="/explore" className="p-3">
 				<span className="flex items-center gap-4">
-					<Image src={icons.message} alt="Message" title="Message" />
+					<Image className="icons" src={icons.explore} alt="Discover" title="Discover" />
 				</span>
 			</Link>
 

@@ -53,20 +53,20 @@ const Navbar = () => {
 						: "nav"
 				}>
 				<Link href="/" className="logo-wrapper h-[73px]">
-					<Image className="logo textlogo" src={icons.textLogo} alt="Instagram" priority />
-					<Image className="logo camlogo" src={icons.camLogo} alt="Instagram camera logo" />
+					<Image className="logo textlogo icons" src={icons.textLogo} alt="Instagram" priority />
+					<Image className="logo camlogo icons" src={icons.camLogo} alt="Instagram camera logo" />
 				</Link>
 
 				<span className="flex-auto flex flex-col">
 					<Link className="nav-links" href="/">
 						{activeLink === "/" ? (
 							<span className="flex items-center gap-4">
-								<Image src={icons.homeActive} alt="Home" title="Home" />
+								<Image className="icons" src={icons.homeActive} alt="Home" title="Home" />
 								<p className="font-bold nav-links-text">Home</p>
 							</span>
 						) : (
 							<span className="flex items-center gap-4">
-								<Image src={icons.home} alt="Home" title="Home" />
+								<Image className="icons" src={icons.home} alt="Home" title="Home" />
 								<p className="nav-links-text">Home</p>
 							</span>
 						)}
@@ -75,12 +75,12 @@ const Navbar = () => {
 					<button onClick={toggleSearchbar} className="nav-links">
 						{activeLink === "search" ? (
 							<span className="flex items-center gap-4">
-								<Image src={icons.searchActive} alt="Home" title="Search" />
+								<Image className="icons" src={icons.searchActive} alt="Home" title="Search" />
 								<p className="nav-links-text">Search</p>
 							</span>
 						) : (
 							<span className="flex items-center gap-4">
-								<Image src={icons.search} alt="Search" title="Search" />
+								<Image className="icons" src={icons.search} alt="Search" title="Search" />
 								<p className="nav-links-text">Search</p>
 							</span>
 						)}
@@ -88,21 +88,21 @@ const Navbar = () => {
 
 					<Link className="nav-links" href="/explore">
 						<span className="flex items-center gap-4">
-							<Image src={icons.explore} alt="Explore" title="Explore" />
+							<Image className="icons" src={icons.explore} alt="Explore" title="Explore" />
 							<p className="nav-links-text">Explore</p>
 						</span>
 					</Link>
 
 					<Link className="nav-links" href="/reels">
 						<span className="flex items-center gap-4">
-							<Image src={icons.reels} alt="Reels" title="Reels" />
+							<Image className="icons" src={icons.reels} alt="Reels" title="Reels" />
 							<p className="nav-links-text">Reels</p>
 						</span>
 					</Link>
 
 					<Link className="nav-links" href="/messages">
 						<span className="flex items-center gap-4">
-							<Image src={icons.message} alt="Messages" title="Messages" />
+							<Image className="icons" src={icons.message} alt="Messages" title="Messages" />
 							<p className="nav-links-text">Messages</p>
 						</span>
 					</Link>
@@ -110,12 +110,22 @@ const Navbar = () => {
 					<button onClick={toggleNotification} className="nav-links">
 						{activeLink === "notification" ? (
 							<span className="flex items-center gap-4">
-								<Image src={icons.notificationActive} alt="Home" title="Notification" />
+								<Image
+									className="icons"
+									src={icons.notificationActive}
+									alt="Home"
+									title="Notification"
+								/>
 								<p className="nav-links-text">Notifications</p>
 							</span>
 						) : (
 							<span className="flex items-center gap-4">
-								<Image src={icons.notification} alt="Notification" title="Notification" />
+								<Image
+									className="icons"
+									src={icons.notification}
+									alt="Notification"
+									title="Notification"
+								/>
 								<p className="nav-links-text">Notifications</p>
 							</span>
 						)}
@@ -123,7 +133,7 @@ const Navbar = () => {
 
 					<Link className="nav-links" href="/create-post">
 						<span className="flex items-center gap-4">
-							<Image src={icons.create} alt="Create" title="Create" />
+							<Image className="icons" src={icons.create} alt="Create" title="Create" />
 							<p className="nav-links-text">Create</p>
 						</span>
 					</Link>
@@ -149,12 +159,12 @@ const Navbar = () => {
 				<button onClick={() => setMenuOpen((prev) => !prev)} className="nav-links relative">
 					{menuOpen ? (
 						<span className="flex items-center gap-4">
-							<Image src={icons.moreActive} alt="More" title="More" />
+							<Image className="icons" src={icons.moreActive} alt="More" title="More" />
 							<p className="font-bold nav-links-text">More</p>
 						</span>
 					) : (
 						<span className="flex items-center gap-4">
-							<Image src={icons.more} alt="More" title="More" />
+							<Image className="icons" src={icons.more} alt="More" title="More" />
 							<p className="nav-links-text">More</p>
 						</span>
 					)}

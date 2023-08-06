@@ -26,7 +26,7 @@ const PostHead = ({ user }: { user: Person }) => {
 			</Link>
 
 			<button>
-				<Image src={icons.dotMenu} alt="menu" />
+				<Image className="icons" src={icons.dotMenu} alt="menu" />
 			</button>
 		</section>
 	);

@@ -1,16 +1,5 @@
 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-   <style>
-        @media (prefers-color-scheme: dark) {
-            path { 
-                stroke: white; 
-            }
-
-            #btn {
-                fill: white;
-                stroke: none;
-            }
-        }
-    </style>
+ 
 <path d="M2.049 7.002H21.95" stroke="black" stroke-width="2" stroke-linejoin="round"/>
 <path d="M13.504 2.001L16.362 7.002" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 <path d="M7.207 2.11L10.002 7.002" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>

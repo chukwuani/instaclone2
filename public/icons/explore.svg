@@ -1,20 +1,5 @@
 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-   <style>
-        @media (prefers-color-scheme: dark) {
-            path { 
-                stroke: white; 
-            }
 
-            #one {
-                stroke: white;
-                fill: black;
-            }
-
-            #two {
-                fill: white;
-            }
-        }
-    </style>
 <g clip-path="url(#clip0_1_15)">
 <path id="one" d="M13.941 13.953L7.581 16.424L10.06 10.056L16.42 7.585L13.941 13.953Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 <path id="two" fill-rule="evenodd" clip-rule="evenodd" d="M10.06 10.056L13.949 13.945L7.581 16.424L10.06 10.056Z" fill="black"/>

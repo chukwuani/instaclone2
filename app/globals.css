@@ -131,7 +131,7 @@ body {
 	position: fixed;
 	display: flex;
 	flex-direction: column;
-	height: 100vh;
+	min-height: 100dvh;
 	max-width: 244px;
 	width: 100%;
 	padding: 8px 12px 20px 12px;

@@ -11,7 +11,7 @@ const MobileNavbar = ({
 	toggleSearch: Function;
 }) => {
 	return (
-		<nav className="w-screen h-[50px] flex items-center justify-evenly fixed bottom-0 z-[1000] divider primary-bg md:hidden">
+		<nav className="w-screen h-[50px] hidden items-center justify-evenly fixed bottom-0 z-[1000] divider primary-bg max-[768px]:flex">
 			<Link href="/" className="p-3">
 				{activeLink === "/" ? (
 					<span className="flex items-center gap-4">

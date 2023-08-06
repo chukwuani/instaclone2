@@ -7,6 +7,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { Toaster } from "@/utils/Toaster";
 
 import type { Metadata } from "next";
+import LoadingBar from "@/components/LoadingBar";
 
 export const metadata: Metadata = {
 	title: "Instagram",
@@ -24,6 +25,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 			<html lang="en" suppressHydrationWarning>
 				<body>
 					<ThemeProviders>
+						<LoadingBar />
 						<Navbar />
 						{children}
 					</ThemeProviders>

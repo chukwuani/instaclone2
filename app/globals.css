@@ -19,6 +19,13 @@
 	--link: rgb(0, 55, 107);
 	--highlight-background: rgb(239, 239, 239);
 
+	--gradient-lavender: rgb(211, 0, 197);
+	--gradient-orange: rgb(255, 122, 0);
+	--gradient-pink: rgb(255, 1, 105);
+	--gradient-purple: rgb(118, 56, 250);
+	--gradient-red: rgb(255, 48, 64);
+	--gradient-yellow: rgb(255, 214, 0);
+
 	--animation-primary: all 0.5s cubic-bezier(0.7, 0, 0.3, 1);
 	--animation-fast: all 0.3s cubic-bezier(0.7, 0, 0.3, 1);
 	--animation-smooth: all 0.7s cubic-bezier(0.7, 0, 0.3, 1);
@@ -41,7 +48,7 @@
 	--highlight-background: rgb(38, 38, 38);
 }
 
-[data-theme="dark"] .icons{
+[data-theme="dark"] .icons {
 	filter: invert(1);
 }
 
@@ -130,6 +137,40 @@ body {
 	position: relative;
 	top: 0.45em;
 	flex-grow: 1;
+}
+
+.loading-bar {
+	height: 3px;
+	width: 100%;
+	position: fixed;
+	left: 0;
+	top: 0;
+	background: linear-gradient(
+		to right,
+		var(--gradient-purple),
+		var(--gradient-yellow),
+		var(--gradient-orange),
+		var(--gradient-pink),
+		var(--gradient-lavender),
+		var(--gradient-purple),
+		var(--gradient-yellow)
+	);
+	background-size: 400% 400%;
+	transition: all 0.7s cubic-bezier(0.7, 0, 0.3, 1);
+	z-index: 2000;
+	animation: gradient 5s ease infinite;
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
 }
 
 /* Navbar styles and all nav based styles begins here */

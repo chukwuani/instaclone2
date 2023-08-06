@@ -11,7 +11,7 @@ const MobileNavbar = ({
 	toggleSearch: Function;
 }) => {
 	return (
-		<nav className="w-screen h-[50px] hidden items-center justify-evenly fixed bottom-0 z-[1000] divider primary-bg max-[768px]:flex">
+		<nav className="w-screen h-[50px] hidden items-center justify-evenly fixed bottom-0 z-[1000] divider !border-x-0 !border-b-0 primary-bg max-[768px]:flex">
 			<Link href="/" className="p-3">
 				{activeLink === "/" ? (
 					<span className="flex items-center gap-4">
@@ -36,15 +36,15 @@ const MobileNavbar = ({
 				)}
 			</button>
 
-			<Link href="/reels" className="p-3">
+			<Link href="/create" className="p-3">
 				<span className="flex items-center gap-4">
-					<Image className="icons" src={icons.reels} alt="Reels" title="Reels" />
+					<Image className="icons" src={icons.create} alt="Reels" title="Reels" />
 				</span>
 			</Link>
 
-			<Link href="/explore" className="p-3">
+			<Link href="/reels" className="p-3">
 				<span className="flex items-center gap-4">
-					<Image className="icons" src={icons.explore} alt="Discover" title="Discover" />
+					<Image className="icons" src={icons.reels} alt="Reels" title="Reels" />
 				</span>
 			</Link>
 

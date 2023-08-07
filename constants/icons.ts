@@ -3,8 +3,10 @@ import homeActive from "public/icons/homeFilled.svg";
 import search from "public/icons/search.svg";
 import searchActive from "public/icons/searchFilled.svg";
 import explore from "public/icons/explore.svg";
+import exploreActive from "public/icons/explorefilled.svg";
 import reels from "public/icons/reel.svg";
 import message from "public/icons/message.svg";
+import messageActive from "public/icons/messagefilled.svg";
 import notification from "public/icons/notification.svg";
 import notificationActive from "public/icons/notificationfilled.svg";
 import create from "public/icons/createPost.svg";
@@ -27,6 +29,7 @@ import comment from "public/icons/comment.svg";
 import share from "public/icons/share.svg";
 import emoji from "public/icons/emoji.svg";
 import spinner from "public/icons/loader-2.svg"
+import posing from "public/icons/posing.svg"
 
 export default {
 	home,
@@ -34,8 +37,10 @@ export default {
 	search,
 	searchActive,
 	explore,
+	exploreActive,
 	reels,
 	message,
+	messageActive,
 	notification,
 	notificationActive,
 	create,
@@ -57,5 +62,6 @@ export default {
 	share,
 	comment,
 	emoji,
-	spinner
+	spinner,
+	posing
 };

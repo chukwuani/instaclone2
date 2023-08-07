@@ -87,24 +87,43 @@ const Navbar = () => {
 					</button>
 
 					<Link className="nav-links" href="/explore">
-						<span className="flex items-center gap-4">
-							<Image className="icons" src={icons.explore} alt="Explore" title="Explore" />
-							<p className="nav-links-text">Explore</p>
-						</span>
+						{activeLink === "/explore" ? (
+							<span className="flex items-center gap-4">
+								<Image className="icons" src={icons.exploreActive} alt="Explore" title="Explore" />
+								<p className="font-bold nav-links-text">Explore</p>
+							</span>
+						) : (
+							<span className="flex items-center gap-4">
+								<Image className="icons" src={icons.explore} alt="Explore" title="Explore" />
+								<p className="nav-links-text">Explore</p>
+							</span>
+						)}
 					</Link>
 
-					<Link className="nav-links" href="/reels">
+					<Link className="nav-links" href="/explore">
 						<span className="flex items-center gap-4">
 							<Image className="icons" src={icons.reels} alt="Reels" title="Reels" />
 							<p className="nav-links-text">Reels</p>
 						</span>
 					</Link>
 
-					<Link className="nav-links" href="/messages">
-						<span className="flex items-center gap-4">
-							<Image className="icons" src={icons.message} alt="Messages" title="Messages" />
-							<p className="nav-links-text">Messages</p>
-						</span>
+					<Link className="nav-links" href="/message">
+						{activeLink === "/message" ? (
+							<span className="flex items-center gap-4">
+								<Image
+									className="icons"
+									src={icons.messageActive}
+									alt="Messages"
+									title="Messages"
+								/>
+								<p className="font-bold nav-links-text">Messages</p>
+							</span>
+						) : (
+							<span className="flex items-center gap-4">
+								<Image className="icons" src={icons.message} alt="Messages" title="Messages" />
+								<p className="nav-links-text">Messages</p>
+							</span>
+						)}
 					</Link>
 
 					<button onClick={toggleNotification} className="nav-links">

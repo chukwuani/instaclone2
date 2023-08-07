@@ -42,10 +42,16 @@ const MobileNavbar = ({
 				</span>
 			</Link>
 
-			<Link href="/reels" className="p-3">
-				<span className="flex items-center gap-4">
-					<Image className="icons" src={icons.reels} alt="Reels" title="Reels" />
-				</span>
+			<Link href="/explore" className="p-3">
+				{activeLink === "/explore" ? (
+					<span className="flex items-center gap-4">
+						<Image className="icons" src={icons.exploreActive} alt="Explore" title="Explore" />
+					</span>
+				) : (
+					<span className="flex items-center gap-4">
+						<Image className="icons" src={icons.explore} alt="Explore" title="Explore" />
+					</span>
+				)}
 			</Link>
 
 			<Link href="/profile" className="p-3">

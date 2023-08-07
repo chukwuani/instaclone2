@@ -576,7 +576,7 @@ input[type="search"]::-webkit-search-cancel-button {
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
-	padding-top: 22px;
+	/* padding-top: 22px; */
 }
 
 /* Insta stories style*/
@@ -598,8 +598,7 @@ input[type="search"]::-webkit-search-cancel-button {
 	gap: 14px;
 	overflow: scroll;
 	scroll-behavior: smooth;
-	/* padding-left: 16px;
-  padding-right: 16px; */
+	scrollbar-width: none; /* Also needed to disable scrollbar Firefox */
 }
 
 .story-slides::-webkit-scrollbar {
@@ -664,14 +663,24 @@ input[type="search"]::-webkit-search-cancel-button {
 	content: "";
 	width: 66px;
 	height: 66px;
-	background: radial-gradient(circle farthest-corner at 35% 90%, #ffd600, transparent 50%),
-		radial-gradient(circle farthest-corner at 0 140%, #ffd600, transparent 50%),
-		radial-gradient(ellipse farthest-corner at 0 -25%, #d300c5, transparent 50%),
-		radial-gradient(ellipse farthest-corner at 20% -50%, #d300c5, transparent 50%),
-		radial-gradient(ellipse farthest-corner at 100% 0, #7638fa, transparent 50%),
-		radial-gradient(ellipse farthest-corner at 60% -20%, #7638fa, transparent 50%),
+	background: radial-gradient(
+			circle farthest-corner at 35% 90%,
+			var(--gradient-yellow),
+			transparent 50%
+		),
+		radial-gradient(circle farthest-corner at 0 140%, var(--gradient-yellow), transparent 50%),
+		radial-gradient(ellipse farthest-corner at 0 -25%, var(--gradient-pink), transparent 50%),
+		radial-gradient(ellipse farthest-corner at 20% -50%, var(--gradient-pink), transparent 50%),
+		radial-gradient(ellipse farthest-corner at 100% 0, var(--gradient-purple), transparent 50%),
+		radial-gradient(ellipse farthest-corner at 60% -20%, var(--gradient-purple), transparent 50%),
 		radial-gradient(ellipse farthest-corner at 100% 100%, #ff0069, transparent),
-		linear-gradient(#d300c5, #bc318f 30%, #ff0069 50%, #ff7a00 70%, #fec66d 100%);
+		linear-gradient(
+			var(--gradient-purple),
+			var(--gradient-lavender) 30%,
+			#ff0069 50%,
+			var(--gradient-orange) 70%,
+			#fec66d 100%
+		);
 	position: absolute;
 	left: 50%;
 	top: 50%;
@@ -713,17 +722,24 @@ input[type="search"]::-webkit-search-cancel-button {
 	content: "";
 	width: 42px;
 	height: 42px;
-	/* background: radial-gradient(circle at 30% 107%, #ffd600 0%, #ff7a00 5%, #ff0069 45%, #d300c5 60%, #7638fa 90%); */
-
-	background: radial-gradient(circle farthest-corner at 35% 90%, #ffd600, transparent 50%),
-		radial-gradient(circle farthest-corner at 0 140%, #ffd600, transparent 50%),
-		radial-gradient(ellipse farthest-corner at 0 -25%, #d300c5, transparent 50%),
-		radial-gradient(ellipse farthest-corner at 20% -50%, #d300c5, transparent 50%),
-		radial-gradient(ellipse farthest-corner at 100% 0, #7638fa, transparent 50%),
-		radial-gradient(ellipse farthest-corner at 60% -20%, #7638fa, transparent 50%),
+	background: radial-gradient(
+			circle farthest-corner at 35% 90%,
+			var(--gradient-yellow),
+			transparent 50%
+		),
+		radial-gradient(circle farthest-corner at 0 140%, var(--gradient-yellow), transparent 50%),
+		radial-gradient(ellipse farthest-corner at 0 -25%, var(--gradient-pink), transparent 50%),
+		radial-gradient(ellipse farthest-corner at 20% -50%, var(--gradient-pink), transparent 50%),
+		radial-gradient(ellipse farthest-corner at 100% 0, var(--gradient-purple), transparent 50%),
+		radial-gradient(ellipse farthest-corner at 60% -20%, var(--gradient-purple), transparent 50%),
 		radial-gradient(ellipse farthest-corner at 100% 100%, #ff0069, transparent),
-		linear-gradient(#d300c5, #bc318f 30%, #ff0069 50%, #ff7a00 70%, #fec66d 100%);
-
+		linear-gradient(
+			var(--gradient-purple),
+			var(--gradient-lavender) 30%,
+			#ff0069 50%,
+			var(--gradient-orange) 70%,
+			#fec66d 100%
+		);
 	position: absolute;
 	left: 50%;
 	top: 50%;
@@ -740,6 +756,7 @@ input[type="search"]::-webkit-search-cancel-button {
 	display: flex;
 	align-items: center;
 	overflow: scroll;
+	scrollbar-width: none; /* Also needed to disable scrollbar Firefox */
 }
 
 .post-content::-webkit-scrollbar {
@@ -753,15 +770,20 @@ input[type="search"]::-webkit-search-cancel-button {
 	object-fit: cover;
 }
 
-.post-content-item img,
-.post-content-item video {
+.post-content-item img {
 	scroll-snap-align: start;
 	max-width: 470px;
 	width: 100vw;
 	height: auto;
+	background-color: var(--primary-background);
+}
+
+.post-content-item video {
+	scroll-snap-align: start;
+	height: auto;
 	aspect-ratio: 1 / 1;
 	object-fit: cover;
-	background-color: var(--secondary-background);
+	background-color: var(--primary-background);
 }
 
 .caption-username {
@@ -832,6 +854,174 @@ input[type="search"]::-webkit-search-cancel-button {
 	text-transform: capitalize;
 }
 
+/* DISCOVER PAGE STYLE */
+.discover-page {
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 28px;
+	/* padding: 0px 20px 40px 20px; */
+	width: 100%;
+	min-height: 100dvh;
+	background-color: transparent;
+	display: flex;
+}
+
+
+.message-container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  position: absolute;
+}
+
+.message-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 935px;
+  height: 563px;
+  background: var(--primary-background);
+  border-radius: 4px;
+  border: 1px solid var(--border-separator);
+  margin-top: 56px;
+}
+
+.chat-list {
+  width: 350px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.active-chat-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.active-chat {
+  padding-top: 8px;
+}
+
+.active-list {
+  display: inline-flex;
+  width: 100%;
+  flex: 1 1 auto;
+  align-items: center;
+  padding: 8px 20px;
+  cursor: pointer;
+}
+
+.active-list:hover {
+  background: var(--hover-overlay);
+}
+
+.general-chat-display {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 585px;
+  height: 100%;
+  border-left: 1px solid var(--border-separator);
+}
+
+.chat-display-header {
+  margin-top: 20px;
+  font-size: 20px;
+  font-weight: 300;
+  color: var(--primary-text);
+}
+
+.chat-display-p {
+  margin-top: 10px;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--secondary-text);
+}
+
+.chat-display-btn {
+  margin-top: 24px;
+  border-radius: 4px;
+  padding: 8px 12px;
+  width: auto;
+  display: block;
+  color: #fff;
+  background: var(--primary-button);
+  font-size: 14px;
+  font-weight: 500;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.chat-profile {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  margin-right: 12px;
+}
+
+.chat-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--primary-text);
+}
+
+.chat-message {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 14px;
+  color: var(--secondary-text);
+  margin-top: 4px;
+  font-weight: 400;
+}
+
+.chat {
+  text-decoration: none;
+}
+
+.switch-chat-acct-head {
+  display: flex;
+  font-size: 16px;
+  font-weight: 500;
+  height: 60px;
+  padding: 0 20px;
+  border-bottom: 1px solid var(--border-separator);
+}
+
+.switch-chat-acct {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  text-align: center;
+  cursor: pointer;
+}
+
+
+.online {
+  position: relative;
+}
+
+.online::after {
+  content: "";
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #78de45;
+  border: 3px solid #fff;
+  position: absolute;
+  bottom: 3px;
+  right: 12px;
+}
+
 @media screen and (max-width: 1264px) {
 	.nav {
 		max-width: 73px;
@@ -890,6 +1080,33 @@ input[type="search"]::-webkit-search-cancel-button {
 		border-bottom-left-radius: 8px;
 		border-bottom-right-radius: 8px;
 	}
+
+	.discover-page {
+		min-height: calc(100dvh - 50px);
+	}
+
+
+	.general-chat-display {
+    display: none;
+  }
+
+  .switch-chat-acct-head {
+    border-bottom: transparent;
+  }
+
+  .message-section {
+    border: transparent;
+    width: 100%;
+    margin-top: 0px;
+  }
+
+  .chat-list {
+    width: 100%;
+  }
+
+  .switch-chat-acct {
+    justify-content: unset;
+  }
 }
 
 @media screen and (max-width: 500px) {

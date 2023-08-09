@@ -10,6 +10,7 @@ import ProfileAvatar from "./ProfileAvatar";
 import MobileNavbar from "./MobileNavbar";
 import NotificationBar from "./NotificationBar";
 import SearchSideBar from "./SearchSideBar";
+import TopMobileNavbar from "./TopMobileNavbar";
 
 const Navbar = () => {
 	const pathname = usePathname();
@@ -52,62 +53,118 @@ const Navbar = () => {
 						? "sidebar-is-active nav"
 						: "nav"
 				}>
-				<Link href="/" className="logo-wrapper h-[73px]">
-					<Image className="logo textlogo icons" src={icons.textLogo} alt="Instagram" priority />
-					<Image className="logo camlogo icons" src={icons.camLogo} alt="Instagram camera logo" />
+				<Link
+					href="/"
+					className="logo-wrapper h-[73px]">
+					<Image
+						className="logo textlogo icons"
+						src={icons.textLogo}
+						alt="Instagram"
+						priority
+					/>
+					<Image
+						className="logo camlogo icons"
+						src={icons.camLogo}
+						alt="Instagram camera logo"
+					/>
 				</Link>
 
 				<span className="flex-auto flex flex-col">
-					<Link className="nav-links" href="/">
+					<Link
+						className="nav-links"
+						href="/">
 						{activeLink === "/" ? (
 							<span className="flex items-center gap-4">
-								<Image className="icons" src={icons.homeActive} alt="Home" title="Home" />
+								<Image
+									className="icons"
+									src={icons.homeActive}
+									alt="Home"
+									title="Home"
+								/>
 								<p className="font-bold nav-links-text">Home</p>
 							</span>
 						) : (
 							<span className="flex items-center gap-4">
-								<Image className="icons" src={icons.home} alt="Home" title="Home" />
+								<Image
+									className="icons"
+									src={icons.home}
+									alt="Home"
+									title="Home"
+								/>
 								<p className="nav-links-text">Home</p>
 							</span>
 						)}
 					</Link>
 
-					<button onClick={toggleSearchbar} className="nav-links">
+					<button
+						onClick={toggleSearchbar}
+						className="nav-links">
 						{activeLink === "search" ? (
 							<span className="flex items-center gap-4">
-								<Image className="icons" src={icons.searchActive} alt="Home" title="Search" />
+								<Image
+									className="icons"
+									src={icons.searchActive}
+									alt="Home"
+									title="Search"
+								/>
 								<p className="nav-links-text">Search</p>
 							</span>
 						) : (
 							<span className="flex items-center gap-4">
-								<Image className="icons" src={icons.search} alt="Search" title="Search" />
+								<Image
+									className="icons"
+									src={icons.search}
+									alt="Search"
+									title="Search"
+								/>
 								<p className="nav-links-text">Search</p>
 							</span>
 						)}
 					</button>
 
-					<Link className="nav-links" href="/explore">
+					<Link
+						className="nav-links"
+						href="/explore">
 						{activeLink === "/explore" ? (
 							<span className="flex items-center gap-4">
-								<Image className="icons" src={icons.exploreActive} alt="Explore" title="Explore" />
+								<Image
+									className="icons"
+									src={icons.exploreActive}
+									alt="Explore"
+									title="Explore"
+								/>
 								<p className="font-bold nav-links-text">Explore</p>
 							</span>
 						) : (
 							<span className="flex items-center gap-4">
-								<Image className="icons" src={icons.explore} alt="Explore" title="Explore" />
+								<Image
+									className="icons"
+									src={icons.explore}
+									alt="Explore"
+									title="Explore"
+								/>
 								<p className="nav-links-text">Explore</p>
 							</span>
 						)}
 					</Link>
 
-					<Link className="nav-links" href="/explore">
+					<Link
+						className="nav-links"
+						href="/explore">
 						<span className="flex items-center gap-4">
-							<Image className="icons" src={icons.reels} alt="Reels" title="Reels" />
+							<Image
+								className="icons"
+								src={icons.reels}
+								alt="Reels"
+								title="Reels"
+							/>
 							<p className="nav-links-text">Reels</p>
 						</span>
 					</Link>
 
-					<Link className="nav-links" href="/message">
+					<Link
+						className="nav-links"
+						href="/message">
 						{activeLink === "/message" ? (
 							<span className="flex items-center gap-4">
 								<Image
@@ -120,13 +177,20 @@ const Navbar = () => {
 							</span>
 						) : (
 							<span className="flex items-center gap-4">
-								<Image className="icons" src={icons.message} alt="Messages" title="Messages" />
+								<Image
+									className="icons"
+									src={icons.message}
+									alt="Messages"
+									title="Messages"
+								/>
 								<p className="nav-links-text">Messages</p>
 							</span>
 						)}
 					</Link>
 
-					<button onClick={toggleNotification} className="nav-links">
+					<button
+						onClick={toggleNotification}
+						className="nav-links">
 						{activeLink === "notification" ? (
 							<span className="flex items-center gap-4">
 								<Image
@@ -150,14 +214,23 @@ const Navbar = () => {
 						)}
 					</button>
 
-					<Link className="nav-links" href="/create-post">
+					<Link
+						className="nav-links"
+						href="/create-post">
 						<span className="flex items-center gap-4">
-							<Image className="icons" src={icons.create} alt="Create" title="Create" />
+							<Image
+								className="icons"
+								src={icons.create}
+								alt="Create"
+								title="Create"
+							/>
 							<p className="nav-links-text">Create</p>
 						</span>
 					</Link>
 
-					<Link className="nav-links" href="/profile">
+					<Link
+						className="nav-links"
+						href="/profile">
 						{pathname === "/profile" ? (
 							<span className="flex items-center gap-4">
 								<span className="profile-active">
@@ -175,15 +248,27 @@ const Navbar = () => {
 					</Link>
 				</span>
 
-				<button onClick={() => setMenuOpen((prev) => !prev)} className="nav-links relative">
+				<button
+					onClick={() => setMenuOpen((prev) => !prev)}
+					className="nav-links relative">
 					{menuOpen ? (
 						<span className="flex items-center gap-4">
-							<Image className="icons" src={icons.moreActive} alt="More" title="More" />
+							<Image
+								className="icons"
+								src={icons.moreActive}
+								alt="More"
+								title="More"
+							/>
 							<p className="font-bold nav-links-text">More</p>
 						</span>
 					) : (
 						<span className="flex items-center gap-4">
-							<Image className="icons" src={icons.more} alt="More" title="More" />
+							<Image
+								className="icons"
+								src={icons.more}
+								alt="More"
+								title="More"
+							/>
 							<p className="nav-links-text">More</p>
 						</span>
 					)}
@@ -196,7 +281,17 @@ const Navbar = () => {
 
 			<SearchSideBar activeLink={activeLink} />
 
-			<MobileNavbar activeLink={pathname} toggleSearch={toggleSearchbar} />
+			{pathname === "/" && (
+				<TopMobileNavbar
+					activeLink={activeLink}
+					toggleNotification={toggleNotification}
+				/>
+			)}
+
+			<MobileNavbar
+				activeLink={pathname}
+				toggleSearch={toggleSearchbar}
+			/>
 		</header>
 	);
 };

@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useSignIn } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
-import { toast } from "sonner";
+import { toast } from "react-hot-toast";
 import Image from "next/image";
 import { icons } from "@/constants";
 
@@ -42,7 +42,10 @@ const LoginForm = () => {
 	};
 
 	return (
-		<form onSubmit={handleLogin} method="post" className="flex flex-col justify-center w-full mt-6">
+		<form
+			onSubmit={handleLogin}
+			method="post"
+			className="flex flex-col justify-center w-full mt-6">
 			<section className="min-h-[38px] divider secondary-bg rounded-[3px] flex flex-col mx-10 mb-[6px] w-auto text-sm leading-normal relative">
 				<label
 					className={userName.length > 0 ? "login-label form-label" : "form-label"}
@@ -78,9 +81,15 @@ const LoginForm = () => {
 				/>
 			</section>
 
-			<button type="submit" className="login-btn">
+			<button
+				type="submit"
+				className="login-btn">
 				{loading && (
-					<Image className="mr-2 w-4 h-4 animate-spin" src={icons.spinner} alt="Google-logo" />
+					<Image
+						className="mr-2 w-4 h-4 animate-spin"
+						src={icons.spinner}
+						alt="Google-logo"
+					/>
 				)}
 				Log in
 			</button>

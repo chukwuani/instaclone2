@@ -2,7 +2,7 @@
 
 import Terms from "./Terms";
 import Image from "next/image";
-import { toast } from "sonner";
+import { toast } from "react-hot-toast";
 import { useSignUp } from "@clerk/nextjs";
 import { icons } from "@/constants";
 import { useState } from "react";
@@ -133,9 +133,15 @@ const SignupForm = () => {
 
 			<Terms />
 
-			<button className="!opacity-70 login-btn" type="submit">
+			<button
+				className="!opacity-70 login-btn"
+				type="submit">
 				{loading && (
-					<Image className="mr-2 w-4 h-4 animate-spin" src={icons.spinner} alt="Google-logo" />
+					<Image
+						className="mr-2 w-4 h-4 animate-spin"
+						src={icons.spinner}
+						alt="Google-logo"
+					/>
 				)}
 				Sign up
 			</button>

@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import { icons } from "@/constants";
-import { currentUser } from "@clerk/nextjs";
-import { redirect } from "next/navigation";
+import ChatCard from "@/components/ChatCard";
+import Image from "next/image";
 
 export const metadata: Metadata = {
-	title: "Inbox • Chats",
+	title: "Inbox • Direct",
 	description:
-		"Join Instagram! Sign up to see photos, videos, stories & messages from your friends, family & interests around the world.",
+		"Share your moments with Instagram, the app that lets you send private photos and messages to a friend or group. You can also explore millions of other photos and videos from people you follow or discover.",
 	icons: {
 		icon: "/images/instagram-logo.png",
 	},
@@ -15,71 +15,28 @@ export const metadata: Metadata = {
 const page = () => {
 	return (
 		<main className="main-content">
-			<div className="message-container">
-				<section className="message-section">
-					<div className="chat-list">
-						<div className="active-chat">
-							<ul className="active-chat-list">
-								<li className="active-list">
-									<span className="chat-img online">
-										<img
-											className="chat-profile"
-											src="https://api.dicebear.com/5.x/avataaars-neutral/svg?seed=Bubba"
-											alt="avatar"
-										/>
-									</span>
-									<a className="chat" href="#">
-										<div>
-											<h3 className="chat-name">Jacob Spinka</h3>
-											<p className="chat-message">Active now</p>
-										</div>
-									</a>
-								</li>
-							</ul>
-						</div>
+			<section className="w-full h-screen flex justify-center absolute">
+				<section className="flex items-center justify-center w-full min-h-screen">
+					<section className=" w-1/3 h-full flex flex-col max-[768px]:w-full">
+						<h1 className=" text-base pb-[10px] px-6 pt-[14px] font-bold primary-text">Messages</h1>
 
-						<div className="active-chat">
-							<ul className="active-chat-list">
-								<li className="active-list">
-									<span className="chat-img online">
-										<img
-											className="chat-profile"
-											src="https://api.dicebear.com/5.x/avataaars-neutral/svg?seed=Jerry"
-											alt="avatar"
-										/>
-									</span>
-									<a className="chat" href="#">
-										<div>
-											<h3 className="chat-name">Jane Doe</h3>
-											<p className="chat-message">Active now</p>
-										</div>
-									</a>
-								</li>
-							</ul>
-						</div>
-					</div>
+						<ChatCard />
+					</section>
 
-					<div className="general-chat-display">
-						<span className="icons">
-							<svg
-								aria-label=""
-								color="black"
-								fill="black"
-								height="96"
-								role="img"
-								viewBox="0 0 96 96"
-								width="96">
-								<path d="M48 0C21.532 0 0 21.533 0 48s21.532 48 48 48 48-21.532 48-48S74.468 0 48 0Zm0 94C22.636 94 2 73.364 2 48S22.636 2 48 2s46 20.636 46 46-20.636 46-46 46Zm12.227-53.284-7.257 5.507c-.49.37-1.166.375-1.661.005l-5.373-4.031a3.453 3.453 0 0 0-4.989.921l-6.756 10.718c-.653 1.027.615 2.189 1.582 1.453l7.257-5.507a1.382 1.382 0 0 1 1.661-.005l5.373 4.031a3.453 3.453 0 0 0 4.989-.92l6.756-10.719c.653-1.027-.615-2.189-1.582-1.453ZM48 25c-12.958 0-23 9.492-23 22.31 0 6.706 2.749 12.5 7.224 16.503.375.338.602.806.62 1.31l.125 4.091a1.845 1.845 0 0 0 2.582 1.629l4.563-2.013a1.844 1.844 0 0 1 1.227-.093c2.096.579 4.331.884 6.659.884 12.958 0 23-9.491 23-22.31S60.958 25 48 25Zm0 42.621c-2.114 0-4.175-.273-6.133-.813a3.834 3.834 0 0 0-2.56.192l-4.346 1.917-.118-3.867a3.833 3.833 0 0 0-1.286-2.727C29.33 58.54 27 53.209 27 47.31 27 35.73 36.028 27 48 27s21 8.73 21 20.31-9.028 20.31-21 20.31Z"></path>
-							</svg>
-						</span>
+					<article className="general-chat-display max-[768px]:hidden">
+						<Image
+							className="icons"
+							src={icons.nodm}
+							alt=""
+						/>
 
-						<h3 className="chat-display-header">Your Messages</h3>
-						<p className="chat-display-p">Send private photos and messages to a friend or group.</p>
-
-						<button className="chat-display-btn">Send Message</button>
-					</div>
+						<h3 className="mt-5 text-xl font-light primary-text">Your Messages</h3>
+						<p className="mt-[10px] text-sm font-normal secondary-text w-1/2 text-center">
+							Send private photos and messages to a friend or group, and have fun conversations.
+						</p>
+					</article>
 				</section>
-			</div>
+			</section>
 		</main>
 	);
 };

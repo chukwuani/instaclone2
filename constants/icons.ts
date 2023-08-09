@@ -29,6 +29,7 @@ import comment from "public/icons/comment.svg";
 import share from "public/icons/share.svg";
 import emoji from "public/icons/emoji.svg";
 import spinner from "public/icons/loader-2.svg"
+import nodm from "public/icons/nodm.svg"
 
 export default {
 	home,
@@ -62,4 +63,5 @@ export default {
 	comment,
 	emoji,
 	spinner,
+	nodm,
 };

@@ -21,18 +21,13 @@ const ExploreCard = () => {
 			</ul>
 
 			<article className="flex flex-col gap-[13px] py-4 px-3">
-				<p className="text-sm leading-[23px] primary-text">
+				<p className="text-sm leading-[25px] primary-text">
 					How do you rickroll someone who knows about rickrolling? You don&apos;t. You just give
-					them up, let them down, run around and desert them.
-					<br />
-					<span className="font-bold">No discover page or reels at the moment.</span>
+					them up, let them down, run around and desert them. No discover page or reels at the
+					moment.
 				</p>
 			</article>
 		</article>
-		// <section>
-
-		// 	<p>No discover page or reels yet. Enjoy this for now.</p>
-		// </section>
 	);
 };
 

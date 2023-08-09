@@ -27,7 +27,7 @@ const Home = async () => {
 	return (
 		<section className="w-full min-h-full flex flex-col justify-center items-center">
 			<section className="border-seperator rounded-[1px] mb-[10px] mt-3 py-[10px] flex flex-col items-center max-w-[350px] w-full">
-				<Image className="w-[175px] h-auto mt-9 mb-3" src={icons.textLogo} alt="Instagram" />
+				<Image className="w-[175px] h-auto mt-9 mb-3 icons" src={icons.textLogo} alt="Instagram" />
 
 				<p className="secondary-text text-[17px] font-semibold leading-5 mt-0 mx-10 mb-[10px] text-center">
 					Sign up to see photos and videos from your friends.

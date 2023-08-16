@@ -1,6 +1,6 @@
 import "../globals.css";
 
-import ThemeProviders from "../../utils/ThemeProviders";
+import ThemeProvider from "../../utils/ThemeProvider";
 import Navbar from "@/components/Navbar";
 
 import { ClerkProvider } from "@clerk/nextjs";
@@ -22,13 +22,15 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 	return (
 		<ClerkProvider>
-			<html lang="en" suppressHydrationWarning>
+			<html
+				lang="en"
+				suppressHydrationWarning>
 				<body>
-					<ThemeProviders>
+					<ThemeProvider>
 						<LoadingBar />
 						<Navbar />
 						{children}
-					</ThemeProviders>
+					</ThemeProvider>
 					<Toaster />
 				</body>
 			</html>

@@ -16,7 +16,7 @@ const ChatCard = () => {
 				</span>
 				<Link
 					className="no-underline"
-					href="/message/chat">
+					href="/message">
 					<article>
 						<h3 className="overflow-hidden text-ellipsis whitespace-nowrap text-sm font-normal primary-text">
 							Jacob Spinka

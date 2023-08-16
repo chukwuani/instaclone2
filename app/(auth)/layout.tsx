@@ -1,6 +1,6 @@
 import "../globals.css";
 
-import ThemeProviders from "@/utils/ThemeProviders";
+import ThemeProvider from "@/utils/ThemeProvider";
 
 import { ClerkProvider } from "@clerk/nextjs";
 import { Toaster } from "@/utils/Toaster";
@@ -24,7 +24,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 				lang="en"
 				suppressHydrationWarning>
 				<body>
-					<ThemeProviders>{children}</ThemeProviders>
+					<ThemeProvider>{children}</ThemeProvider>
 					<Toaster />
 				</body>
 			</html>

@@ -27,10 +27,10 @@ const MobileStats = async () => {
 					posts
 				</p>
 				<p>
-					<a href="#">321</a> followers
+					<a href="#">0</a> followers
 				</p>
 				<p>
-					<a href="#">538</a> following
+					<a href="#">0</a> following
 				</p>
 			</div>
 		</>

@@ -1,13 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
 import { icons } from "@/constants";
+import { RefObject } from "react";
 
 type Person = {
 	image: string;
 	username: string;
 };
 
-const PostHead = ({ user }: { user: Person }) => {
+const PostHead = ({ user, dialog }: { user: Person; dialog: RefObject<HTMLDialogElement> }) => {
 	return (
 		<section className="flex items-center justify-between my-2 mx-2">
 			<Link
@@ -37,7 +38,12 @@ const PostHead = ({ user }: { user: Person }) => {
 				</section>
 			</Link>
 
-			<button>
+			<button
+				type="button"
+				onClick={() => {
+					dialog.current?.showModal();
+					document.body.classList.add("modal-open");
+				}}>
 				<Image
 					className="icons"
 					src={icons.dotMenu}

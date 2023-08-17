@@ -1,12 +1,14 @@
 "use client";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import PostHead from "./PostHead";
 import PostContent from "./PostContent";
 import PostReaction from "./PostReaction";
 import PostStat from "./PostStat";
 import AddComment from "./AddComment";
+import FeedMenu from "./FeedMenu";
 
 export default function Feed() {
+	const dialog = useRef<HTMLDialogElement>(null);
 	const [feed, setFeed] = useState([
 		{
 			id: crypto.randomUUID(),
@@ -32,7 +34,10 @@ export default function Feed() {
 				<article
 					key={item.id}
 					className="max-w-[470px] w-full h-auto overflow-hidden flex flex-col primary-bg rounded-[8px] border-seperator mb-3">
-					<PostHead user={item.user} />
+					<PostHead
+						user={item.user}
+						dialog={dialog}
+					/>
 
 					<PostContent posts={item.posts} />
 
@@ -48,6 +53,8 @@ export default function Feed() {
 					<AddComment />
 				</article>
 			))}
+
+			<FeedMenu dialog={dialog} />
 		</>
 	);
 }

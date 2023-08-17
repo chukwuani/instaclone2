@@ -5,6 +5,7 @@ import Image from "next/image";
 
 export default async function page() {
 	const user = await currentUser();
+	const userName = user?.username ? user?.username : `${user?.firstName}${user?.lastName}`;
 	return (
 		<main className="main-content">
 			<section className="user-profile">
@@ -21,14 +22,7 @@ export default async function page() {
 					<div className="user-profile-stats">
 						<div className="profile-stats-1">
 							<span className="lowercase flex items-center gap-[5px]">
-								{user?.username ? (
-									<h1>{user.username}</h1>
-								) : (
-									<h1>
-										{user?.firstName}
-										{user?.lastName}
-									</h1>
-								)}
+								<h1>{userName}</h1>
 
 								<span className="profile-setting icons cursor-pointer !hidden max-[768px]:!flex">
 									<Image
@@ -62,10 +56,10 @@ export default async function page() {
 								posts
 							</p>
 							<p>
-								<a href="#">321</a> followers
+								<a href="#">0</a> followers
 							</p>
 							<p>
-								<a href="#">538</a> following
+								<a href="#">0</a> following
 							</p>
 						</div>
 

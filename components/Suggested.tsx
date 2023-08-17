@@ -12,6 +12,7 @@ interface suggestion {
 
 const Suggested = async () => {
 	const user = await currentUser();
+	const userName = user?.username ? user?.username : `${user?.firstName}${user?.lastName}`;
 	const currentYear = new Date().getFullYear();
 
 	const data = await fetch(
@@ -28,9 +29,13 @@ const Suggested = async () => {
 				</Link>
 
 				<article className="flex-auto flex flex-col text-sm ml-3">
-					<Link className="font-semibold lowercase" href="/profile">
-						{user?.username ?? user?.firstName}
+					<Link
+						className="font-semibold lowercase"
+						href="/profile">
+						{/* {user?.username ?? user?.firstName} */}
+						{userName}
 					</Link>
+
 					<p className="secondary-text">
 						{user?.firstName} {user?.lastName}
 					</p>
@@ -43,7 +48,10 @@ const Suggested = async () => {
 				</h4>
 
 				{suggestion.map((list) => (
-					<SuggestedCard user={list} key={list.id} />
+					<SuggestedCard
+						user={list}
+						key={list.id}
+					/>
 				))}
 			</article>
 

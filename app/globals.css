@@ -19,6 +19,8 @@
 	--primary-button-hover: rgb(24, 119, 242);
 	--link: rgb(0, 55, 107);
 	--highlight-background: rgb(239, 239, 239);
+	--error-or-destructive: rgb(237, 73, 86);
+	--elevated-separator: rgb(219, 219, 219);
 
 	--gradient-lavender: rgb(211, 0, 197);
 	--gradient-orange: rgb(255, 122, 0);
@@ -42,6 +44,7 @@
 	--stroke: rgba(85, 85, 85, 0.3);
 	--border-separator: rgb(38, 38, 38);
 	--divider: rgb(38, 38, 38);
+	--elevated-separator: rgb(54, 54, 54);
 	--primary-text: rgb(245, 245, 245);
 	--secondary-text: rgb(168, 168, 168);
 	--link: rgb(224, 241, 255);
@@ -67,6 +70,57 @@
 body {
 	color: var(--primary-text);
 	background: var(--primary-background);
+}
+
+/* Modal related styles */
+.modal-open {
+	overflow: hidden;
+}
+
+::backdrop {
+	background: rgba(0, 0, 0, 0.6);
+}
+
+.more-list-option {
+	background-color: var(--banner-background);
+	width: 400px;
+	max-height: calc(100vh - 40px);
+	border-radius: 12px;
+	position: fixed;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	overflow: hidden;
+	margin: 20px;
+}
+
+.more-list-items {
+	background-color: transparent;
+	border: 0;
+	border-top: 1px solid var(--elevated-separator);
+	cursor: pointer;
+	font-size: 14px;
+	line-height: 1.5;
+	margin: 0;
+	min-height: 48px;
+	padding: 4px 8px;
+	text-align: center;
+	vertical-align: middle;
+	display: inline-grid;
+	place-content: center;
+}
+
+.important-option {
+	font-weight: 700;
+	color: var(--error-or-destructive);
+}
+
+.more-list-items:active {
+	background-color: rgba(0, 0, 0, 0.1);
+}
+
+.report {
+	border-top: none;
 }
 
 /* Uncategorized styles */
@@ -783,7 +837,7 @@ input[type="search"]::-webkit-search-cancel-button {
 
 .post-content-item img {
 	scroll-snap-align: start;
-	max-width: 470px;
+	max-width: calc(470px - 2px);
 	width: 100vw;
 	height: auto;
 	background-color: var(--primary-background);
@@ -1216,11 +1270,9 @@ input[type="search"]::-webkit-search-cancel-button {
 	.search-sidebar,
 	.notification-sidebar {
 		max-width: 100%;
-		padding-bottom: 50px;
-	}
-
-	.search-sidebar {
-		z-index: 700;
+		top: calc(60px - 1px);
+		bottom: calc(50px - 1px);
+		height: auto;
 	}
 
 	.showing-search-sidebar,
@@ -1361,5 +1413,9 @@ input[type="search"]::-webkit-search-cancel-button {
 	.story-slides {
 		padding-left: 16px;
 		padding-right: 16px;
+	}
+
+	.more-list-option {
+		width: 260px;
 	}
 }

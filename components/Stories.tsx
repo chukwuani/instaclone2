@@ -1,3 +1,7 @@
+"use client";
+import { useState, useRef, useEffect } from "react";
+import { useMotionValueEvent, useScroll } from "framer-motion";
+
 import Link from "next/link";
 import Image from "next/image";
 
@@ -7,68 +11,58 @@ interface story {
 	image: string;
 }
 
-const Stories = async () => {
-	const data = await fetch(
-		"https://dummyjson.com/users?limit=10&skip=30&select=username,image, id"
-	).then((res) => res.json());
+const Stories = () => {
+	const wrapper = useRef<HTMLUListElement>(null);
+	const [stories, setStories] = useState<story[]>([]);
+	const [scroll, setScroll] = useState(0);
 
-	const stories: story[] = data?.users;
-	// const stories = [
-	// 	{
-	// 		id: crypto.randomUUID(),
-	// 		image: "/images/alessia-russo.jpg",
-	// 		username: "alessiarusso99",
-	// 		link: "/",
-	// 	},
-	// 	{
-	// 		id: crypto.randomUUID(),
-	// 		image: "/images/alessia-russo.jpg",
-	// 		username: "alessiarusso99",
-	// 		link: "/",
-	// 	},
-	// 	{
-	// 		id: crypto.randomUUID(),
-	// 		image: "/images/alessia-russo.jpg",
-	// 		username: "alessiarusso99",
-	// 		link: "/",
-	// 	},
-	// 	{
-	// 		id: crypto.randomUUID(),
-	// 		image: "/images/alessia-russo.jpg",
-	// 		username: "alessiarusso99",
-	// 		link: "/",
-	// 	},
-	// 	{
-	// 		id: crypto.randomUUID(),
-	// 		image: "/images/alessia-russo.jpg",
-	// 		username: "alessiarusso99",
-	// 		link: "/",
-	// 	},
-	// 	{
-	// 		id: crypto.randomUUID(),
-	// 		image: "/images/alessia-russo.jpg",
-	// 		username: "alessiarusso99",
-	// 		link: "/",
-	// 	},
-	// 	{
-	// 		id: crypto.randomUUID(),
-	// 		image: "/images/alessia-russo.jpg",
-	// 		username: "alessiarusso99",
-	// 		link: "/",
-	// 	},
-	// ];
+	const { scrollX, scrollXProgress } = useScroll({
+		container: wrapper,
+	});
+
+	useMotionValueEvent(scrollX, "change", (latest) => {
+		setScroll(latest);
+	});
+
+	useEffect(() => {
+		const fetchData = async () => {
+			const data = await fetch(
+				"https://dummyjson.com/users?limit=10&skip=30&select=username,image, id"
+			).then((res) => res.json());
+
+			setStories(data?.users);
+		};
+
+		fetchData();
+	}, []);
 
 	return (
 		<section className="story-section">
-			<button className="back-btn" aria-label="Go back" />
+			{scroll > 0 && (
+				<button
+					onClick={() => wrapper.current?.scrollBy(-wrapper.current?.offsetWidth, 0)}
+					className="back-btn"
+					aria-label="Go back"
+				/>
+			)}
 
-			<ul className="story-slides">
+			<ul
+				ref={wrapper}
+				className="story-slides">
 				{stories.map((story) => (
 					<li key={story.id}>
-						<Link href={story.username} className="slide">
+						<Link
+							href="/"
+							className="slide">
 							<span className="story-ring relative">
 								<span className="slide-profile">
-									<Image src={story.image} alt="profile-pic" width={56} height={56} quality={100} />
+									<Image
+										src={story.image}
+										alt="profile-pic"
+										width={56}
+										height={56}
+										quality={100}
+									/>
 								</span>
 							</span>
 
@@ -78,7 +72,13 @@ const Stories = async () => {
 				))}
 			</ul>
 
-			<button className="next-btn" aria-label="See next" />
+			{scrollXProgress.get() < 0.99 && stories.length > 1 ? (
+				<button
+					onClick={() => wrapper.current?.scrollBy(wrapper.current?.offsetWidth, 0)}
+					className="next-btn"
+					aria-label="See next"
+				/>
+			) : null}
 		</section>
 	);
 };

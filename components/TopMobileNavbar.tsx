@@ -11,7 +11,7 @@ const TopMobileNavbar = ({
 	toggleNotification: Function;
 }) => {
 	return (
-		<div className="flex w-screen h-[60px] justify-between px-1 pl-4 primary-bg fixed top-0 z-[600] divider !border-x-0 !border-t-0 md:hidden">
+		<div className="flex w-screen h-[60px] justify-between px-1 pl-4 primary-bg fixed top-0 z-[1000] divider !border-x-0 !border-t-0 md:hidden">
 			<Link
 				href="/"
 				className="flex items-center justify-center">

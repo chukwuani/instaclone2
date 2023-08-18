@@ -5,20 +5,20 @@ import ProfileMenu from "@/components/ProfileMenu";
 import Image from "next/image";
 import { icons } from "@/constants";
 import { useUser } from "@clerk/nextjs";
-import { Metadata } from "next";
+// import { Metadata } from "next";
 import { useRef, useState } from "react";
 import Share from "@/components/Share";
 import Saved from "@/components/Saved";
 import Tagged from "@/components/Tagged";
 import Footer from "@/components/Footer";
 
-export const metadata: Metadata = {
-	title: "Profile • Instagram photos and videos",
-	description: "See Instagram photos and videos from user",
-	icons: {
-		icon: "/images/instagram-logo.png",
-	},
-};
+// export const metadata: Metadata = {
+// 	title: "Profile • Instagram photos and videos",
+// 	description: "See Instagram photos and videos from user",
+// 	icons: {
+// 		icon: "/images/instagram-logo.png",
+// 	},
+// };
 
 export default function Page() {
 	const dialog = useRef<HTMLDialogElement>(null);

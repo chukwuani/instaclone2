@@ -1,11 +1,33 @@
-import MobileStats from "@/components/MobileStats";
-import { icons } from "@/constants";
-import { currentUser } from "@clerk/nextjs";
-import Image from "next/image";
+"use client";
 
-export default async function page() {
-	const user = await currentUser();
-	const userName = user?.username ? user?.username : `${user?.firstName}${user?.lastName}`;
+import MobileStats from "@/components/MobileStats";
+import ProfileMenu from "@/components/ProfileMenu";
+import Image from "next/image";
+import { icons } from "@/constants";
+import { useUser } from "@clerk/nextjs";
+import { Metadata } from "next";
+import { useRef, useState } from "react";
+import Share from "@/components/Share";
+import Saved from "@/components/Saved";
+import Tagged from "@/components/Tagged";
+import Footer from "@/components/Footer";
+
+export const metadata: Metadata = {
+	title: "Profile • Instagram photos and videos",
+	description: "See Instagram photos and videos from user",
+	icons: {
+		icon: "/images/instagram-logo.png",
+	},
+};
+
+export default function Page() {
+	const dialog = useRef<HTMLDialogElement>(null);
+	const { user } = useUser();
+	const userName = user?.username
+		? user?.username
+		: `${user?.firstName ?? "no"}${user?.lastName ?? "username"}`;
+
+	const [activeCta, setActivecta] = useState("Share");
 	return (
 		<main className="main-content">
 			<section className="user-profile">
@@ -24,7 +46,12 @@ export default async function page() {
 							<span className="lowercase flex items-center gap-[5px]">
 								<h1>{userName}</h1>
 
-								<span className="profile-setting icons cursor-pointer !hidden max-[768px]:!flex">
+								<span
+									className="profile-setting icons cursor-pointer !hidden max-[768px]:!flex"
+									onClick={() => {
+										dialog.current?.showModal();
+										document.body.classList.add("modal-open");
+									}}>
 									<Image
 										src={icons.gear}
 										alt="gear icon"
@@ -34,11 +61,16 @@ export default async function page() {
 
 							<a
 								className="edit-profile"
-								href="https://Instagram.com/accounts/edit">
+								href="#">
 								Edit profile
 							</a>
 
-							<span className="profile-setting cursor-pointer icons">
+							<span
+								className="profile-setting cursor-pointer icons"
+								onClick={() => {
+									dialog.current?.showModal();
+									document.body.classList.add("modal-open");
+								}}>
 								<Image
 									src={icons.gear}
 									alt="gear icon"
@@ -82,7 +114,9 @@ export default async function page() {
 				<div className="user-profile-bottom-section-container">
 					<div className="user-profile-bottom-cta">
 						<ul className="user-profile-bottom-cta-list-item">
-							<li className={"user-cta"}>
+							<li
+								className={activeCta === "Share" ? "active-bottom-cta user-cta" : "user-cta"}
+								onClick={() => setActivecta("Share")}>
 								<span>
 									<svg
 										aria-label=""
@@ -147,7 +181,9 @@ export default async function page() {
 								</span>
 								<p>POSTS</p>
 							</li>
-							<li className={"user-cta"}>
+							<li
+								className={activeCta === "Saved" ? "active-bottom-cta user-cta" : "user-cta"}
+								onClick={() => setActivecta("Saved")}>
 								<span>
 									<svg
 										aria-label=""
@@ -169,7 +205,9 @@ export default async function page() {
 								</span>
 								<p>SAVED</p>
 							</li>
-							<li className={"user-cta"}>
+							<li
+								className={activeCta === "Tagged" ? "active-bottom-cta user-cta" : "user-cta"}
+								onClick={() => setActivecta("Tagged")}>
 								<span>
 									<svg
 										aria-label=""
@@ -209,14 +247,16 @@ export default async function page() {
 							</li>
 						</ul>
 					</div>
-					{/* 
-						{activeCta === "Share" && <Share />}
-						{activeCta === "Saved" && <Saved />}
-						{activeCta === "Tagged" && <Tagged />}
 
-						<Footer /> */}
+					{activeCta === "Share" && <Share />}
+					{activeCta === "Saved" && <Saved />}
+					{activeCta === "Tagged" && <Tagged />}
 				</div>
+
+				<Footer />
 			</section>
+
+			<ProfileMenu dialog={dialog} />
 		</main>
 	);
 }

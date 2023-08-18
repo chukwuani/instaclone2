@@ -20,7 +20,7 @@ export default function Feed() {
 				image: "/images/cristiano.jpg",
 				username: "cristiano",
 			},
-			posts: ["/images/post1.jpg", "/images/post2.jpg"],
+			posts: ["/images/post1.jpg", "/images/post2.jpg", "/images/post1.jpg", "/images/post2.jpg"],
 			isVerified: true,
 			isLikedByYou: false,
 			isSaved: false,

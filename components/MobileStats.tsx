@@ -1,8 +1,8 @@
-import { currentUser } from "@clerk/nextjs";
+import { useUser } from "@clerk/nextjs";
 import React from "react";
 
-const MobileStats = async () => {
-	const user = await currentUser();
+const MobileStats = () => {
+	const { user } = useUser();
 	return (
 		<>
 			<div className="mobile-stats-one">

@@ -15,6 +15,7 @@ const Stories = () => {
 	const wrapper = useRef<HTMLUListElement>(null);
 	const [stories, setStories] = useState<story[]>([]);
 	const [scroll, setScroll] = useState(0);
+	const [scrollProgress, setScrollProgress] = useState(0);
 
 	const { scrollX, scrollXProgress } = useScroll({
 		container: wrapper,
@@ -24,10 +25,25 @@ const Stories = () => {
 		setScroll(latest);
 	});
 
+	useMotionValueEvent(scrollXProgress, "change", (latest) => {
+		setScrollProgress(scrollXProgress.get());
+	});
+
+	const bool = scrollProgress < 0.99 && stories.length > 1;
+
+	console.log(
+		scrollXProgress.get(),
+		scrollX.get(),
+		scrollProgress,
+		wrapper.current?.scrollWidth,
+		stories.length,
+		bool
+	);
+
 	useEffect(() => {
 		const fetchData = async () => {
 			const data = await fetch(
-				"https://dummyjson.com/users?limit=10&skip=30&select=username,image, id"
+				"https://dummyjson.com/users?limit=15&skip=30&select=username,image, id"
 			).then((res) => res.json());
 
 			setStories(data?.users);
@@ -72,7 +88,7 @@ const Stories = () => {
 				))}
 			</ul>
 
-			{scrollXProgress.get() < 0.99 && stories.length > 1 ? (
+			{scrollProgress < 0.99 && stories.length > 6 ? (
 				<button
 					onClick={() => wrapper.current?.scrollBy(wrapper.current?.offsetWidth, 0)}
 					className="next-btn"

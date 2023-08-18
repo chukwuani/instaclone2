@@ -17,6 +17,7 @@
 	--secondary-button: rgb(38, 38, 38);
 	--secondary-button-background: rgb(239, 239, 239);
 	--primary-button-hover: rgb(24, 119, 242);
+	--secondary-button-hover: rgb(219, 219, 219);
 	--link: rgb(0, 55, 107);
 	--highlight-background: rgb(239, 239, 239);
 	--error-or-destructive: rgb(237, 73, 86);
@@ -51,6 +52,7 @@
 	--secondary-button: rgb(250, 250, 250);
 	--highlight-background: rgb(38, 38, 38);
 	--secondary-button-background: rgb(54, 54, 54);
+	--secondary-button-hover: rgb(38, 38, 38);
 }
 
 [data-theme="dark"] .icons {
@@ -91,7 +93,7 @@ body {
 	top: 50%;
 	transform: translate(-50%, -50%);
 	overflow: hidden;
-	margin: 20px;
+	/* margin: 20px; */
 }
 
 .more-list-items {
@@ -924,11 +926,29 @@ input[type="search"]::-webkit-search-cancel-button {
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	gap: 28px;
-	/* padding: 0px 20px 40px 20px; */
 	width: 100%;
 	min-height: 100dvh;
 	background-color: transparent;
+	display: flex;
+}
+
+.reel-video video {
+	min-height: calc(90dvh - 50px);
+	object-fit: cover;
+}
+
+.reel-video::after {
+	content: "";
+	position: absolute;
+	background: linear-gradient(to bottom, var(--primary-background), transparent);
+	width: 100%;
+	height: 100px;
+	top: -1px;
+	left: 0px;
+	display: none;
+}
+
+[data-theme="dark"] .reel-video::after {
 	display: flex;
 }
 
@@ -1045,7 +1065,7 @@ input[type="search"]::-webkit-search-cancel-button {
 }
 
 .edit-profile:hover {
-	opacity: 0.5;
+	background-color: var(--secondary-button-hover);
 }
 
 .profile-setting {
@@ -1092,6 +1112,7 @@ input[type="search"]::-webkit-search-cancel-button {
 	align-items: center;
 	justify-content: center;
 }
+
 .user-profile-bottom-cta-list-item {
 	display: flex;
 	align-items: center;
@@ -1115,8 +1136,8 @@ input[type="search"]::-webkit-search-cancel-button {
 }
 
 .active-bottom-cta {
-	border-top: 2px solid var(--primary-text);
-	margin-top: -2px;
+	border-top: 1px solid var(--primary-text);
+	margin-top: -1px;
 }
 
 .active-bottom-cta p {
@@ -1138,68 +1159,23 @@ input[type="search"]::-webkit-search-cancel-button {
 	display: none;
 }
 
-/* .user-profile-bottom-bg {
+.camera-icon {
 	background-repeat: no-repeat;
 	background-position: -128px -269px;
 	height: 62px;
 	width: 62px;
-	background-image: url(/user-profile-bg.png);
+	background-image: url(/images/collection.png);
 }
 
-.profile-bottom-cta-slide-1 {
-	display: flex;
-	flex-direction: column;
-	gap: 24px;
-	margin: 44px 60px;
-	align-items: center;
-	justify-content: center;
-	text-align: center;
-}
-
-.profile-bottom-cta-slide-1 h1 {
-	font-weight: 900;
-	font-size: 30px;
-}
-
-.profile-bottom-cta-slide-1 p {
-	font-weight: 400;
-	font-size: 14px;
-}
-
-.profile-bottom-cta-slide-1 a {
-	font-weight: 600;
-	font-size: 14px;
-	color: rgb(0, 149, 246);
-}
-
-
-.user-profile-bottom-bg-3 {
+.tagged-icon {
 	background-repeat: no-repeat;
 	background-position: -256px -269px;
 	height: 62px;
 	width: 62px;
-	background-image: url(/user-profile-bg.png);
+	background-image: url(/images/collection.png);
 }
 
-.profile-bottom-cta-slide-3 {
-	display: flex;
-	flex-direction: column;
-	gap: 10px;
-	margin: 66px 60px;
-	align-items: center;
-	justify-content: center;
-	text-align: center;
-}
-
-.profile-bottom-cta-slide-3 h1 {
-	font-weight: 900;
-	font-size: 30px;
-}
-
-.profile-bottom-cta-slide-3 p {
-	font-weight: 400;
-	font-size: 14px;
-}
+/* REfactor styles later */
 
 .profile-bottom-cta-slide-2 {
 	display: flex;
@@ -1216,14 +1192,85 @@ input[type="search"]::-webkit-search-cancel-button {
 .profile-bottom-cta-slide-2 p {
 	font-weight: 400;
 	font-size: 13px;
-	color: #8e8e8e;
+	color: var(--secondary-text);
 }
 
 .profile-bottom-cta-slide-2 a {
 	font-weight: 600;
 	font-size: 14px;
-	color: rgb(0, 149, 246);
-} */
+	color: var(--primary-button);
+}
+
+.saved-post-grid {
+	background-image: linear-gradient(to top, rgba(38, 38, 38, 0.6), rgba(255, 255, 255, 0));
+	display: grid;
+	width: 300px;
+	height: 300px;
+	grid-template-columns: repeat(2, 1fr);
+	margin-top: 40px;
+	cursor: pointer;
+	position: relative;
+	overflow: hidden;
+}
+
+.saved-post-overlay {
+	width: 300px;
+	height: 300px;
+	position: absolute;
+	padding-left: 20px;
+	padding-bottom: 10px;
+	color: #fff;
+	display: flex;
+	align-items: flex-end;
+	top: 0;
+	left: 0;
+	background-color: transparent;
+}
+
+.saved-post-overlay h2 {
+	font-weight: 500;
+	font-size: 1.3rem;
+}
+
+.saved-post-grid img {
+	width: 100%;
+	height: 100%;
+}
+
+footer {
+	margin-bottom: 52px;
+	width: auto;
+	display: flex;
+	line-height: 20px;
+}
+
+.footer-list {
+	display: flex;
+	column-gap: 20px;
+	text-align: center;
+	align-items: center;
+	justify-content: center;
+	flex-wrap: wrap;
+	word-wrap: break-word;
+	max-width: 982px;
+	width: 100%;
+	line-height: 45px;
+}
+
+.footer-list-item {
+	font-size: 14px;
+	list-style: none;
+}
+
+.footer-list-item a {
+	text-decoration: none;
+	color: var(--secondary-text);
+}
+
+.footer-title {
+	color: var(--secondary-text);
+	font-size: 14px;
+}
 
 @media screen and (max-width: 1264px) {
 	.nav {
@@ -1267,10 +1314,17 @@ input[type="search"]::-webkit-search-cancel-button {
 		margin-bottom: 50px;
 	}
 
-	.search-sidebar,
 	.notification-sidebar {
 		max-width: 100%;
 		top: calc(60px - 1px);
+		bottom: calc(50px - 1px);
+		height: auto;
+	}
+
+	.search-sidebar {
+		max-width: 100%;
+		z-index: 700;
+		top: 0;
 		bottom: calc(50px - 1px);
 		height: auto;
 	}
@@ -1288,6 +1342,12 @@ input[type="search"]::-webkit-search-cancel-button {
 
 	.discover-page {
 		min-height: calc(100dvh - 50px);
+		justify-content: flex-end;
+	}
+
+	.reel-video video {
+		min-height: calc(100dvh - 50px);
+		object-fit: cover;
 	}
 
 	.chat-list:hover {
@@ -1332,6 +1392,7 @@ input[type="search"]::-webkit-search-cancel-button {
 	.user-cta {
 		width: 100%;
 	}
+
 	.user-cta p {
 		display: none;
 	}
@@ -1342,7 +1403,7 @@ input[type="search"]::-webkit-search-cancel-button {
 	}
 
 	.active-bottom-cta svg {
-		color: var(--blue-btn-color);
+		color: var(--primary-button);
 	}
 
 	.mobile-stats-two {
@@ -1393,7 +1454,8 @@ input[type="search"]::-webkit-search-cancel-button {
 	}
 
 	.profile-stats-2,
-	.profile-stats-3 {
+	.profile-stats-3,
+	footer {
 		display: none;
 	}
 

@@ -1,58 +1,51 @@
 "use client";
+
 import Image from "next/image";
 import Link from "next/link";
-import MoreOption from "./MoreOption";
-import { usePathname } from "next/navigation";
 
-import { icons } from "@/constants";
-import { useState, useEffect } from "react";
-import ProfileAvatar from "./ProfileAvatar";
+import MoreOption from "../MoreOption";
+import Avatar from "../Avatar";
 import MobileNavbar from "./MobileNavbar";
 import NotificationBar from "./NotificationBar";
 import SearchSideBar from "./SearchSideBar";
 import TopMobileNavbar from "./TopMobileNavbar";
 
+import { icons } from "@/constants";
+import { usePathname } from "next/navigation";
+import { useState, useEffect } from "react";
+
 const Navbar = () => {
 	const pathname = usePathname();
 
-	const [activeLink, setActiveLink] = useState(pathname);
-	const [activeSideBar, setActiveSideBar] = useState("");
 	const [menuOpen, setMenuOpen] = useState(false);
+	const [activeLink, setActiveLink] = useState(pathname);
+
+	const sideBarIsActive = activeLink === "search" || activeLink === "notification";
 
 	useEffect(() => {
+		// Reset the activeLink because usestate persist through route change
 		setActiveLink(pathname);
-		setActiveSideBar("");
-		// console.log(activeSideBar);
 	}, [pathname]);
 
 	const toggleSearchbar = () => {
-		if (activeSideBar === "search") {
-			setActiveSideBar("");
+		if (activeLink === "search") {
 			setActiveLink(pathname);
 		} else {
-			setActiveSideBar("search");
 			setActiveLink("search");
 		}
 	};
 
 	const toggleNotification = () => {
-		if (activeSideBar === "notification") {
-			setActiveSideBar("");
+		if (activeLink === "notification") {
 			setActiveLink(pathname);
 		} else {
-			setActiveSideBar("notification");
 			setActiveLink("notification");
 		}
 	};
 
 	return (
 		<header>
-			<nav
-				className={
-					activeSideBar === "search" || activeSideBar === "notification"
-						? "sidebar-is-active nav"
-						: "nav"
-				}>
+			<nav className={`nav ${sideBarIsActive ? "sidebar-is-active" : ""}`}>
 				<Link
 					href="/"
 					className="logo-wrapper h-[73px]">
@@ -73,27 +66,15 @@ const Navbar = () => {
 					<Link
 						className="nav-links"
 						href="/">
-						{activeLink === "/" ? (
-							<span className="flex items-center gap-4">
-								<Image
-									className="icons"
-									src={icons.homeActive}
-									alt="Home"
-									title="Home"
-								/>
-								<p className="font-bold nav-links-text">Home</p>
-							</span>
-						) : (
-							<span className="flex items-center gap-4">
-								<Image
-									className="icons"
-									src={icons.home}
-									alt="Home"
-									title="Home"
-								/>
-								<p className="nav-links-text">Home</p>
-							</span>
-						)}
+						<span className="flex items-center gap-4">
+							<Image
+								className="icons"
+								src={activeLink === "/" ? icons.homeActive : icons.home}
+								alt="Home"
+								title="Home"
+							/>
+							<p className={`nav-links-text ${activeLink === "/" ? "font-bold" : ""}`}>Home</p>
+						</span>
 					</Link>
 
 					<button
@@ -125,27 +106,17 @@ const Navbar = () => {
 					<Link
 						className="nav-links"
 						href="/explore">
-						{activeLink === "/explore" ? (
-							<span className="flex items-center gap-4">
-								<Image
-									className="icons"
-									src={icons.exploreActive}
-									alt="Explore"
-									title="Explore"
-								/>
-								<p className="font-bold nav-links-text">Explore</p>
-							</span>
-						) : (
-							<span className="flex items-center gap-4">
-								<Image
-									className="icons"
-									src={icons.explore}
-									alt="Explore"
-									title="Explore"
-								/>
-								<p className="nav-links-text">Explore</p>
-							</span>
-						)}
+						<span className="flex items-center gap-4">
+							<Image
+								className="icons"
+								src={activeLink === "/explore" ? icons.exploreActive : icons.explore}
+								alt="Explore"
+								title="Explore"
+							/>
+							<p className={`nav-links-text ${activeLink === "/explore" ? "font-bold" : ""}`}>
+								Explore
+							</p>
+						</span>
 					</Link>
 
 					<Link
@@ -165,27 +136,17 @@ const Navbar = () => {
 					<Link
 						className="nav-links"
 						href="/message">
-						{activeLink === "/message" ? (
-							<span className="flex items-center gap-4">
-								<Image
-									className="icons"
-									src={icons.messageActive}
-									alt="Messages"
-									title="Messages"
-								/>
-								<p className="font-bold nav-links-text">Messages</p>
-							</span>
-						) : (
-							<span className="flex items-center gap-4">
-								<Image
-									className="icons"
-									src={icons.message}
-									alt="Messages"
-									title="Messages"
-								/>
-								<p className="nav-links-text">Messages</p>
-							</span>
-						)}
+						<span className="flex items-center gap-4">
+							<Image
+								className="icons"
+								src={activeLink === "/message" ? icons.messageActive : icons.message}
+								alt="Messages"
+								title="Messages"
+							/>
+							<p className={`nav-links-text ${activeLink === "/message" ? "font-bold" : ""}`}>
+								Messages
+							</p>
+						</span>
 					</Link>
 
 					<button
@@ -216,7 +177,7 @@ const Navbar = () => {
 
 					<Link
 						className="nav-links"
-						href="/create-post">
+						href="#">
 						<span className="flex items-center gap-4">
 							<Image
 								className="icons"
@@ -234,14 +195,14 @@ const Navbar = () => {
 						{pathname === "/profile" ? (
 							<span className="flex items-center gap-4">
 								<span className="profile-active">
-									<ProfileAvatar size={24} />
+									<Avatar size={24} />
 								</span>
 
 								<p className="font-bold nav-links-text">Profile</p>
 							</span>
 						) : (
 							<span className="flex items-center gap-4">
-								<ProfileAvatar size={24} />
+								<Avatar size={24} />
 								<p className="nav-links-text">Profile</p>
 							</span>
 						)}
@@ -273,20 +234,19 @@ const Navbar = () => {
 						</span>
 					)}
 
-					{menuOpen && <MoreOption />}
+					{menuOpen ? <MoreOption /> : null}
 				</button>
 			</nav>
 
 			<NotificationBar activeLink={activeLink} />
-
 			<SearchSideBar activeLink={activeLink} />
 
-			{pathname === "/" && (
+			{pathname === "/" ? (
 				<TopMobileNavbar
 					activeLink={activeLink}
 					toggleNotification={toggleNotification}
 				/>
-			)}
+			) : null}
 
 			<MobileNavbar
 				activeLink={pathname}

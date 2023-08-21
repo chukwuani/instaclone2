@@ -1,7 +1,7 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
 import { useMotionValueEvent, useScroll } from "framer-motion";
-
+import { Skeleton } from "@/components/ui/skeleton";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -13,6 +13,7 @@ interface story {
 
 const Stories = () => {
 	const wrapper = useRef<HTMLUListElement>(null);
+
 	const [stories, setStories] = useState<story[]>([]);
 	const [scroll, setScroll] = useState(0);
 	const [scrollProgress, setScrollProgress] = useState(0);
@@ -25,20 +26,9 @@ const Stories = () => {
 		setScroll(latest);
 	});
 
-	useMotionValueEvent(scrollXProgress, "change", (latest) => {
+	useMotionValueEvent(scrollXProgress, "change", () => {
 		setScrollProgress(scrollXProgress.get());
 	});
-
-	const bool = scrollProgress < 0.99 && stories.length > 1;
-
-	console.log(
-		scrollXProgress.get(),
-		scrollX.get(),
-		scrollProgress,
-		wrapper.current?.scrollWidth,
-		stories.length,
-		bool
-	);
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -86,6 +76,13 @@ const Stories = () => {
 						</Link>
 					</li>
 				))}
+
+				<Skeleton className="w-[66px] h-[66px] rounded-full highlight-bg" />
+				<Skeleton className="w-[66px] h-[66px] rounded-full highlight-bg" />
+				<Skeleton className="w-[66px] h-[66px] rounded-full highlight-bg" />
+				<Skeleton className="w-[66px] h-[66px] rounded-full highlight-bg" />
+				<Skeleton className="w-[66px] h-[66px] rounded-full highlight-bg" />
+				<Skeleton className="w-[66px] h-[66px] rounded-full highlight-bg" />
 			</ul>
 
 			{scrollProgress < 0.99 && stories.length > 6 ? (

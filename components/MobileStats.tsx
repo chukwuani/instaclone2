@@ -5,22 +5,21 @@ const MobileStats = () => {
 	const { user } = useUser();
 	return (
 		<>
-			<div className="mobile-stats-one">
+			<article className="flex flex-col p-5 pt-0 text-sm primary-text md:hidden">
 				<p className="name">
-					{user?.firstName} {user?.lastName}
+					{user?.firstName ?? "no"} {user?.lastName ?? "name"}
 				</p>
-				<span className="bio">
-					<p>
-						I&apos;m a mysterious individual who has yet to fill out my bio. One thing&apos;s for
-						certain: I will fill it out one day!
-					</p>
-				</span>
-			</div>
+
+				<p>
+					I&apos;m a mysterious individual who has yet to fill out my bio. One thing&apos;s for
+					certain: I will fill it out one day!
+				</p>
+			</article>
 
 			<div className="mobile-stats-two">
 				<p>
 					<a
-						className="number-post"
+						className="cursor-auto"
 						href="#">
 						0
 					</a>

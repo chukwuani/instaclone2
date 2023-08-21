@@ -1,6 +1,7 @@
 import { useClerk } from "@clerk/nextjs";
 import { useTheme } from "next-themes";
-import React, { RefObject } from "react";
+import Link from "next/link";
+import { RefObject } from "react";
 
 const ProfileMenu = ({ dialog }: { dialog: RefObject<HTMLDialogElement> }) => {
 	const { signOut } = useClerk();
@@ -19,29 +20,29 @@ const ProfileMenu = ({ dialog }: { dialog: RefObject<HTMLDialogElement> }) => {
 			ref={dialog}
 			className="more-list-option">
 			<section className="flex flex-col">
-				<a
+				<Link
 					className="more-list-items report"
 					href="#">
 					Apps and Websites
-				</a>
+				</Link>
 
-				<a
+				<Link
 					className="more-list-items"
 					href="#">
 					Settings
-				</a>
+				</Link>
 
-				<a
+				<Link
 					className="more-list-items"
 					href="#">
 					QR Code
-				</a>
+				</Link>
 
-				<a
+				<Link
 					className="more-list-items"
 					href="#">
 					Report A Problem
-				</a>
+				</Link>
 
 				<button
 					className="more-list-items"

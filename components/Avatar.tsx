@@ -3,7 +3,7 @@
 import { useUser } from "@clerk/nextjs";
 import Image from "next/image";
 
-const ProfileAvatar = ({ size }: { size: number }) => {
+const Avatar = ({ size }: { size: number }) => {
 	const { user } = useUser();
 	return (
 		<Image
@@ -17,4 +17,4 @@ const ProfileAvatar = ({ size }: { size: number }) => {
 	);
 };
 
-export default ProfileAvatar;
+export default Avatar;

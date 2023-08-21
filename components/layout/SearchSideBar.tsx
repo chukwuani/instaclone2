@@ -4,7 +4,7 @@ const SearchSideBar = ({ activeLink }: { activeLink: string }) => {
 			className={
 				activeLink === "search" ? "showing-search-sidebar search-sidebar" : "search-sidebar"
 			}>
-			<article className="search-sidebar-head">
+			<article className="flex flex-col pb-6 divider-bottom">
 				<h1 className="pt-3 pb-9 pr-[14px] pl-6 my-2 text-[24px] leading-[30px] font-semibold primary-text">
 					Search
 				</h1>
@@ -40,18 +40,27 @@ const SearchSideBar = ({ activeLink }: { activeLink: string }) => {
 						</svg>
 					</span>
 
-					<input className="search" type="search" name="search" id="search" placeholder="search" />
+					<input
+						className="search"
+						type="search"
+						name="search"
+						id="search"
+						placeholder="search"
+					/>
 				</div>
 			</article>
 
-			<div className="search-result-wrapper">
-				<div className="search-result-cta">
-					<p>Recent</p>
-					{/* <a href="#">Clear all</a> */}
+			<div className="flex flex-col grow">
+				<div className="flex items-center justify-between mx-6 mt-[6px] pt-4 mb-2">
+					<p className="font-semibold text-base">Recent</p>
+
+					{/* <Link className="font-semibold text-sm primary-btn" href="#">Clear all</Link> */}
 				</div>
 
-				<div className="search-result">
-					<p>No recent searches.</p>
+				<div className="flex items-center justify-center w-full text-center grow">
+					<p className="text-sm font-semibold secondary-text text-center w-full">
+						No recent searches.
+					</p>
 				</div>
 			</div>
 		</section>

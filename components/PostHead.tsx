@@ -8,13 +8,24 @@ type Person = {
 	username: string;
 };
 
-const PostHead = ({ user, dialog }: { user: Person; dialog: RefObject<HTMLDialogElement> }) => {
+// no-post-story-ring;
+// 👆🏼 style for removing story ring in feed
+
+const PostHead = ({
+	user,
+	dialog,
+	verified,
+}: {
+	user: Person;
+	dialog: RefObject<HTMLDialogElement>;
+	verified: boolean;
+}) => {
 	return (
 		<section className="flex items-center justify-between my-2 mx-2">
 			<Link
 				href="/profile"
 				className="flex gap-[3px] items-center">
-				<span className="post-story-ring no">
+				<span className="post-story-ring">
 					<span className="post-profile-pic">
 						<Image
 							src={user?.image}
@@ -30,11 +41,14 @@ const PostHead = ({ user, dialog }: { user: Person; dialog: RefObject<HTMLDialog
 					<p className="primary-text text-ellipsis text-sm leading-[18px] font-semibold">
 						{user?.username}
 					</p>
-					<Image
-						className="ml-1"
-						src={icons.verifiedBadge}
-						alt="verified badge"
-					/>
+
+					{verified ? (
+						<Image
+							className="ml-1"
+							src={icons.verifiedBadge}
+							alt="verified badge"
+						/>
+					) : null}
 				</section>
 			</Link>
 

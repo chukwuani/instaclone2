@@ -1,41 +1,110 @@
-"use client";
-
-import { useEffect, useRef } from "react";
+import Image from "next/image";
 
 const ExploreCard = () => {
-	const video = useRef<HTMLVideoElement>(null);
-
-	const toggleVideo = () => {
-		if (video.current?.paused === true) {
-			video.current?.play();
-		} else {
-			video.current?.pause();
-		}
-	};
-
 	return (
-		<article className="max-w-[470px] w-full h-auto flex flex-col primary-bg relative">
-			<div className="reel-video relative">
-				<video
-					onClick={toggleVideo}
-					ref={video}
-					width={470}
-					height={"auto"}
-					loop
-					autoPlay
-					title="Rick Astley - Never Gonna Give You Up (Official Music Video)">
-					<source
-						src="https://res.cloudinary.com/deghol0i0/video/upload/v1691379653/Rick_Astley_-_Never_Gonna_Give_You_Up_Official_Music_Video_1_i0ywl7.mp4"
-						type="video/mp4"
-					/>
-				</video>
-			</div>
+		<section className="discover-page-one">
+			<section className="discover-item-span">
+				<Image
+					width={309}
+					height={300}
+					className="discover-item"
+					id="image"
+					src="https://source.unsplash.com/random?sig=1"
+					alt="unsplash"
+				/>
+			</section>
 
-			<p className="left-0 bottom-0 absolute text-base leading-[25px] text-white py-4 px-3">
-				How do you rickroll someone who knows about rickrolling? You don&apos;t. You just give them
-				up, let them down, run around and desert them. No discover page or reels at the moment.
-			</p>
-		</article>
+			<section className="discover-item-span">
+				<Image
+					width={309}
+					height={300}
+					className="discover-item"
+					alt="random"
+					src="https://source.unsplash.com/random?sig=2"
+				/>
+			</section>
+
+			<section className="discover-item-span">
+				<Image
+					width={309}
+					height={300}
+					className="discover-item"
+					id="image"
+					src="https://source.unsplash.com/random?sig=3"
+					alt="unsplash"
+				/>
+			</section>
+
+			<section className="discover-item-span">
+				<Image
+					width={309}
+					height={300}
+					className="discover-item"
+					alt="random"
+					src="https://source.unsplash.com/random?sig=4"
+				/>
+			</section>
+
+			<section className="discover-item-span reel-1">
+				<Image
+					width={309}
+					height={300}
+					className="discover-item span-1"
+					alt="random"
+					src="https://source.unsplash.com/random?sig=5"
+				/>
+			</section>
+
+			<section className="discover-item-span">
+				<Image
+					width={309}
+					height={300}
+					className="discover-item"
+					alt="random"
+					src="https://source.unsplash.com/random?sig=6"
+				/>
+			</section>
+
+			<section className="discover-item-span">
+				<Image
+					width={309}
+					height={300}
+					className="discover-item"
+					alt="random"
+					src="https://source.unsplash.com/random?sig=7"
+				/>
+			</section>
+
+			<section className="discover-item-span">
+				<Image
+					width={309}
+					height={300}
+					className="discover-item"
+					alt="random"
+					src="https://source.unsplash.com/random?sig=8"
+				/>
+			</section>
+
+			<section className="discover-item-span">
+				<Image
+					width={309}
+					height={300}
+					className="discover-item"
+					alt="random"
+					src="https://source.unsplash.com/random?sig=9"
+				/>
+			</section>
+
+			<section className="discover-item-span reel-2">
+				<Image
+					width={309}
+					height={300}
+					className="discover-item span-2"
+					alt="random"
+					src="https://source.unsplash.com/random?sig=10"
+				/>
+			</section>
+		</section>
 	);
 };
 

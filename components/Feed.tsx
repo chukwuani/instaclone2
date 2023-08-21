@@ -4,7 +4,7 @@ import PostHead from "./PostHead";
 import PostContent from "./PostContent";
 import PostReaction from "./PostReaction";
 import PostStat from "./PostStat";
-import AddComment from "./AddComment";
+import AddComment from "./form/AddComment";
 import FeedMenu from "./FeedMenu";
 
 export default function Feed() {
@@ -28,6 +28,34 @@ export default function Feed() {
 		},
 	]);
 
+	const toggleSave = (id: string) => {
+		setFeed(
+			feed.map((item) => {
+				if (item.id === id) {
+					return { ...item, isSaved: !item.isSaved };
+				} else {
+					return item;
+				}
+			})
+		);
+		console.log("Saved");
+	};
+
+	const toggleLike = (id: string) => {
+		setFeed(
+			feed.map((item) => {
+				if (item.id === id && item.isLikedByYou === false) {
+					return { ...item, isLikedByYou: true, likeCount: item.likeCount + 1 };
+				} else if (item.id === id && item.isLikedByYou === true) {
+					return { ...item, isLikedByYou: false, likeCount: item.likeCount - 1 };
+				} else {
+					return item;
+				}
+			})
+		);
+		console.log("Liked");
+	};
+
 	return (
 		<>
 			{feed.map((item) => (
@@ -36,12 +64,18 @@ export default function Feed() {
 					className="max-w-[470px] w-full h-auto overflow-hidden flex flex-col primary-bg rounded-[8px] border-seperator mb-3">
 					<PostHead
 						user={item.user}
+						verified={item.isVerified}
 						dialog={dialog}
 					/>
 
 					<PostContent posts={item.posts} />
 
-					<PostReaction />
+					<PostReaction
+						toggleLike={() => toggleLike(item.id)}
+						toggleSave={() => toggleSave(item.id)}
+						saved={item.isSaved}
+						liked={item.isLikedByYou}
+					/>
 
 					<PostStat
 						user={item.user}
@@ -51,10 +85,10 @@ export default function Feed() {
 					/>
 
 					<AddComment />
+
+					<FeedMenu dialog={dialog} />
 				</article>
 			))}
-
-			<FeedMenu dialog={dialog} />
 		</>
 	);
 }

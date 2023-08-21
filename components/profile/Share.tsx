@@ -1,6 +1,6 @@
 const Share = () => {
 	return (
-		<div className="flex flex-col gap-4 my-11 mx-[60px] items-center justify-center text-center">
+		<div className="flex flex-col gap-4 my-[60px] mx-11 items-center justify-center text-center">
 			<div className="camera-icon" />
 
 			<h1 className="font-black text-3xl">Share Photos</h1>

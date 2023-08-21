@@ -28,7 +28,6 @@ const LoginForm = () => {
 
 				router.push(`${window.location.origin}/`);
 			} else {
-				/*Investigate why the login hasn't completed */
 				console.log(result);
 			}
 

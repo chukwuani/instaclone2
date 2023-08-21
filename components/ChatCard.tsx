@@ -3,8 +3,8 @@ import Link from "next/link";
 
 const ChatCard = () => {
 	return (
-		<ul className="flex flex-col items-center pt-2">
-			<li className="w-full inline-flex flex-auto items-center py-2 px-5 cursor-pointer chat-list">
+		<article className="flex flex-col items-center pt-2">
+			<section className="w-full inline-flex flex-auto items-center py-2 px-5 cursor-pointer chat-list">
 				<span className="online">
 					<Image
 						width={56}
@@ -14,6 +14,7 @@ const ChatCard = () => {
 						alt="avatar"
 					/>
 				</span>
+
 				<Link
 					className="no-underline"
 					href="/message">
@@ -26,8 +27,8 @@ const ChatCard = () => {
 						</p>
 					</article>
 				</Link>
-			</li>
-		</ul>
+			</section>
+		</article>
 	);
 };
 

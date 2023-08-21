@@ -19,12 +19,14 @@ import googleWithBg from "public/icons/google-white-bg.svg";
 import gear from "public/icons/gear.svg";
 import clock from "public/icons/clock.svg";
 import saved from "public/icons/saved.svg";
+import save from "public/icons/save.svg";
 import moon from "public/icons/moon.svg";
 import sun from "public/icons/sun.svg";
 import report from "public/icons/report.svg";
 import dotMenu from "public/icons/dot-menu.svg";
 import verifiedBadge from "public/icons/verified-badge.svg";
 import like from "public/icons/like.svg";
+import liked from "public/icons/liked.svg";
 import comment from "public/icons/comment.svg";
 import share from "public/icons/share.svg";
 import emoji from "public/icons/emoji.svg";
@@ -53,12 +55,14 @@ export default {
   	gear,
 	clock,
 	saved,
+	save,
 	moon,
 	sun,
 	report,
 	dotMenu,
 	verifiedBadge,
 	like,
+	liked,
 	share,
 	comment,
 	emoji,

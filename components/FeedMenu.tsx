@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { RefObject } from "react";
 
 const FeedMenu = ({ dialog }: { dialog: RefObject<HTMLDialogElement> }) => {
@@ -6,47 +7,47 @@ const FeedMenu = ({ dialog }: { dialog: RefObject<HTMLDialogElement> }) => {
 			ref={dialog}
 			className="more-list-option">
 			<section className="flex flex-col">
-				<a
+				<Link
 					className="more-list-items important-option report"
 					href="#">
 					Report
-				</a>
+				</Link>
 
-				<a
+				<Link
 					className="more-list-items important-option unfollow-btn"
 					href="#">
 					Unfollow
-				</a>
+				</Link>
 
-				<a
+				<Link
 					className="more-list-items"
 					href="#">
 					Add to favourites
-				</a>
+				</Link>
 
-				<a
+				<Link
 					className="more-list-items"
 					href="#">
 					Go to post
-				</a>
+				</Link>
 
-				<a
+				<Link
 					className="more-list-items"
 					href="#">
 					Share to...
-				</a>
+				</Link>
 
-				<a
+				<Link
 					className="more-list-items"
 					href="#">
 					Copy link
-				</a>
+				</Link>
 
-				<a
+				<Link
 					className="more-list-items"
 					href="#">
 					Embed
-				</a>
+				</Link>
 
 				<button
 					className="more-list-items cancel-more-option"

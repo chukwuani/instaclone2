@@ -12,8 +12,8 @@ const PostContent = ({ posts }: { posts: Array<string> }) => {
 
 	useMotionValueEvent(scrollX, "change", (latest) => {
 		setScroll(latest);
-		console.log(scrollXProgress);
 	});
+	
 	return (
 		<section className="overflow-hidden max-w-[470px] w-full h-auto flex relative">
 			{scroll > 0 && (

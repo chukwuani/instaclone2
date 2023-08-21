@@ -12,6 +12,11 @@ const nextConfig = {
 				hostname: "robohash.org",
 				port: "",
 			},
+			{
+				protocol: "https",
+				hostname: "source.unsplash.com",
+				port: "",
+			},
 		],
 	},
 };

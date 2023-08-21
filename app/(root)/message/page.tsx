@@ -4,7 +4,7 @@ import ChatCard from "@/components/ChatCard";
 import Image from "next/image";
 
 export const metadata: Metadata = {
-	title: "Inbox • Direct",
+	title: "Inbox • Chats",
 	description:
 		"Share your moments with Instagram, the app that lets you send private photos and messages to a friend or group. You can also explore millions of other photos and videos from people you follow or discover.",
 	icons: {

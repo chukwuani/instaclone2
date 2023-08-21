@@ -20,33 +20,69 @@ const MoreOption = () => {
 
 	return (
 		<nav className="more-option-list">
-			<Link href="/profile/setting" className="more-option">
-				<Image className="icons" src={icons.gear} alt="" />
+			<Link
+				href="#"
+				className="more-option">
+				<Image
+					className="icons"
+					src={icons.gear}
+					alt=""
+				/>
 				<p>setting</p>
 			</Link>
 
-			<Link href="/notification" className="more-option">
-				<Image className="icons" src={icons.clock} alt="" />
+			<Link
+				href="#"
+				className="more-option">
+				<Image
+					className="icons"
+					src={icons.clock}
+					alt=""
+				/>
 				<p>Your activity</p>
 			</Link>
 
-			<Link href="profile/saved" className="more-option">
-				<Image className="icons" src={icons.saved} alt="" />
+			<Link
+				href="#"
+				className="more-option">
+				<Image
+					className="icons"
+					src={icons.save}
+					alt=""
+				/>
 				<p>saved</p>
 			</Link>
 
-			<span className="more-option" onClick={toggleTheme}>
-				<Image className="icons sun" src={icons.sun} alt="" />
-				<Image className="icons moon" src={icons.moon} alt="" />
+			<span
+				className="more-option"
+				onClick={toggleTheme}>
+				<Image
+					className="icons sun"
+					src={icons.sun}
+					alt="Sun icon"
+				/>
+				<Image
+					className="icons moon"
+					src={icons.moon}
+					alt="Moon icon"
+				/>
 				<p>Switch appearance</p>
 			</span>
 
-			<Link href="https://github.com/chukwuani" className="more-option">
-				<Image className="icons" src={icons.report} alt="" />
+			<Link
+				href="https://github.com/chukwuani"
+				className="more-option">
+				<Image
+					className="icons"
+					src={icons.report}
+					alt=""
+				/>
 				<p>Report a problem</p>
 			</Link>
 
-			<span onClick={() => signOut()} className="more-option">
+			<span
+				onClick={() => signOut()}
+				className="more-option">
 				<p>log out</p>
 			</span>
 		</nav>

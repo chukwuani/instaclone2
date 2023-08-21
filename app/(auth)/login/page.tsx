@@ -2,11 +2,11 @@ import type { Metadata } from "next";
 import { icons } from "@/constants";
 import Image from "next/image";
 import Link from "next/link";
-import LoginForm from "@/components/LoginForm";
+import LoginForm from "@/components/form/LoginForm";
 import { currentUser } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
-import LoginWithGoogle from "@/components/LoginWithGoogle";
-import FormDivider from "@/components/FormDivider";
+import LoginWithGoogle from "@/components/form/LoginWithGoogle";
+import FormDivider from "@/components/form/FormDivider";
 
 export const metadata: Metadata = {
 	title: "Login • Instagram",

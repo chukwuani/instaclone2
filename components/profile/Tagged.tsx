@@ -2,7 +2,7 @@ import React from "react";
 
 const Tagged = () => {
 	return (
-		<div className="flex flex-col gap-4 mx-[60px] my-[66px] items-center justify-center text-center">
+		<div className="flex flex-col gap-4 mx-11 my-[60px] items-center justify-center text-center">
 			<div className="tagged-icon" />
 
 			<h1 className="font-black text-3xl">Photos of you</h1>

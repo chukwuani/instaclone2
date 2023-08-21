@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useSignIn } from "@clerk/nextjs";
 import { type OAuthStrategy } from "@clerk/types";
-import { toast } from "sonner";
+import { toast } from "react-hot-toast";
 import { icons } from "@/constants";
 
 const LoginWithGoogle = () => {
@@ -28,7 +28,11 @@ const LoginWithGoogle = () => {
 		<button
 			onClick={() => OAuthSignIn("oauth_google")}
 			className="flex items-center justify-center font-semibold text-sm link">
-			<Image className="mr-2 w-4 h-4" src={icons.google} alt="Google-logo" />
+			<Image
+				className="mr-2 w-4 h-4"
+				src={icons.google}
+				alt="Google-logo"
+			/>
 			Log in with Google
 		</button>
 	);

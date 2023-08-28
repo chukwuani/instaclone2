@@ -846,10 +846,10 @@ input[type="search"]::-webkit-search-cancel-button {
 	color: var(--primary-text);
 }
 
-.comment-input:active,
+/* .comment-input:active,
 .comment-input:focus ~ .post-comment-btn {
 	opacity: 1;
-}
+} */
 
 .comment-input::placeholder {
 	color: var(--secondary-text);
@@ -866,7 +866,7 @@ input[type="search"]::-webkit-search-cancel-button {
 	text-align: center;
 	width: auto;
 	margin: 0;
-	opacity: 0.3;
+	/* opacity: 0.3; */
 	color: var(--primary-button);
 	text-transform: capitalize;
 }

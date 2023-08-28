@@ -1,3 +1,5 @@
+// million-ignore
+
 import { Metadata } from "next";
 
 import Footer from "@/components/layout/Footer";

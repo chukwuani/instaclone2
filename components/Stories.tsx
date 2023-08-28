@@ -77,12 +77,15 @@ const Stories = () => {
 					</li>
 				))}
 
-				<Skeleton className="w-[66px] h-[66px] rounded-full highlight-bg" />
-				<Skeleton className="w-[66px] h-[66px] rounded-full highlight-bg" />
-				<Skeleton className="w-[66px] h-[66px] rounded-full highlight-bg" />
-				<Skeleton className="w-[66px] h-[66px] rounded-full highlight-bg" />
-				<Skeleton className="w-[66px] h-[66px] rounded-full highlight-bg" />
-				<Skeleton className="w-[66px] h-[66px] rounded-full highlight-bg" />
+				<li>
+					<Skeleton className="w-[66px] h-[66px] rounded-full highlight-bg" />
+				</li>
+				<li>
+					<Skeleton className="w-[66px] h-[66px] rounded-full highlight-bg" />
+				</li>
+				<li>
+					<Skeleton className="w-[66px] h-[66px] rounded-full highlight-bg" />
+				</li>
 			</ul>
 
 			{scrollProgress < 0.99 && stories.length > 6 ? (

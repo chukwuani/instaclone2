@@ -68,7 +68,10 @@ export default function Feed() {
 						dialog={dialog}
 					/>
 
-					<PostContent posts={item.posts} />
+					<PostContent
+						posts={item.posts}
+						toggleLike={() => toggleLike(item.id)}
+					/>
 
 					<PostReaction
 						toggleLike={() => toggleLike(item.id)}

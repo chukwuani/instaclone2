@@ -2,7 +2,12 @@ import { useMotionValueEvent, useScroll } from "framer-motion";
 import Image from "next/image";
 import { useRef, useState } from "react";
 
-const PostContent = ({ posts }: { posts: Array<string> }) => {
+interface Props {
+	posts: Array<string>;
+	toggleLike: () => void;
+}
+
+const PostContent = ({ posts, toggleLike }: Props) => {
 	const wrapper = useRef<HTMLUListElement>(null);
 	const [scroll, setScroll] = useState(0);
 
@@ -13,7 +18,7 @@ const PostContent = ({ posts }: { posts: Array<string> }) => {
 	useMotionValueEvent(scrollX, "change", (latest) => {
 		setScroll(latest);
 	});
-	
+
 	return (
 		<section className="overflow-hidden max-w-[470px] w-full h-auto flex relative">
 			{scroll > 0 && (
@@ -40,6 +45,7 @@ const PostContent = ({ posts }: { posts: Array<string> }) => {
 							/>
 						) : (
 							<Image
+								onDoubleClick={toggleLike}
 								src={item}
 								alt="post"
 								priority

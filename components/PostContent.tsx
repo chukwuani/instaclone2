@@ -13,7 +13,7 @@ interface Props {
 }
 
 const PostContent = ({ posts, toggleLike, options }: Props) => {
-	const autoheight = React.useRef(AutoHeight());
+	const autoheight = React.useRef(AutoHeight({ destroyHeight: "auto" }));
 	const [emblaRef, emblaApi] = useEmblaCarousel(options, [autoheight.current]);
 
 	const [prevBtnDisabled, setPrevBtnDisabled] = React.useState(true);

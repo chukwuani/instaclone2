@@ -4,7 +4,7 @@ import React from "react";
 const Saved = () => {
 	return (
 		<section className="flex justify-between relative flex-row gap-6 my-5 max-w-[950px] max-md:flex-col max-md:items-center max-md:h-full max-md:justify-center">
-			<p className="font-normal text-[13px] secondary-text">
+			<p className="font-normal text-[13px] text-secondary-text">
 				Only you can see what you&apos;ve saved
 			</p>
 
@@ -15,7 +15,7 @@ const Saved = () => {
 			</section>
 
 			<Link
-				className="font-semibold text-sm primary-btn mb-5"
+				className="font-semibold text-sm text-primary-button mb-5"
 				href="#">
 				+ New Collection
 			</Link>

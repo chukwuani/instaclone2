@@ -3,9 +3,11 @@ import Link from "next/link";
 const Terms = () => {
 	return (
 		<article className="text-center leading-4 my-[10px] mx-10">
-			<p className="text-xs secondary-text min-w-full">
+			<p className="text-xs text-secondary-text min-w-full">
 				People who use our service may have uploaded your contact information to Instagram.
-				<Link className="link" href="#">
+				<Link
+					className="text-link"
+					href="#">
 					{" "}
 					Learn More
 				</Link>
@@ -13,18 +15,24 @@ const Terms = () => {
 
 			<br />
 
-			<p className="text-xs secondary-text min-w-full">
+			<p className="text-xs text-secondary-text min-w-full">
 				By signing up, you agree to our{" "}
-				<Link className="link" href="#">
+				<Link
+					className="text-link"
+					href="#">
 					Terms
 				</Link>{" "}
 				,
-				<Link className="link" href="#">
+				<Link
+					className="text-link"
+					href="#">
 					Privacy Policy
 				</Link>{" "}
 				and{" "}
-				<Link className="link" href="#">
-					Cookies Policy .
+				<Link
+					className="text-link"
+					href="#">
+					Cookies Policy.
 				</Link>
 			</p>
 		</article>

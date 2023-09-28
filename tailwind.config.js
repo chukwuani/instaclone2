@@ -17,39 +17,50 @@ module.exports = {
     },
     extend: {
       colors: {
-        border: "hsl(var(--border))",
-        input: "hsl(var(--input))",
-        ring: "hsl(var(--ring))",
-        background: "hsl(var(--background))",
-        foreground: "hsl(var(--foreground))",
+        link: "rgb(var(--link))",
+        stroke: "rgba(var(--stroke),0.3)",
+        banner: "rgb(var(--banner-background))",
+        highlight: "rgb(var(--highlight-background))",
         primary: {
-          DEFAULT: "hsl(var(--primary))",
-          foreground: "hsl(var(--primary-foreground))",
+          background: "rgb(var(--primary-background))",
+          text: "rgb(var(--primary-text))",
+          button: "rgb(var(--primary-button))",
         },
         secondary: {
-          DEFAULT: "hsl(var(--secondary))",
-          foreground: "hsl(var(--secondary-foreground))",
+          background: "rgb(var(--secondary-background))",
+          text: "rgb(var(--secondary-text))",
+          button: "rgb(var(--secondary-button))",
+          "button-background": "rgb(var(--secondary-button-background))",
         },
         destructive: {
-          DEFAULT: "hsl(var(--destructive))",
-          foreground: "hsl(var(--destructive-foreground))",
+          DEFAULT: "rgb(var(--error-or-destructive))",
         },
         muted: {
-          DEFAULT: "hsl(var(--muted))",
-          foreground: "hsl(var(--muted-foreground))",
+          DEFAULT: "rgb(var(--muted))",
+          foreground: "rgb(var(--muted-foreground))",
         },
         accent: {
-          DEFAULT: "hsl(var(--accent))",
-          foreground: "hsl(var(--accent-foreground))",
+          DEFAULT: "rgb(var(--accent))",
+          foreground: "rgb(var(--accent-foreground))",
         },
         popover: {
-          DEFAULT: "hsl(var(--popover))",
-          foreground: "hsl(var(--popover-foreground))",
+          DEFAULT: "rgb(var(--popover))",
+          foreground: "rgb(var(--popover-foreground))",
         },
         card: {
-          DEFAULT: "hsl(var(--card))",
-          foreground: "hsl(var(--card-foreground))",
+          DEFAULT: "rgb(var(--card))",
+          foreground: "rgb(var(--card-foreground))",
         },
+        hover: {
+          overlay: "var(--hover-overlay)",
+          "primary-button": "rgb(var(--primary-button-hover))",
+          "secondary-button": "rgb(var(--secondary-button-hover))",
+        },
+        separator: {
+          DEFAULT: "rgba(var(--border-separator))",
+          divider: "rgb(var(--divider))",
+          elevated: "rgb(var(--elevated-separator))",
+        }
       },
       borderRadius: {
         lg: "var(--radius)",

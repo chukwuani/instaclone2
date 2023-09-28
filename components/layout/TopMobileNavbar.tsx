@@ -9,7 +9,7 @@ interface Props {
 
 const TopMobileNavbar = ({ activeLink, toggleNotification }: Props) => {
 	return (
-		<section className="flex w-screen h-[60px] justify-between px-1 pl-4 primary-bg fixed top-0 z-[600] divider !border-x-0 !border-t-0 md:hidden">
+		<section className="flex w-screen h-[60px] justify-between px-1 pl-4 bg-primary-background fixed top-0 z-[600] border-separator-divider border-b md:hidden">
 			<Link
 				href="/"
 				className="flex items-center justify-center">

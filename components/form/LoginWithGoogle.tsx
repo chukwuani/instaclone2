@@ -27,7 +27,7 @@ const LoginWithGoogle = () => {
 	return (
 		<button
 			onClick={() => OAuthSignIn("oauth_google")}
-			className="flex items-center justify-center font-semibold text-sm link">
+			className="flex items-center justify-center font-semibold text-sm text-link">
 			<Image
 				className="mr-2 w-4 h-4"
 				src={icons.google}

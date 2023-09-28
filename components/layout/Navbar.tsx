@@ -13,6 +13,7 @@ import TopMobileNavbar from "./TopMobileNavbar";
 import { icons } from "@/constants";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
+import CreatePost from "./CreatePost";
 
 const Navbar = () => {
 	const pathname = usePathname();
@@ -175,19 +176,7 @@ const Navbar = () => {
 						)}
 					</button>
 
-					<Link
-						className="nav-links"
-						href="#">
-						<span className="flex items-center gap-4">
-							<Image
-								className="icons"
-								src={icons.create}
-								alt="Create"
-								title="Create"
-							/>
-							<p className="nav-links-text">Create</p>
-						</span>
-					</Link>
+					<CreatePost />
 
 					<Link
 						className="nav-links"

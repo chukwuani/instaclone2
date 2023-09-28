@@ -61,7 +61,7 @@ const SignupForm = () => {
 
 			<FormDivider />
 
-			<section className="min-h-[38px] divider secondary-bg rounded-[3px] flex flex-col mx-10 mb-[6px] w-auto text-sm leading-normal relative">
+			<section className="min-h-[38px] border border-transparent md:border-separator bg-secondary-background rounded-[3px] flex flex-col mx-10 mb-[6px] w-auto text-sm leading-normal relative">
 				<label
 					htmlFor="email"
 					className={email.length > 0 ? "login-label form-label" : "form-label"}>
@@ -80,7 +80,7 @@ const SignupForm = () => {
 				/>
 			</section>
 
-			<section className="min-h-[38px] divider secondary-bg rounded-[3px] flex flex-col mx-10 mb-[6px] w-auto text-sm leading-normal relative">
+			<section className="min-h-[38px] border border-separator-divider bg-secondary-background rounded-[3px] flex flex-col mx-10 mb-[6px] w-auto text-sm leading-normal relative">
 				<label
 					htmlFor="fullname"
 					className={fullName.length > 0 ? "login-label form-label" : "form-label"}>
@@ -97,7 +97,7 @@ const SignupForm = () => {
 				/>
 			</section>
 
-			<section className="min-h-[38px] divider secondary-bg rounded-[3px] flex flex-col mx-10 mb-[6px] w-auto text-sm leading-normal relative">
+			<section className="min-h-[38px] border border-separator-divider bg-secondary-background rounded-[3px] flex flex-col mx-10 mb-[6px] w-auto text-sm leading-normal relative">
 				<label
 					htmlFor="username"
 					className={userName.length > 0 ? "login-label form-label" : "form-label"}>
@@ -114,7 +114,7 @@ const SignupForm = () => {
 				/>
 			</section>
 
-			<section className="min-h-[38px] divider secondary-bg rounded-[3px] flex flex-col mx-10 mb-[6px] w-auto text-sm leading-normal relative">
+			<section className="min-h-[38px] border border-separator-divider bg-secondary-background rounded-[3px] flex flex-col mx-10 mb-[6px] w-auto text-sm leading-normal relative">
 				<label
 					htmlFor="password"
 					className={password.length > 0 ? "login-label form-label" : "form-label"}>

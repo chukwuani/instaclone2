@@ -61,7 +61,7 @@ export default function Feed() {
 			{feed.map((item) => (
 				<article
 					key={item.id}
-					className="max-w-[470px] w-full h-auto overflow-hidden flex flex-col primary-bg rounded-[8px] border-seperator mb-3">
+					className="max-w-[470px] w-full h-auto overflow-hidden flex flex-col bg-primary-background rounded-[8px] border border-separator max-md:border-transparent mb-3">
 					<PostHead
 						user={item.user}
 						verified={item.isVerified}

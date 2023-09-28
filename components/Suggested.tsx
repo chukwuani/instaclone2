@@ -36,12 +36,12 @@ const Suggested = async () => {
 						{userName}
 					</Link>
 
-					<p className="secondary-text">{fullName}</p>
+					<p className="text-secondary-text">{fullName}</p>
 				</article>
 			</section>
 
 			<article className="my-2 mt-6">
-				<h4 className="flex-auto text-[14px] font-semibold secondary-text flex items-center py-2 px-4">
+				<h4 className="flex-auto text-[14px] font-semibold text-secondary-text flex items-center py-2 px-4">
 					Suggested for you
 				</h4>
 
@@ -53,7 +53,7 @@ const Suggested = async () => {
 				))}
 			</article>
 
-			<p className="opacity-50 mt-[11px] secondary-text font-normal text-[12px] uppercase px-4">
+			<p className="opacity-50 mt-[11px] text-secondary-text font-normal text-[12px] uppercase px-4">
 				© {currentYear} Instagram clone from me
 			</p>
 		</aside>

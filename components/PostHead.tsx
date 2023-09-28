@@ -38,7 +38,7 @@ const PostHead = ({
 				</span>
 
 				<section className="flex items-center gap-[2px] ml-[10px]">
-					<p className="primary-text text-ellipsis text-sm leading-[18px] font-semibold">
+					<p className="text-primary-text text-ellipsis text-sm leading-[18px] font-semibold">
 						{user?.username}
 					</p>
 

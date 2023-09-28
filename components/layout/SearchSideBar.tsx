@@ -4,8 +4,8 @@ const SearchSideBar = ({ activeLink }: { activeLink: string }) => {
 			className={
 				activeLink === "search" ? "showing-search-sidebar search-sidebar" : "search-sidebar"
 			}>
-			<article className="flex flex-col pb-6 divider-bottom">
-				<h1 className="pt-3 pb-9 pr-[14px] pl-6 my-2 text-[24px] leading-[30px] font-semibold primary-text">
+			<article className="flex flex-col pb-6 border-b border-separator-divider">
+				<h1 className="pt-3 pb-9 pr-[14px] pl-6 my-2 text-[24px] leading-[30px] font-semibold text-primary-text">
 					Search
 				</h1>
 
@@ -58,7 +58,7 @@ const SearchSideBar = ({ activeLink }: { activeLink: string }) => {
 				</div>
 
 				<div className="flex items-center justify-center w-full text-center grow">
-					<p className="text-sm font-semibold secondary-text text-center w-full">
+					<p className="text-sm font-semibold text-secondary-text text-center w-full">
 						No recent searches.
 					</p>
 				</div>

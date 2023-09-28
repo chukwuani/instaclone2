@@ -7,7 +7,6 @@ const page = () => {
 		<main className="main-content">
 			<section className="discover-page">
 				<ExploreCard />
-				<ExploreCard />
 			</section>
 		</main>
 	);

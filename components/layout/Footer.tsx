@@ -27,7 +27,7 @@ const Footer = () => {
 						key={links.label}
 						className="text-sm list-none">
 						<Link
-							className="secondary-text no-underline"
+							className="text-secondary-text no-underline"
 							href={links.href}>
 							{links.label}
 						</Link>
@@ -35,7 +35,7 @@ const Footer = () => {
 				))}
 
 				<li className="text-sm list-none">
-					<p className="secondary-text text-sm">© {currentYear} Instagram clone from Me</p>
+					<p className="text-secondary-text text-sm">© {currentYear} Instagram clone from Me</p>
 				</li>
 			</ul>
 		</footer>

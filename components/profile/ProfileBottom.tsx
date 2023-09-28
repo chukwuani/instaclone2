@@ -9,7 +9,7 @@ const ProfileBottom = () => {
 	const [activeCta, setActivecta] = useState("Share");
 
 	return (
-		<div className="divider-top">
+		<div className="border-t border-separator-divider">
 			<div className="w-full h-[52px]">
 				<ul className="user-profile-bottom-cta-list-item flex items-center justify-center gap-[60px] h-[52px] max-md:gap-0">
 					<li

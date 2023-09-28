@@ -1,23 +1,39 @@
+"use client";
+
+import InputEmoji from "react-input-emoji";
 import Image from "next/image";
 import { icons } from "@/constants";
+import { useState } from "react";
 
 const AddComment = () => {
+	const [text, setText] = useState("");
+
 	return (
-		<form className="comment-form">
-			<button type="button" className="pt-2 pr-3 pb-2 pl-0">
-				<Image className="icons" src={icons.emoji} alt="Add emoji" />
+		<form className="px-3 py-[6px] mt-[6px] flex items-center justify-between border-t border-separator-divider max-md:border max-md:rounded-b-[8px]">
+			<button
+				type="button"
+				className="pt-2 pr-3 pb-2 pl-0">
+				<Image
+					className="icons"
+					src={icons.emoji}
+					alt="Add emoji"
+				/>
 			</button>
 
-			<label className="flex items-center justify-between flex-auto" htmlFor="comment">
+			<label
+				className="flex items-center justify-between flex-auto"
+				htmlFor="comment">
 				<textarea
-					className="comment-input"
+					className="border-none bg-transparent outline-none w-full resize-none h-5 text-sm leading-[initial] text-primary-text placeholder:text-secondary-text"
 					required
 					name="comment"
 					id="comment"
 					placeholder="Add a comment..."
 				/>
 
-				<button className="post-comment-btn" type="submit">
+				<button
+					className=" bg-transparent border-none block text-[14px] font-semibold py-[5px] px-[9px] text-center w-auto m-0 text-primary-button capitalize"
+					type="submit">
 					post
 				</button>
 			</label>

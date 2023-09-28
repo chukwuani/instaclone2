@@ -11,7 +11,7 @@ const SuggestedCard = ({ user }: { user: User }) => {
 	return (
 		<section className="flex items-center py-2 px-4">
 			<Image
-				className="rounded-full object-cover mr-3 highlight-bg cursor-pointer"
+				className="rounded-full object-cover mr-3 bg-highlight cursor-pointer"
 				src={user?.image}
 				alt="avatar"
 				width={44}
@@ -26,11 +26,11 @@ const SuggestedCard = ({ user }: { user: User }) => {
 					{user?.username}
 				</Link>
 
-				<p className="text-[12px] secondary-text font-normal">Suggested for you</p>
+				<p className="text-[12px] text-secondary-text font-normal">Suggested for you</p>
 			</article>
 
 			<Link
-				className="text-[12px] ml-2 no-underline capitalize primary-btn font-semibold"
+				className="text-[12px] ml-2 no-underline capitalize text-primary-button font-semibold"
 				href="#">
 				Follow
 			</Link>

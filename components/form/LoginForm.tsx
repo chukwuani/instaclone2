@@ -45,7 +45,7 @@ const LoginForm = () => {
 			onSubmit={handleLogin}
 			method="post"
 			className="flex flex-col justify-center w-full mt-6">
-			<section className="min-h-[38px] divider secondary-bg rounded-[3px] flex flex-col mx-10 mb-[6px] w-auto text-sm leading-normal relative">
+			<section className="min-h-[38px] border border-transparent md:border-separator bg-secondary-background rounded-[3px] flex flex-col mx-10 mb-[6px] w-auto text-sm leading-normal relative">
 				<label
 					className={userName.length > 0 ? "login-label form-label" : "form-label"}
 					htmlFor="text">
@@ -63,7 +63,7 @@ const LoginForm = () => {
 				/>
 			</section>
 
-			<section className="min-h-[38px] divider secondary-bg rounded-[3px] flex flex-col mx-10 mb-[6px] w-auto text-sm leading-normal relative">
+			<section className="min-h-[38px] border border-separator-divider bg-secondary-background rounded-[3px] flex flex-col mx-10 mb-[6px] w-auto text-sm leading-normal relative">
 				<label
 					className={password.length > 0 ? "login-label form-label" : "form-label"}
 					htmlFor="password">

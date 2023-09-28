@@ -8,7 +8,7 @@ const Share = () => {
 				When you share photos, they will appear on your profile.
 			</p>
 			<a
-				className="primary-btn text-sm font-semibold"
+				className="text-primary-button text-sm font-semibold"
 				href="#">
 				Share your first photo
 			</a>

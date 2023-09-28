@@ -5,7 +5,7 @@ const MobileStats = () => {
 	const { user } = useUser();
 	return (
 		<>
-			<article className="flex flex-col p-5 pt-0 text-sm primary-text md:hidden">
+			<article className="flex flex-col p-5 pt-0 text-sm text-primary-text md:hidden">
 				<p className="name">
 					{user?.firstName ?? "no"} {user?.lastName ?? "name"}
 				</p>

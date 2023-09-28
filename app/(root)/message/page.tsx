@@ -18,7 +18,9 @@ const page = () => {
 			<section className="w-full h-screen flex justify-center absolute">
 				<section className="flex items-center justify-center w-full min-h-screen">
 					<section className=" w-1/3 h-full flex flex-col max-[768px]:w-full">
-						<h1 className=" text-base pb-[10px] px-6 pt-[14px] font-bold primary-text">Messages</h1>
+						<h1 className="text-base pb-[10px] px-6 pt-[14px] font-bold text-primary-text">
+							Messages
+						</h1>
 
 						<ChatCard />
 					</section>
@@ -30,8 +32,8 @@ const page = () => {
 							alt=""
 						/>
 
-						<h3 className="mt-5 text-xl font-light primary-text">Your Messages</h3>
-						<p className="mt-[10px] text-sm font-normal secondary-text w-1/2 text-center">
+						<h3 className="mt-5 text-xl font-light text-primary-text">Your Messages</h3>
+						<p className="mt-[10px] text-sm font-normal text-secondary-text w-1/2 text-center">
 							Send private photos and messages to a friend or group, and have fun conversations.
 						</p>
 					</article>

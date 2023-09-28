@@ -27,7 +27,7 @@ export default async function Home() {
 
 	return (
 		<section className="w-full min-h-full flex flex-col justify-center items-center">
-			<section className="border-seperator rounded-[1px] mb-[10px] mt-3 py-[10px] flex flex-col items-center max-w-[350px] w-full">
+			<section className="border border-separator rounded-[1px] mb-[10px] mt-3 py-[10px] flex flex-col items-center max-w-[350px] w-full">
 				<Image
 					className="w-[175px] h-auto mt-9 mb-3 icons"
 					src={icons.textLogo}
@@ -43,17 +43,17 @@ export default async function Home() {
 
 					<Link
 						href="#"
-						className="text-xs font-normal link">
+						className="text-xs font-normal text-link">
 						Forgot password?
 					</Link>
 				</section>
 			</section>
 
-			<section className="flex justify-center max-w-[350px] w-full items-center border-seperator rounded-[1px] mb-[10px] py-[5px]">
+			<section className="flex justify-center max-w-[350px] w-full items-center border border-separator rounded-[1px] mb-[10px] py-[5px]">
 				<p className="text-sm leading-normal text-center m-[15px]">
 					Don&apos;t have an account?{" "}
 					<Link
-						className="primary-btn font-semibold"
+						className="text-primary-button font-semibold"
 						href="/signup">
 						Sign up
 					</Link>

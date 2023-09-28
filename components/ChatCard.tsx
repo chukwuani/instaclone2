@@ -5,7 +5,7 @@ const ChatCard = () => {
 	return (
 		<article className="flex flex-col items-center pt-2">
 			<section className="w-full inline-flex flex-auto items-center py-2 px-5 cursor-pointer chat-list">
-				<span className="online">
+				<span className="online-status">
 					<Image
 						width={56}
 						height={56}

@@ -3,7 +3,7 @@ import ExploreCard from "@/components/ExploreCard";
 
 const Page = () => {
 	return (
-		<main className="main-content">
+		<main className="main-content max-md:!absolute">
 			<section className="discover-page">
 				<section className="md:hidden flex w-full">
 					<div className="search-container w-full m-4 relative">

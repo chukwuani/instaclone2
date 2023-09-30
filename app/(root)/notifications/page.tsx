@@ -6,7 +6,7 @@ import React from "react";
 const Page = () => {
 	const router = useRouter();
 	return (
-		<main className="main-content h-full items-center justify-center">
+		<main className="main-content max-md:!absolute h-full items-center justify-center">
 			<header className="md:hidden h-11 border-b flex items-center justify-center px-4 border-separator-elevated w-full fixed top-0 right-0">
 				<button
 					onClick={() => router.back()}

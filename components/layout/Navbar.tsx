@@ -122,15 +122,17 @@ const Navbar = () => {
 
 					<Link
 						className="nav-links"
-						href="/explore">
+						href="/reels">
 						<span className="flex items-center gap-4">
 							<Image
 								className="icons"
-								src={icons.reels}
+								src={activeLink === "/reels" ? icons.reelsActive : icons.reels}
 								alt="Reels"
 								title="Reels"
 							/>
-							<p className="nav-links-text">Reels</p>
+							<p className={`nav-links-text ${activeLink === "/reels" ? "font-bold" : ""}`}>
+								Reels
+							</p>
 						</span>
 					</Link>
 
@@ -230,12 +232,7 @@ const Navbar = () => {
 			<NotificationBar activeLink={activeLink} />
 			<SearchSideBar activeLink={activeLink} />
 
-			{pathname === "/" ? (
-				<TopMobileNavbar
-					activeLink={activeLink}
-					toggleNotification={toggleNotification}
-				/>
-			) : null}
+			{pathname === "/" ? <TopMobileNavbar /> : null}
 
 			<MobileNavbar
 				activeLink={pathname}

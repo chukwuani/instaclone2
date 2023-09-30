@@ -1,12 +1,4 @@
-import {
-	Dialog,
-	DialogContent,
-	DialogDescription,
-	DialogFooter,
-	DialogHeader,
-	DialogTitle,
-	DialogTrigger,
-} from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { icons } from "@/constants";
 import Image from "next/image";
 import React from "react";
@@ -32,11 +24,13 @@ export default function CreatePost() {
 				</button>
 			</DialogTrigger>
 
-			<DialogContent className="max-h-[855px] min-h-[348px] w-[438px] max-[500px]:w-[340px] bg-banner p-0">
-				<section>
-					<p className="text-primary-text border-b border-separator-divider">Create new post</p>
+			<DialogContent className="w-[438px] max-[500px]:w-[340px] bg-banner p-0">
+				<section className="flex flex-col items-center">
+					<span className="border-b border-separator-elevated min-h-[43px] h-full flex items-center justify-center w-full">
+						<p className="text-primary-text font-semibold">Create new post</p>
+					</span>
 
-					<section>
+					<section className="p-6 w-full h-full min-h-[348px] flex items-center justify-center flex-col gap-3">
 						<Image
 							className="icons"
 							src={icons.media}
@@ -45,10 +39,11 @@ export default function CreatePost() {
 							aria-label="Icon to represent media such as images or videos"
 						/>
 
-						<p>Drag photos and videos here</p>
+						<p className="text-[20px] font-normal leading-[25px]">Drag photos and videos here</p>
+						<button className="px-4 py-[7px] bg-primary-button rounded-[8px] text-sm font-semibold">
+							Select from computer
+						</button>
 					</section>
-
-					<button>Select from computer</button>
 				</section>
 			</DialogContent>
 		</Dialog>

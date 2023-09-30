@@ -47,6 +47,7 @@ const PostHead = ({
 							className="ml-1"
 							src={icons.verifiedBadge}
 							alt="verified badge"
+							title="Verified user"
 						/>
 					) : null}
 				</section>

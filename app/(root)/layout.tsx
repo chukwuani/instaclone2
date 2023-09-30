@@ -2,11 +2,10 @@ import "../globals.css";
 
 import ThemeProvider from "../../utils/ThemeProvider";
 import Navbar from "@/components/layout/Navbar";
-
 import { ClerkProvider } from "@clerk/nextjs";
 import { Toaster } from "@/utils/Toaster";
-
 import type { Metadata } from "next";
+import ReactQuery from "@/utils/ReactQuery";
 
 export const metadata: Metadata = {
 	title: "Instagram",
@@ -19,18 +18,20 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 	return (
-		<ClerkProvider>
-			<html
-				lang="en"
-				suppressHydrationWarning>
-				<body>
-					<ThemeProvider>
-						<Navbar />
-						{children}
-					</ThemeProvider>
-					<Toaster />
-				</body>
-			</html>
-		</ClerkProvider>
+		<ReactQuery>
+			<ClerkProvider>
+				<html
+					lang="en"
+					suppressHydrationWarning>
+					<body>
+						<ThemeProvider>
+							<Navbar />
+							{children}
+						</ThemeProvider>
+						<Toaster />
+					</body>
+				</html>
+			</ClerkProvider>
+		</ReactQuery>
 	);
 }

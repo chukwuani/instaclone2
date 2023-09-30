@@ -32,6 +32,17 @@ const MoreOption = () => {
 			</Link>
 
 			<Link
+				href="https://www.buymeacoffee.com/chukwuanise"
+				className="py-[9px] px-4 text-primary-text flex flex-row-reverse items-center justify-between gap-3 border-t border-separator grow-0 shrink-0 basis-auto hover:bg-hover-overlay">
+				<Image
+					className="icons"
+					src={icons.bmc}
+					alt=""
+				/>
+				<p className="text-[14px] h-6 mr-1 font-normal capitalize no-underline">Buy me a coffee</p>
+			</Link>
+
+			<Link
 				href="#"
 				className="py-[9px] px-4 text-primary-text flex flex-row-reverse items-center justify-between gap-3 border-t border-separator grow-0 shrink-0 basis-auto hover:bg-hover-overlay">
 				<Image

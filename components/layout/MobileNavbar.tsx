@@ -23,19 +23,6 @@ const MobileNavbar = ({ activeLink, toggleSearch }: Props) => {
 				/>
 			</Link>
 
-			<button
-				onClick={toggleSearch}
-				className="p-3">
-				<Image
-					className="icons"
-					src={icons.search}
-					alt="Search"
-					title="Search"
-				/>
-			</button>
-
-			<CreatePost />
-
 			<Link
 				href="/explore"
 				className="p-3">
@@ -44,6 +31,19 @@ const MobileNavbar = ({ activeLink, toggleSearch }: Props) => {
 					src={activeLink === "/explore" ? icons.exploreActive : icons.explore}
 					alt="Explore"
 					title="Explore"
+				/>
+			</Link>
+
+			<CreatePost />
+
+			<Link
+				href="/reels"
+				className="p-3">
+				<Image
+					className="icons"
+					src={activeLink === "/reels" ? icons.reelsActive : icons.reels}
+					alt="Reels"
+					title="Reels"
 				/>
 			</Link>
 

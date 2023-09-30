@@ -5,6 +5,7 @@ import searchActive from "public/icons/searchFilled.svg";
 import explore from "public/icons/explore.svg";
 import exploreActive from "public/icons/explorefilled.svg";
 import reels from "public/icons/reel.svg";
+import reelsActive from "public/icons/reelActive.svg";
 import message from "public/icons/message.svg";
 import messageActive from "public/icons/messagefilled.svg";
 import notification from "public/icons/notification.svg";
@@ -34,8 +35,10 @@ import emoji from "public/icons/emoji.svg";
 import spinner from "public/icons/loader-2.svg";
 import nodm from "public/icons/nodm.svg";
 import media from "public/icons/media.svg";
+import bmc from "public/icons/bmc.svg";
 
 export default {
+	bmc,
 	home,
 	homeActive,
 	search,
@@ -43,6 +46,7 @@ export default {
 	explore,
 	exploreActive,
 	reels,
+	reelsActive,
 	message,
 	messageActive,
 	notification,

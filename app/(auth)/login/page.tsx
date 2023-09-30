@@ -27,11 +27,12 @@ export default async function Home() {
 
 	return (
 		<section className="w-full min-h-full flex flex-col justify-center items-center">
-			<section className="border border-separator rounded-[1px] mb-[10px] mt-3 py-[10px] flex flex-col items-center max-w-[350px] w-full">
+			<section className="border border-separator max-md:border-transparent rounded-[1px] mb-[10px] mt-3 py-[10px] flex flex-col items-center max-w-[350px] w-full">
 				<Image
 					className="w-[175px] h-auto mt-9 mb-3 icons"
 					src={icons.textLogo}
 					alt="Instagram"
+					priority
 				/>
 
 				<LoginForm />
@@ -49,7 +50,7 @@ export default async function Home() {
 				</section>
 			</section>
 
-			<section className="flex justify-center max-w-[350px] w-full items-center border border-separator rounded-[1px] mb-[10px] py-[5px]">
+			<section className="flex justify-center max-w-[350px] w-full items-center border border-separator max-md:border-transparent rounded-[1px] mb-[10px] py-[5px]">
 				<p className="text-sm leading-normal text-center m-[15px]">
 					Don&apos;t have an account?{" "}
 					<Link

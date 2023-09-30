@@ -22,8 +22,8 @@ const ProfileMenu = ({ dialog }: { dialog: RefObject<HTMLDialogElement> }) => {
 			<section className="flex flex-col">
 				<Link
 					className="bg-transparent border-t-0 border-separator-elevated cursor-pointer text-sm leading-normal m-0 min-h-[48px] py-1 px-2 text-center align-middle inline-grid place-content-center active:bg-black/10"
-					href="#">
-					Apps and Websites
+					href="https://www.buymeacoffee.com/chukwuanise">
+					Buy me a coffee
 				</Link>
 
 				<Link

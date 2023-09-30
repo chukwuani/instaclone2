@@ -31,7 +31,7 @@ const PostStat = ({
 			</p>
 
 			<Link
-				className="text-sm leading-normal no-underline text-secondary-text"
+				className="w-fit text-sm leading-normal no-underline hover:underline text-secondary-text"
 				href="/post/comment">
 				View all 42,958 comments
 			</Link>

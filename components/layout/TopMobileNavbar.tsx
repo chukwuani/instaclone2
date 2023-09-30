@@ -2,14 +2,9 @@ import { icons } from "@/constants";
 import Image from "next/image";
 import Link from "next/link";
 
-interface Props {
-	activeLink: string;
-	toggleNotification: () => void;
-}
-
-const TopMobileNavbar = ({ activeLink, toggleNotification }: Props) => {
+const TopMobileNavbar = () => {
 	return (
-		<section className="flex w-screen h-[60px] justify-between px-1 pl-4 bg-primary-background fixed top-0 z-[600] border-separator-divider border-b md:hidden">
+		<section className="flex w-full h-[60px] justify-between px-1 pl-4 bg-primary-background fixed top-0 z-[600] border-separator-divider border-b md:hidden">
 			<Link
 				href="/"
 				className="flex items-center justify-center">
@@ -22,16 +17,16 @@ const TopMobileNavbar = ({ activeLink, toggleNotification }: Props) => {
 			</Link>
 
 			<section className="flex items-center">
-				<button
-					onClick={toggleNotification}
+				<Link
+					href="/notifications"
 					className="p-3">
 					<Image
 						className="icons"
-						src={activeLink === "notification" ? icons.notificationActive : icons.notification}
+						src={icons.notification}
 						alt="Notification"
 						title="Notification"
 					/>
-				</button>
+				</Link>
 
 				<Link
 					href="/message"

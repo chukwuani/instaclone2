@@ -1,24 +1,14 @@
 "use client";
 
-import InputEmoji from "react-input-emoji";
-import Image from "next/image";
-import { icons } from "@/constants";
 import { useState } from "react";
+import EmojiPicker from "../EmojiPicker";
 
 const AddComment = () => {
 	const [text, setText] = useState("");
 
 	return (
 		<form className="px-3 py-[6px] mt-[6px] flex items-center justify-between border-t border-separator-divider max-md:border max-md:rounded-b-[8px]">
-			<button
-				type="button"
-				className="pt-2 pr-3 pb-2 pl-0">
-				<Image
-					className="icons"
-					src={icons.emoji}
-					alt="Add emoji"
-				/>
-			</button>
+			<EmojiPicker />
 
 			<label
 				className="flex items-center justify-between flex-auto"

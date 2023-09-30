@@ -4,7 +4,6 @@ import useEmblaCarousel, {
 	type EmblaCarouselType,
 	type EmblaOptionsType,
 } from "embla-carousel-react";
-import AutoHeight from "embla-carousel-auto-height";
 
 interface Props {
 	posts: Array<string>;
@@ -13,8 +12,7 @@ interface Props {
 }
 
 const PostContent = ({ posts, toggleLike, options }: Props) => {
-	const autoheight = React.useRef(AutoHeight({ destroyHeight: "auto" }));
-	const [emblaRef, emblaApi] = useEmblaCarousel(options, [autoheight.current]);
+	const [emblaRef, emblaApi] = useEmblaCarousel(options);
 
 	const [prevBtnDisabled, setPrevBtnDisabled] = React.useState(true);
 	const [nextBtnDisabled, setNextBtnDisabled] = React.useState(true);
@@ -48,11 +46,12 @@ const PostContent = ({ posts, toggleLike, options }: Props) => {
 	}, [emblaApi, onSelect]);
 
 	return (
-		<section className="overflow-hidden max-w-[470px] w-full h-auto flex relative">
+		<section className="overflow-hidden max-w-[470px] w-full flex relative">
 			<section
 				ref={emblaRef}
-				className="w-full flex max-h-[470px] h-auto">
-				<ul className="post-content">
+				className="w-full flex max-h-[470px]">
+				<ul
+					className="post-content">
 					{posts.map((item, index) => (
 						<li
 							key={index}

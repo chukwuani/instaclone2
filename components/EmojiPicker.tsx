@@ -9,7 +9,7 @@ import data from "@emoji-mart/data";
 import { useTheme } from "next-themes";
 
 interface EmojiPickerProps {
-	onChange: (value: string) => void;
+	onChange?: (value: string) => void;
 }
 
 const EmojiPicker = ({ onChange }: EmojiPickerProps) => {
@@ -29,7 +29,7 @@ const EmojiPicker = ({ onChange }: EmojiPickerProps) => {
 				<Picker
 					theme={resolvedTheme}
 					data={data}
-					onEmojiSelect={(emoji: any) => onChange(emoji.native)}
+					// onEmojiSelect={(emoji: any) => onChange(emoji.native)}
 				/>
 			</PopoverContent>
 		</Popover>

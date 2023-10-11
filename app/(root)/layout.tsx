@@ -6,6 +6,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { Toaster } from "@/utils/Toaster";
 import type { Metadata } from "next";
 import ReactQuery from "@/utils/ReactQuery";
+import LoadingBar from "@/components/LoadingBar";
 
 export const metadata: Metadata = {
 	title: "Instagram",
@@ -26,6 +27,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 					<body>
 						<ThemeProvider>
 							<Navbar />
+							<LoadingBar />
 							{children}
 						</ThemeProvider>
 						<Toaster />

@@ -86,7 +86,7 @@ const ProfileTop = () => {
 
 					<article className="hidden md:flex flex-col leading-7">
 						<p className="name">
-							{user?.firstName ?? "no"} {user?.lastName ?? "name"}
+							{user?.firstName ?? "no"} {user?.lastName ?? "fullname"}
 						</p>
 
 						<p>

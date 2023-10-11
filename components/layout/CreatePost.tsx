@@ -39,8 +39,10 @@ export default function CreatePost() {
 							aria-label="Icon to represent media such as images or videos"
 						/>
 
-						<p className="text-[20px] font-normal leading-[25px]">Drag photos and videos here</p>
-						<button className="px-4 py-[7px] bg-primary-button rounded-[8px] text-sm font-semibold">
+						<p className="text-sm font-normal leading-[25px] max-w-[250px] text-center">
+							Simply drag and drop your photos and videos into this area to upload them.
+						</p>
+						<button className="px-4 py-[7px] bg-primary-button text-white rounded-[8px] text-sm font-semibold">
 							Select from computer
 						</button>
 					</section>

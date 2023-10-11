@@ -170,7 +170,7 @@ body {
 	filter: invert(1);
 }
 
-.loading-bar {
+/* .loading-bar {
 	height: 3px;
 	width: 100%;
 	position: fixed;
@@ -190,6 +190,22 @@ body {
 	transition: all 0.7s cubic-bezier(0.7, 0, 0.3, 1);
 	z-index: 2000;
 	animation: loaderGradient 5s ease infinite;
+} */
+
+/* .indicator {
+	width: 6px;
+	height: 6px;
+	border-radius: 50%;
+	opacity: 0.4;
+	margin-right: 4px;
+	background-color: white;
+} */
+
+.verify-email {
+	background-image: url(/images/collection-2.png);
+	background-position: -440px 0;
+	height: 72px;
+	width: 92px;
 }
 
 @keyframes loaderGradient {
@@ -202,15 +218,6 @@ body {
 	100% {
 		background-position: 0% 50%;
 	}
-}
-
-/* Modal related styles */
-.modal-open {
-	overflow: hidden;
-}
-
-::backdrop {
-	background: rgba(0, 0, 0, 0.6);
 }
 
 /* Navbar styles and all nav based styles begins here */
@@ -652,7 +659,6 @@ input[type="search"]::-webkit-search-cancel-button {
 	backface-visibility: hidden;
 	touch-action: pan-y;
 	max-width: 470px;
-	/* max-height: 373px; */
 	height: 100%;
 	width: 100%;
 	display: flex;
@@ -662,15 +668,15 @@ input[type="search"]::-webkit-search-cancel-button {
 .post-content-item {
 	max-width: 470px;
 	width: 100%;
-	height: auto;
-	object-fit: cover;
 }
 
 .post-content-item img {
+	object-fit: cover;
+	aspect-ratio: 1 / 1;
 	scroll-snap-align: start;
 	max-width: calc(470px - 2px);
 	width: 100vw;
-	height: auto;
+	height: 100%;
 	background-color: rgb(var(--primary-background));
 }
 
@@ -944,7 +950,9 @@ input[type="search"]::-webkit-search-cancel-button {
 }
 
 @media screen and (max-width: 768px) {
-	.nav {
+	.nav,
+	.next-btn,
+	.back-btn {
 		display: none;
 	}
 

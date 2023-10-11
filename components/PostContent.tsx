@@ -13,7 +13,6 @@ interface Props {
 
 const PostContent = ({ posts, toggleLike, options }: Props) => {
 	const [emblaRef, emblaApi] = useEmblaCarousel(options);
-
 	const [prevBtnDisabled, setPrevBtnDisabled] = React.useState(true);
 	const [nextBtnDisabled, setNextBtnDisabled] = React.useState(true);
 
@@ -50,8 +49,7 @@ const PostContent = ({ posts, toggleLike, options }: Props) => {
 			<section
 				ref={emblaRef}
 				className="w-full flex max-h-[470px]">
-				<ul
-					className="post-content">
+				<ul className="post-content">
 					{posts.map((item, index) => (
 						<li
 							key={index}

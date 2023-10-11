@@ -1,55 +1,57 @@
 "use client";
 
-import Terms from "./Terms";
 import Image from "next/image";
-import { toast } from "react-hot-toast";
-import { useSignUp } from "@clerk/nextjs";
-import { icons } from "@/constants";
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-
+import Terms from "./Terms";
 import SignUpWithGoogle from "./SignUpWithGoogle";
 import FormDivider from "./FormDivider";
 
+import { useSignUp } from "@clerk/nextjs";
+import { useTransition, useState } from "react";
+import { useRouter } from "next/navigation";
+import { toast } from "react-hot-toast";
+import { icons } from "@/constants";
+import { cn } from "@/lib/utils";
+
 const SignupForm = () => {
 	const router = useRouter();
-	const { signUp, setActive, isLoaded } = useSignUp();
-	const [loading, setLoading] = useState(false);
-	const [email, setEmail] = useState("");
-	const [password, setPassword] = useState("");
-	const [fullName, setFullName] = useState("");
-	const [userName, setUserName] = useState("");
 
-	const handleSignUp = async (e: React.FormEvent<HTMLFormElement>) => {
+	const { signUp, isLoaded } = useSignUp();
+	const [user, setUser] = useState({
+		email: "",
+		password: "",
+		username: "",
+		fullname: "",
+	});
+
+	const [isPending, startTransition] = useTransition();
+
+	const handleSignUp = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-
 		if (!isLoaded) return;
 
-		try {
-			const result = await signUp?.create({
-				emailAddress: email,
-				password: password,
-				username: userName,
-				firstName: fullName.split(" ")[0],
-				lastName: fullName.split(" ")[1],
-			});
+		startTransition(async () => {
+			try {
+				await signUp?.create({
+					emailAddress: user.email,
+					password: user.password,
+					username: user.username,
+					firstName: user.fullname.split(" ")[0],
+					lastName: user.fullname.split(" ")[1],
+				});
 
-			setLoading(true);
+				// Send email verification code
+				await signUp.prepareEmailAddressVerification({
+					strategy: "email_code",
+				});
 
-			if (result?.status === "complete") {
-				await setActive({ session: result.createdSessionId });
-
-				router.push(`${window.location.origin}/`);
-			} else {
-				/*Investigate why the login hasn't completed */
-				console.log(result);
+				router.push("/signup/verify-email");
+				toast.success("Check your email. We sent you a 6-digit verification code.");
+			} catch (err: any) {
+				err.errors.map((msg: { message: string }) => {
+					toast.error(msg.message);
+				});
 			}
-		} catch (err: any) {
-			setLoading(false);
-			err.errors.map((msg: { message: string }) => {
-				toast.error(msg.message);
-			});
-		}
+		});
 	};
 
 	return (
@@ -64,83 +66,91 @@ const SignupForm = () => {
 			<section className="min-h-[38px] border border-transparent md:border-separator bg-secondary-background rounded-[3px] flex flex-col mx-10 mb-[6px] w-auto text-sm leading-normal relative">
 				<label
 					htmlFor="email"
-					className={email.length > 0 ? "login-label form-label" : "form-label"}>
+					className={cn("form-label", user.email && "login-label")}>
 					Email
 				</label>
 
 				<input
-					className={email.length > 0 ? "login-input form-input" : "form-input"}
+					className={cn("form-input", user.email && "login-input")}
 					type="email"
 					id="email"
 					name="email"
 					required
 					autoComplete="true"
-					value={email}
-					onChange={(e) => setEmail(e.target.value)}
+					value={user.email}
+					onChange={(e) => setUser({ ...user, email: e.target.value })}
 				/>
 			</section>
 
 			<section className="min-h-[38px] border border-separator-divider bg-secondary-background rounded-[3px] flex flex-col mx-10 mb-[6px] w-auto text-sm leading-normal relative">
 				<label
 					htmlFor="fullname"
-					className={fullName.length > 0 ? "login-label form-label" : "form-label"}>
+					className={cn("form-label", user.fullname && "login-label")}>
 					Full Name
 				</label>
+
 				<input
-					className={fullName.length > 0 ? "login-input form-input" : "form-input"}
+					className={cn("form-input", user.fullname && "login-input")}
 					type="text"
 					id="fullname"
 					required
 					name="fullname"
-					value={fullName}
-					onChange={(e) => setFullName(e.target.value)}
+					maxLength={50}
+					value={user.fullname}
+					onChange={(e) => setUser({ ...user, fullname: e.target.value })}
 				/>
 			</section>
 
 			<section className="min-h-[38px] border border-separator-divider bg-secondary-background rounded-[3px] flex flex-col mx-10 mb-[6px] w-auto text-sm leading-normal relative">
 				<label
 					htmlFor="username"
-					className={userName.length > 0 ? "login-label form-label" : "form-label"}>
+					className={cn("form-label", user.username && "login-label")}>
 					Username
 				</label>
+
 				<input
-					className={userName.length > 0 ? "login-input form-input" : "form-input"}
+					className={cn("form-input", user.username && "login-input")}
 					type="text"
 					id="username"
 					required
 					name="username"
-					value={userName}
-					onChange={(e) => setUserName(e.target.value)}
+					maxLength={50}
+					spellCheck={false}
+					value={user.username}
+					onChange={(e) => setUser({ ...user, username: e.target.value })}
 				/>
 			</section>
 
 			<section className="min-h-[38px] border border-separator-divider bg-secondary-background rounded-[3px] flex flex-col mx-10 mb-[6px] w-auto text-sm leading-normal relative">
 				<label
 					htmlFor="password"
-					className={password.length > 0 ? "login-label form-label" : "form-label"}>
+					className={cn("form-label", user.password && "login-label")}>
 					Password
 				</label>
+
 				<input
-					className={password.length > 0 ? "login-input form-input" : "form-input"}
 					type="password"
 					id="password"
 					required
 					name="password"
-					value={password}
-					onChange={(e) => setPassword(e.target.value)}
+					minLength={8}
+					className={cn("form-input", user.password && "login-input")}
+					value={user.password}
+					onChange={(e) => setUser({ ...user, password: e.target.value })}
 				/>
 			</section>
 
 			<Terms />
 
 			<button
+				disabled={isPending}
 				className="!opacity-70 login-btn"
 				type="submit">
-				{loading && (
+				{isPending && (
 					<Image
 						className="mr-2 w-4 h-4 animate-spin"
 						src={icons.spinner}
-						alt="Google-logo"
+						alt="Loading spinner"
 					/>
 				)}
 				Sign up

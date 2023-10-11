@@ -28,7 +28,7 @@ const DialogOverlay = React.forwardRef<
 			className
 		)}
 		{...props}>
-		<DialogPrimitive.Close className="absolute z-[1600] right-5 top-5 rounded-sm ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground">
+		{/* <DialogPrimitive.Close className="absolute z-[1600] right-5 top-5 rounded-sm ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground">
 			<svg
 				color="rgb(255, 255, 255)"
 				fill="rgb(255, 255, 255)"
@@ -56,7 +56,7 @@ const DialogOverlay = React.forwardRef<
 					y2="3.354"></line>
 			</svg>
 			<span className="sr-only">Close</span>
-		</DialogPrimitive.Close>
+		</DialogPrimitive.Close> */}
 	</DialogPrimitive.Overlay>
 ));
 DialogOverlay.displayName = DialogPrimitive.Overlay.displayName;

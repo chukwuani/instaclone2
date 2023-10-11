@@ -1,5 +1,5 @@
 "use client";
-import { useState, useRef, useEffect, useCallback, KeyboardEvent } from "react";
+import { useState, useEffect, useCallback, KeyboardEvent } from "react";
 import useEmblaCarousel, {
 	type EmblaCarouselType,
 	type EmblaOptionsType,
@@ -16,13 +16,11 @@ type story = {
 };
 
 const Stories = ({ options }: { options?: EmblaOptionsType }) => {
-	const random = Math.floor(Math.random() * 20);
-
 	const { isLoading, error, data } = useQuery({
 		queryKey: ["storyData"],
 		queryFn: () =>
-			fetch(`https://dummyjson.com/users?limit=${random}&skip=30&select=username,image,id`).then(
-				(res) => res.json()
+			fetch("https://dummyjson.com/users?limit=23&skip=30&select=username,image,id").then((res) =>
+				res.json()
 			),
 	});
 

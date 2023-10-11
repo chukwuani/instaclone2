@@ -5,6 +5,7 @@ import { icons } from "@/constants";
 import { useTheme } from "next-themes";
 
 import { useClerk } from "@clerk/clerk-react";
+import { toast } from "react-hot-toast";
 
 const MoreOption = () => {
 	const { signOut } = useClerk();
@@ -16,6 +17,11 @@ const MoreOption = () => {
 		} else {
 			setTheme("dark");
 		}
+	};
+
+	const logOut = () => {
+		signOut();
+		toast.success("You have successfully logged out!");
 	};
 
 	return (
@@ -94,7 +100,7 @@ const MoreOption = () => {
 			</Link>
 
 			<span
-				onClick={() => signOut()}
+				onClick={logOut}
 				className="py-[9px] px-4 text-primary-text flex items-center justify-between gap-3 border-t-[6px] border-stroke grow-0 shrink-0 basis-auto hover:bg-hover-overlay">
 				<p className="text-[14px] h-6 mr-1 font-normal capitalize no-underline">log out</p>
 			</span>

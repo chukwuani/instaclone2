@@ -12,12 +12,17 @@ interface suggestion {
 
 const Suggested = async () => {
 	const user = await currentUser();
-	const userName = user?.username ? user?.username : `${user?.firstName}${user?.lastName}`;
-	const fullName = `${user?.firstName} ${user?.lastName}`;
+
+	const userName = user?.username
+		? user?.username
+		: `${user?.firstName ?? "no "}${user?.lastName ?? "username"}`;
+
+	const fullName = `${user?.firstName ?? "no"} ${user?.lastName ?? "fullname"}`;
+
 	const currentYear = new Date().getFullYear();
 
 	const data = await fetch(
-		"https://dummyjson.com/users?limit=5&skip=20&select=username,image, id"
+		"https://dummyjson.com/users?limit=5&skip=20&select=username,image,id"
 	).then((res) => res.json());
 
 	const suggestion: suggestion[] = data?.users;

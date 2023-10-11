@@ -1,4 +1,7 @@
 import Link from "next/link";
+import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
+import Comments from "./Comments";
+
 type Person = {
 	image: string;
 	username: string;
@@ -30,11 +33,17 @@ const PostStat = ({
 				{caption}
 			</p>
 
-			<Link
-				className="w-fit text-sm leading-normal no-underline hover:underline text-secondary-text"
-				href="/post/comment">
-				View all 42,958 comments
-			</Link>
+			<Sheet>
+				<SheetTrigger asChild>
+					<button className="w-fit text-sm leading-normal no-underline hover:underline text-secondary-text">
+						View all 42,958 comments
+					</button>
+				</SheetTrigger>
+
+				<SheetContent>
+					<Comments />
+				</SheetContent>
+			</Sheet>
 
 			<time
 				dateTime="03-07-2023"

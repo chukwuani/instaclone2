@@ -1,14 +1,12 @@
 "use client";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import PostHead from "./PostHead";
 import PostContent from "./PostContent";
 import PostReaction from "./PostReaction";
 import PostStat from "./PostStat";
 import AddComment from "./form/AddComment";
-import FeedMenu from "./FeedMenu";
 
 export default function Feed() {
-	const dialog = useRef<HTMLDialogElement>(null);
 	const [feed, setFeed] = useState([
 		{
 			id: crypto.randomUUID(),
@@ -21,9 +19,9 @@ export default function Feed() {
 				username: "cristiano",
 			},
 			posts: [
-				// "/images/post1.jpg",
-				// "/images/post2.jpg",
 				"/images/post3.jpg",
+				"/images/post1.jpg",
+				"/images/post2.jpg",
 				"/images/post4.jpg",
 				"/images/post5.jpg",
 				"/images/post6.jpg",
@@ -47,7 +45,6 @@ export default function Feed() {
 				}
 			})
 		);
-		console.log("Saved");
 	};
 
 	const toggleLike = (id: string) => {
@@ -62,7 +59,6 @@ export default function Feed() {
 				}
 			})
 		);
-		console.log("Liked");
 	};
 
 	return (
@@ -70,11 +66,10 @@ export default function Feed() {
 			{feed.map((item) => (
 				<article
 					key={item.id}
-					className="max-w-[470px] w-full h-auto overflow-hidden flex flex-col bg-primary-background rounded-[8px] border border-separator max-md:border-transparent mb-3">
+					className="max-w-[470px] w-full h-auto overflow-hidden flex flex-col bg-primary-background rounded-[4px] border border-separator max-md:border-transparent mb-3">
 					<PostHead
 						user={item.user}
 						verified={item.isVerified}
-						dialog={dialog}
 					/>
 
 					<PostContent
@@ -96,9 +91,7 @@ export default function Feed() {
 						createdAt={item.createdAt}
 					/>
 
-					<AddComment />
-
-					<FeedMenu dialog={dialog} />
+					{/* <AddComment /> */}
 				</article>
 			))}
 		</>

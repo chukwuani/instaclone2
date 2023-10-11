@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import { icons } from "@/constants";
+import { currentUser } from "@clerk/nextjs";
+import { redirect } from "next/navigation";
+
 import Image from "next/image";
 import Link from "next/link";
 import LoginForm from "@/components/form/LoginForm";
-import { currentUser } from "@clerk/nextjs";
-import { redirect } from "next/navigation";
 import LoginWithGoogle from "@/components/form/LoginWithGoogle";
 import FormDivider from "@/components/form/FormDivider";
 
@@ -21,9 +22,7 @@ export default async function Home() {
 	const user = await currentUser();
 
 	// if user manually enters this URL send them back to home if user exists
-	if (user) {
-		redirect("/");
-	}
+	if (user) redirect("/");
 
 	return (
 		<section className="w-full min-h-full flex flex-col justify-center items-center">

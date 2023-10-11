@@ -1,11 +1,12 @@
 "use client";
+import Image from "next/image";
 
 import { useState } from "react";
 import { useSignIn } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import { toast } from "react-hot-toast";
-import Image from "next/image";
 import { icons } from "@/constants";
+import { cn } from "@/lib/utils";
 
 const LoginForm = () => {
 	const router = useRouter();
@@ -27,8 +28,6 @@ const LoginForm = () => {
 				await setActive({ session: result.createdSessionId });
 
 				router.push(`${window.location.origin}/`);
-			} else {
-				console.log(result);
 			}
 
 			setLoading(true);
@@ -47,7 +46,7 @@ const LoginForm = () => {
 			className="flex flex-col justify-center w-full mt-6">
 			<section className="min-h-[38px] border border-transparent md:border-separator bg-secondary-background rounded-[3px] flex flex-col mx-10 mb-[6px] w-auto text-sm leading-normal relative">
 				<label
-					className={userName.length > 0 ? "login-label form-label" : "form-label"}
+					className={cn("form-label", userName.length > 0 && "login-label")}
 					htmlFor="text">
 					Username or email
 				</label>
@@ -59,13 +58,13 @@ const LoginForm = () => {
 					id="text"
 					name="text"
 					autoComplete="true"
-					className={userName.length > 0 ? "login-input form-input" : "form-input"}
+					className={cn("form-input", userName.length > 0 && "login-input")}
 				/>
 			</section>
 
 			<section className="min-h-[38px] border border-separator-divider bg-secondary-background rounded-[3px] flex flex-col mx-10 mb-[6px] w-auto text-sm leading-normal relative">
 				<label
-					className={password.length > 0 ? "login-label form-label" : "form-label"}
+					className={cn("form-label", password.length > 0 && "login-label")}
 					htmlFor="password">
 					Password
 				</label>
@@ -76,18 +75,19 @@ const LoginForm = () => {
 					value={password}
 					onChange={(e) => setPassword(e.target.value)}
 					name="password"
-					className={password.length > 0 ? "login-input form-input" : "form-input"}
+					className={cn("form-input", password.length > 0 && "login-input")}
 				/>
 			</section>
 
 			<button
+				disabled={loading}
 				type="submit"
 				className="login-btn">
 				{loading && (
 					<Image
 						className="mr-2 w-4 h-4 animate-spin"
 						src={icons.spinner}
-						alt="Google-logo"
+						alt="Loading spinner"
 					/>
 				)}
 				Log in

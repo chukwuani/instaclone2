@@ -1,9 +1,6 @@
-import Image from "next/image";
+import VerifyForm from "@/components/form/VerifyForm";
 import Link from "next/link";
-import SignupForm from "@/components/form/SignupForm";
-
 import type { Metadata } from "next";
-import { icons } from "@/constants";
 import { currentUser } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 
@@ -25,18 +22,22 @@ const Home = async () => {
 	return (
 		<section className="w-full min-h-full flex flex-col justify-center items-center">
 			<section className="border border-separator max-md:border-transparent rounded-[1px] mb-[10px] mt-3 py-[10px] flex flex-col items-center max-w-[350px] w-full">
-				<Image
-					className="w-[175px] h-auto mt-9 mb-3 icons"
-					src={icons.textLogo}
-					alt="Instagram"
-					priority
-				/>
+				<section className="flex flex-col py-2 px-7 items-center justify-center">
+					<span className="verify-email" />
 
-				<p className="text-secondary-text text-[17px] font-semibold leading-5 mt-0 mx-10 mb-[10px] text-center">
-					Sign up to see photos and videos from your friends.
-				</p>
+					<h2 className="text-[14px] text-primary-text font-semibold mt-2 mb-4">
+						Enter Confirmation Code
+					</h2>
 
-				<SignupForm />
+					<span className="text-[14px] text-center text-primary-text font-normal mt-2 mb-4">
+						Enter the confirmation code we sent to chukwuanisteven78@gmail.com.{" "}
+						<button className="text-sm text-primary-button font-semibold hover:text-link">
+							Resend Code.
+						</button>
+					</span>
+				</section>
+
+				<VerifyForm />
 			</section>
 
 			<section className="flex justify-center max-w-[350px] w-full items-center border border-separator max-md:border-transparent rounded-[1px] mb-[10px] py-[5px]">

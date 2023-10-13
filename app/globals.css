@@ -220,6 +220,14 @@ body {
 	}
 }
 
+.reel-bg {
+	background-repeat: no-repeat;
+	background-position: -222px -319px;
+	height: 62px;
+	width: 61px;
+	background-image: url(/images/collection-2.png);
+}
+
 /* Navbar styles and all nav based styles begins here */
 .nav {
 	position: fixed;

@@ -7,6 +7,7 @@ import { Toaster } from "@/utils/Toaster";
 import type { Metadata } from "next";
 import ReactQuery from "@/utils/ReactQuery";
 import LoadingBar from "@/components/LoadingBar";
+import { EdgeStoreProvider } from "@/lib/edgestore";
 
 export const metadata: Metadata = {
 	title: "Instagram",
@@ -19,21 +20,23 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 	return (
-		<ReactQuery>
-			<ClerkProvider>
-				<html
-					lang="en"
-					suppressHydrationWarning>
-					<body>
-						<ThemeProvider>
-							<Navbar />
-							<LoadingBar />
-							{children}
-						</ThemeProvider>
-						<Toaster />
-					</body>
-				</html>
-			</ClerkProvider>
-		</ReactQuery>
+		<EdgeStoreProvider>
+			<ReactQuery>
+				<ClerkProvider>
+					<html
+						lang="en"
+						suppressHydrationWarning>
+						<body>
+							<ThemeProvider>
+								<Navbar />
+								<LoadingBar />
+								{children}
+							</ThemeProvider>
+							<Toaster />
+						</body>
+					</html>
+				</ClerkProvider>
+			</ReactQuery>
+		</EdgeStoreProvider>
 	);
 }

@@ -2,7 +2,7 @@
 
 import { useRef, useState } from "react";
 import EmojiPicker from "../EmojiPicker";
-import useAutosizeTextArea from "@/lib/useAutosizeTextArea";
+import useAutosizeTextArea from "@/utils/useAutosizeTextArea";
 
 const AddComment = () => {
 	const [text, setText] = useState("");

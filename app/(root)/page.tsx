@@ -7,7 +7,7 @@ export default async function Home() {
 		<>
 			<main className="main-content pt-[76px] md:pt-[22px]">
 				<section className="flex flex-col items-center max-w-[470px] w-full mt-4">
-					<Stories options={{ slidesToScroll: "auto", skipSnaps: true, dragFree: true }} />
+					{/* <Stories options={{ slidesToScroll: "auto", skipSnaps: true, dragFree: true }} /> */}
 					<Feed />
 				</section>
 

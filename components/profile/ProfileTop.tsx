@@ -7,9 +7,9 @@ import MobileStats from "@/components/MobileStats";
 import ProfileMenu from "@/components/profile/ProfileMenu";
 import { useRef } from "react";
 import Link from "next/link";
+import { Dialog, DialogContent, DialogTrigger } from "../ui/dialog";
 
 const ProfileTop = () => {
-	const dialog = useRef<HTMLDialogElement>(null);
 	const { user } = useUser();
 	const userName = user?.username
 		? user?.username
@@ -33,17 +33,20 @@ const ProfileTop = () => {
 						<section className="lowercase flex items-center gap-[5px]">
 							<h1 className="font-normal h-min text-xl">{userName}</h1>
 
-							<button
-								className="p-2 icons cursor-pointer hidden max-[768px]:flex"
-								onClick={() => {
-									dialog.current?.showModal();
-									document.body.classList.add("modal-open");
-								}}>
-								<Image
-									src={icons.gear}
-									alt="gear icon"
-								/>
-							</button>
+							<Dialog>
+								<DialogTrigger asChild>
+									<button className="p-2 icons cursor-pointer hidden max-[768px]:flex">
+										<Image
+											src={icons.gear}
+											alt="gear icon"
+										/>
+									</button>
+								</DialogTrigger>
+
+								<DialogContent className="p-0">
+									<ProfileMenu />
+								</DialogContent>
+							</Dialog>
 						</section>
 
 						<Link
@@ -52,17 +55,20 @@ const ProfileTop = () => {
 							Edit profile
 						</Link>
 
-						<button
-							className="p-2 cursor-pointer icons max-[768px]:hidden"
-							onClick={() => {
-								dialog.current?.showModal();
-								document.body.classList.add("modal-open");
-							}}>
-							<Image
-								src={icons.gear}
-								alt="gear icon"
-							/>
-						</button>
+						<Dialog>
+							<DialogTrigger asChild>
+								<button className="p-2 cursor-pointer icons max-[768px]:hidden">
+									<Image
+										src={icons.gear}
+										alt="gear icon"
+									/>
+								</button>
+							</DialogTrigger>
+
+							<DialogContent className="p-0">
+								<ProfileMenu />
+							</DialogContent>
+						</Dialog>
 					</section>
 
 					<article className="profile-stats-2">
@@ -98,7 +104,6 @@ const ProfileTop = () => {
 			</section>
 
 			<MobileStats />
-			<ProfileMenu dialog={dialog} />
 		</>
 	);
 };

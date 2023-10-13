@@ -44,6 +44,8 @@ const SignupForm = () => {
 					strategy: "email_code",
 				});
 
+				localStorage.setItem("userData", JSON.stringify(user));
+
 				router.push("/signup/verify-email");
 				toast.success("Check your email. We sent you a 6-digit verification code.");
 			} catch (err: any) {

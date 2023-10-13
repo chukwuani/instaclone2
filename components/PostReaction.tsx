@@ -1,6 +1,8 @@
 import Image from "next/image";
 import { icons } from "@/constants";
 import { AnimatePresence, motion } from "framer-motion";
+import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
+import Comments from "./Comments";
 
 interface Props {
 	saved: boolean;
@@ -56,13 +58,21 @@ const PostReaction = ({ saved, liked, toggleSave, toggleLike }: Props) => {
 					)}
 				</AnimatePresence>
 
-				<button className="comment-btn p-2">
-					<Image
-						className="icons"
-						src={icons.comment}
-						alt="Button for leaving a comment"
-					/>
-				</button>
+				<Sheet>
+					<SheetTrigger asChild>
+						<button className="comment-btn p-2">
+							<Image
+								className="icons"
+								src={icons.comment}
+								alt="Button for leaving a comment"
+							/>
+						</button>
+					</SheetTrigger>
+
+					<SheetContent>
+						<Comments />
+					</SheetContent>
+				</Sheet>
 
 				<button className="share-btn p-2">
 					<Image

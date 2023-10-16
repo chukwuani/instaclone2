@@ -2,7 +2,7 @@ import Stories from "@/components/Stories";
 import Suggested from "@/components/Suggested";
 import Feed from "@/components/Feed";
 
-export default async function Home() {
+export default function Home() {
 	return (
 		<>
 			<main className="main-content pt-[76px] md:pt-[22px]">

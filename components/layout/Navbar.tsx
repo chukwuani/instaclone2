@@ -14,11 +14,11 @@ import { icons } from "@/constants";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import CreatePost from "./CreatePost";
+import { cn } from "@/lib/utils";
 
 const Navbar = () => {
 	const pathname = usePathname();
 
-	const [menuOpen, setMenuOpen] = useState(false);
 	const [activeLink, setActiveLink] = useState(pathname);
 
 	const sideBarIsActive = activeLink === "search" || activeLink === "notification";
@@ -46,7 +46,7 @@ const Navbar = () => {
 
 	return (
 		<header>
-			<nav className={`nav ${sideBarIsActive ? "sidebar-is-active" : ""}`}>
+			<nav className={cn("nav", sideBarIsActive && "sidebar-is-active")}>
 				<Link
 					href="/"
 					className="logo-wrapper h-[73px]">
@@ -200,33 +200,7 @@ const Navbar = () => {
 					</Link>
 				</span>
 
-				<button
-					onClick={() => setMenuOpen((prev) => !prev)}
-					className="nav-links relative">
-					{menuOpen ? (
-						<span className="flex items-center gap-4">
-							<Image
-								className="icons"
-								src={icons.moreActive}
-								alt="More"
-								title="More"
-							/>
-							<p className="font-bold nav-links-text">More</p>
-						</span>
-					) : (
-						<span className="flex items-center gap-4">
-							<Image
-								className="icons"
-								src={icons.more}
-								alt="More"
-								title="More"
-							/>
-							<p className="nav-links-text">More</p>
-						</span>
-					)}
-
-					{menuOpen ? <MoreOption /> : null}
-				</button>
+				<MoreOption />
 			</nav>
 
 			<NotificationBar activeLink={activeLink} />

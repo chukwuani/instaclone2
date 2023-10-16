@@ -10,6 +10,52 @@ export const metadata: Metadata = {
 	icons: {
 		icon: "/images/instagram-logo.png",
 	},
+	twitter: {
+		card: "summary_large_image",
+		title: "Inbox • Chats",
+		description:
+			"Share your moments with Instagram, the app that lets you send private photos and messages to a friend or group. You can also explore millions of other photos and videos from people you follow or discover.",
+		images: ["/images/instagram-logo.png"],
+		creator: "@_stevecodes",
+	},
+	openGraph: {
+		type: "website",
+		locale: "en_US",
+		title: "Inbox • Chats",
+		description:
+			"Share your moments with Instagram, the app that lets you send private photos and messages to a friend or group. You can also explore millions of other photos and videos from people you follow or discover.",
+		siteName: "Inbox • Chats",
+	},
+	keywords: [
+		"Next.js",
+		"React",
+		"Tailwind CSS",
+		"Server Components",
+		"Server Actions",
+		"Social Media App",
+		"Photo Sharing App",
+		"Instant Messaging App",
+		"User Profiles",
+		"Followers and Following",
+		"Likes and Comments",
+		"Explore Feed",
+		"Direct Messaging",
+		"Notifications",
+		"User Authentication",
+		"Customizable Profiles",
+		"Activity Feed",
+		"User Engagement",
+		"User Interactions",
+		"Search and Discover",
+		"Social Networking",
+	],
+	authors: [
+		{
+			name: "Stephen Chukwuani",
+			url: "https://github.com/chukwuani",
+		},
+	],
+	creator: "Stephen Chukwuani",
 };
 
 const page = () => {

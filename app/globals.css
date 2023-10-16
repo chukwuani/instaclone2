@@ -480,8 +480,6 @@ input[type="search"]::-webkit-search-cancel-button {
 	width: 230px;
 	display: flex;
 	flex-direction: column;
-	position: absolute;
-	bottom: 110%;
 	background-color: rgb(var(--banner-background));
 	border-radius: 6px;
 	overflow: hidden;

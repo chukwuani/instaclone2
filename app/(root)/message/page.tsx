@@ -19,6 +19,7 @@ export const metadata: Metadata = {
 		creator: "@_stevecodes",
 	},
 	openGraph: {
+		images: ["/images/instagram-logo.png"],
 		type: "website",
 		locale: "en_US",
 		title: "Inbox • Chats",
@@ -64,9 +65,17 @@ const page = () => {
 			<section className="w-full h-screen flex justify-center absolute">
 				<section className="flex items-center justify-center w-full min-h-screen">
 					<section className=" w-1/3 h-full flex flex-col max-[768px]:w-full">
-						<h1 className="text-base pb-[10px] px-6 pt-[14px] font-bold text-primary-text">
-							Messages
-						</h1>
+						<section className="flex items-center justify-between pb-[10px] px-6 pt-[14px]">
+							<h1 className="text-base font-bold text-primary-text">Messages</h1>
+
+							<button>
+								<Image
+									className="icons"
+									src={icons.newMessage}
+									alt="New message icon"
+								/>
+							</button>
+						</section>
 
 						<ChatCard />
 					</section>

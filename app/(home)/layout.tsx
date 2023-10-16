@@ -10,6 +10,7 @@ import LoadingBar from "@/components/LoadingBar";
 import { EdgeStoreProvider } from "@/lib/edgestore";
 
 export const metadata: Metadata = {
+	metadataBase: new URL(`${window.location.origin}`),
 	title: "Instagram",
 	description:
 		"Create an account or log into Instagram - A simple, fun & creative way to capture, edit & share photos, videos & messages with friends & family.",
@@ -25,6 +26,7 @@ export const metadata: Metadata = {
 		creator: "@_stevecodes",
 	},
 	openGraph: {
+		images: ["/images/instagram-logo.png"],
 		type: "website",
 		locale: "en_US",
 		title: "Instagram",

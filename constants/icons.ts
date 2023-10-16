@@ -36,6 +36,7 @@ import spinner from "public/icons/loader-2.svg";
 import nodm from "public/icons/nodm.svg";
 import media from "public/icons/media.svg";
 import bmc from "public/icons/bmc.svg";
+import newMessage from "public/icons/new-message.svg";
 
 export default {
 	bmc,
@@ -76,4 +77,5 @@ export default {
 	spinner,
 	nodm,
 	media,
+	newMessage,
 };

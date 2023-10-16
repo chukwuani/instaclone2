@@ -20,6 +20,7 @@ export const metadata: Metadata = {
 		creator: "@_stevecodes",
 	},
 	openGraph: {
+		images: ["/images/instagram-logo.png"],
 		type: "website",
 		locale: "en_US",
 		title: "Profile • Instagram photos and videos",

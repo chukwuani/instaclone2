@@ -47,7 +47,7 @@ const SuggestedCard = ({ user }: { user: User }) => {
 			</article>
 
 			<Link
-				className="text-[12px] ml-2 no-underline capitalize text-primary-button font-semibold"
+				className="text-[12px] ml-2 no-underline capitalize text-primary-button hover:text-link transition-colors duration-300 font-semibold"
 				href="#">
 				Follow
 			</Link>

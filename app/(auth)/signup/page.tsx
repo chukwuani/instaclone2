@@ -14,6 +14,52 @@ export const metadata: Metadata = {
 	icons: {
 		icon: "/images/instagram-logo.png",
 	},
+	twitter: {
+		card: "summary_large_image",
+		title: "Sign up • Instagram",
+		description:
+			"Join Instagram! Sign up to see photos, videos, stories & messages from your friends, family & interests around the world.",
+		images: ["/images/instagram-logo.png"],
+		creator: "@_stevecodes",
+	},
+	openGraph: {
+		type: "website",
+		locale: "en_US",
+		title: "Sign up • Instagram",
+		description:
+			"Join Instagram! Sign up to see photos, videos, stories & messages from your friends, family & interests around the world.",
+		siteName: "Sign up • Instagram",
+	},
+	keywords: [
+		"Next.js",
+		"React",
+		"Tailwind CSS",
+		"Server Components",
+		"Server Actions",
+		"Social Media App",
+		"Photo Sharing App",
+		"Instant Messaging App",
+		"User Profiles",
+		"Followers and Following",
+		"Likes and Comments",
+		"Explore Feed",
+		"Direct Messaging",
+		"Notifications",
+		"User Authentication",
+		"Customizable Profiles",
+		"Activity Feed",
+		"User Engagement",
+		"User Interactions",
+		"Search and Discover",
+		"Social Networking",
+	],
+	authors: [
+		{
+			name: "Stephen Chukwuani",
+			url: "https://github.com/chukwuani",
+		},
+	],
+	creator: "Stephen Chukwuani",
 };
 
 const Home = async () => {

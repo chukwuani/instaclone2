@@ -3,7 +3,7 @@ import React from "react";
 
 const Saved = () => {
 	return (
-		<section className="flex justify-between relative flex-row gap-6 my-5 max-w-[950px] max-md:flex-col max-md:items-center max-md:h-full max-md:justify-center">
+		<section className="flex flex-col justify-center items-center relative gap-6 mt-5 mb-7 max-w-[950px] max-md:h-full max-md:mb-[70px]">
 			<p className="font-normal text-[13px] text-secondary-text">
 				Only you can see what you&apos;ve saved
 			</p>
@@ -13,12 +13,6 @@ const Saved = () => {
 					<h2 className="font-medium text-[1.3rem]">All Posts</h2>
 				</section>
 			</section>
-
-			<Link
-				className="font-semibold text-sm text-primary-button mb-5"
-				href="#">
-				+ New Collection
-			</Link>
 		</section>
 	);
 };

@@ -1,97 +1,81 @@
 "use client";
-import { useState } from "react";
+
 import PostHead from "./PostHead";
 import PostContent from "./PostContent";
 import PostReaction from "./PostReaction";
 import PostStat from "./PostStat";
-import AddComment from "./form/AddComment";
+import { useQuery } from "@tanstack/react-query";
+import FeedSkeleton from "./FeedSkeleton";
+import { collection, getDocs, orderBy, query } from "firebase/firestore";
+import { firestore } from "@/lib/firebaseConfig";
 
 export default function Feed() {
-	const [feed, setFeed] = useState([
-		{
-			id: crypto.randomUUID(),
-			caption:
-				"Disappointed with the result, but we stay focused on our season and the games ahead.💪🏼Thank you Al Nassr fans for your support, we know we can count on you!🙌🏼💛💙",
-			createdAt: "1 month ago",
-			likeCount: 5787888,
-			user: {
-				image: "/images/cristiano.jpg",
-				username: "cristiano",
-			},
-			posts: [
-				"/images/post3.jpg",
-				"/images/post1.jpg",
-				"/images/post2.jpg",
-				"/images/post4.jpg",
-				"/images/post5.jpg",
-				"/images/post6.jpg",
-				"/images/post7.jpg",
-				"/images/post8.jpg",
-			],
-			isVerified: true,
-			isLikedByYou: false,
-			isSaved: false,
-			replies: [],
-		},
-	]);
+	const { isLoading, data } = useQuery({
+		queryKey: ["postData"],
+		queryFn: () => getPost(),
+	});
 
-	const toggleSave = (id: string) => {
-		setFeed(
-			feed.map((item) => {
-				if (item.id === id) {
-					return { ...item, isSaved: !item.isSaved };
-				} else {
-					return item;
-				}
-			})
-		);
+	const getPost = async () => {
+		const postsRef = collection(firestore, "posts");
+		const q = query(postsRef, orderBy("createdAt", "desc"));
+
+		const doc = await getDocs(q).then((querySnapshot) => {
+			const newData = querySnapshot.docs.map((doc) => ({ ...doc.data() }));
+			return newData;
+		});
+
+		return doc;
+
+		// The code below gets the realtime update
+		// const postsRef = collection(firestore, "posts");
+		// const q = query(postsRef, orderBy("createdAt", "desc"));
+
+		// return new Promise<DocumentData[]>((resolve) => {
+		// 	const unsubscribe = onSnapshot(q, (snapshot) => {
+		// 		const updatedPosts: DocumentData[] = [];
+		// 		snapshot.forEach((doc) => {
+		// 			updatedPosts.push({ id: doc.id, ...doc.data() });
+		// 		});
+
+		// 		resolve(updatedPosts);
+		// 	});
+
+		// 	// Return a cleanup function to unsubscribe when the component unmounts
+		// 	return () => {
+		// 		unsubscribe();
+		// 	};
+		// });
 	};
 
-	const toggleLike = (id: string) => {
-		setFeed(
-			feed.map((item) => {
-				if (item.id === id && item.isLikedByYou === false) {
-					return { ...item, isLikedByYou: true, likeCount: item.likeCount + 1 };
-				} else if (item.id === id && item.isLikedByYou === true) {
-					return { ...item, isLikedByYou: false, likeCount: item.likeCount - 1 };
-				} else {
-					return item;
-				}
-			})
-		);
-	};
+	if (isLoading) return <FeedSkeleton />;
 
 	return (
 		<>
-			{feed.map((item) => (
+			{data?.map((item, index) => (
 				<article
-					key={item.id}
+					key={index}
 					className="max-w-[470px] w-full h-auto overflow-hidden flex flex-col bg-primary-background rounded-[4px] border border-separator max-md:border-transparent mb-3">
 					<PostHead
-						user={item.user}
-						verified={item.isVerified}
+						user={item?.user}
+						verified={item?.isVerified}
 					/>
 
 					<PostContent
-						posts={item.posts}
-						toggleLike={() => toggleLike(item.id)}
+						images={item?.images}
+						alt={item?.altTexts}
 					/>
 
 					<PostReaction
-						toggleLike={() => toggleLike(item.id)}
-						toggleSave={() => toggleSave(item.id)}
-						saved={item.isSaved}
-						liked={item.isLikedByYou}
+						saved={item?.isSaved}
+						liked={item?.isLikedByYou}
 					/>
 
 					<PostStat
 						user={item.user}
-						likeCount={item.likeCount}
-						caption={item.caption}
-						createdAt={item.createdAt}
+						likeCount={item?.likes?.length}
+						caption={item?.caption}
+						createdAt={item?.createdAt?.seconds}
 					/>
-
-					{/* <AddComment /> */}
 				</article>
 			))}
 		</>

@@ -3,7 +3,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { currentUser } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
-import ResendEmail from "@/components/ResendEmail";
+import ResendEmail from "@/components/form/ResendEmail";
 
 export const metadata: Metadata = {
 	title: "Sign up • Instagram",
@@ -17,7 +17,6 @@ export const metadata: Metadata = {
 const Home = async () => {
 	const user = await currentUser();
 
-	// if user manually enters this URL send them back to home if user exists
 	if (user) redirect("/");
 
 	return (

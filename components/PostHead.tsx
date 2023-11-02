@@ -2,34 +2,21 @@ import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import Image from "next/image";
 import Link from "next/link";
 import { icons } from "@/constants";
-import { RefObject } from "react";
 import FeedMenu from "./FeedMenu";
-
-type Person = {
-	image: string;
-	username: string;
-};
 
 // no-post-story-ring;
 // 👆🏼 style for removing story ring in feed
 
-const PostHead = ({
-	user,
-	verified,
-}: {
-	user: Person;
-
-	verified: boolean;
-}) => {
+const PostHead = ({ user, verified }: { user: any; verified: boolean }) => {
 	return (
 		<section className="flex items-center justify-between my-2 mx-2">
 			<Link
-				href="/profile"
+				href={`/profile/${user?.username}`}
 				className="flex gap-[3px] items-center">
 				<span className="post-story-ring no-post-story-ring">
 					<span className="post-profile-pic">
 						<Image
-							src={user?.image}
+							src={user?.image ?? "/images/placeholder.png"}
 							alt="profile-pic"
 							width={32}
 							height={32}
@@ -54,7 +41,7 @@ const PostHead = ({
 						) : null}
 					</section>
 
-					<p className="text-xs font-normal ml-[10px] text-secondary-text">Cristiano Ronaldo</p>
+					<p className="text-xs font-normal ml-[10px] text-secondary-text">{user?.fullname}</p>
 				</section>
 			</Link>
 

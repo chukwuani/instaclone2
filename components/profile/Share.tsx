@@ -4,7 +4,7 @@ const Share = () => {
 			<div className="camera-icon" />
 
 			<h1 className="font-black text-3xl">Share Photos</h1>
-			<p className="font-normal text-sm">
+			<p className="font-normal text-sm w-[70%]">
 				When you share photos, they will appear on your profile.
 			</p>
 			<a

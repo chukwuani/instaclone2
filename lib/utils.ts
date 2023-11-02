@@ -19,3 +19,27 @@ export function formatBytes(
     sizeType === "accurate" ? accurateSizes[i] ?? "Bytest" : sizes[i] ?? "Bytes"
   }`
 }
+
+export function formatTimeDifference(postTimestamp: number) {
+  const currentTimestamp = Math.floor(Date.now() / 1000); // Convert milliseconds to seconds
+  const timeDifference = currentTimestamp - postTimestamp;
+
+  if (timeDifference < 60) {
+    return "just now";
+  } else if (timeDifference < 3600) {
+    const minutes = Math.floor(timeDifference / 60);
+    return `${minutes} ${minutes === 1 ? "minute" : "minutes"} ago`;
+  } else if (timeDifference < 86400) {
+    const hours = Math.floor(timeDifference / 3600);
+    return `${hours} ${hours === 1 ? "hour" : "hours"} ago`;
+  } else if (timeDifference < 604800) {
+    const days = Math.floor(timeDifference / 86400);
+    return `${days} ${days === 1 ? "day" : "days"} ago`;
+  } else if (timeDifference < 2419200) {
+    const weeks = Math.floor(timeDifference / 604800);
+    return `${weeks} ${weeks === 1 ? "week" : "weeks"} ago`;
+  } else {
+    const months = Math.floor(timeDifference / 2419200);
+    return `${months} ${months === 1 ? "month" : "months"} ago`;
+  }
+}

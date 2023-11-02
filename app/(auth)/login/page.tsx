@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
-import { icons } from "@/constants";
-import { currentUser } from "@clerk/nextjs";
-import { redirect } from "next/navigation";
-
 import Image from "next/image";
 import Link from "next/link";
+import { redirect } from "next/navigation";
+
+import { currentUser } from "@clerk/nextjs";
+
+import { icons } from "@/constants";
 import LoginForm from "@/components/form/LoginForm";
-import LoginWithGoogle from "@/components/form/LoginWithGoogle";
+import LoginWithFaceBook from "@/components/form/LoginWithFaceBook";
 import FormDivider from "@/components/form/FormDivider";
 
 export const metadata: Metadata = {
@@ -68,7 +69,6 @@ export const metadata: Metadata = {
 export default async function Home() {
 	const user = await currentUser();
 
-	// if user manually enters this URL send them back to home if user exists
 	if (user) redirect("/");
 
 	return (
@@ -86,7 +86,7 @@ export default async function Home() {
 				<FormDivider />
 
 				<section className="flex flex-col items-center justify-center gap-[10px] mb-[10px] py-[10px]">
-					<LoginWithGoogle />
+					<LoginWithFaceBook />
 
 					<Link
 						href="#"

@@ -16,7 +16,7 @@ type story = {
 };
 
 const Stories = ({ options }: { options?: EmblaOptionsType }) => {
-	const { isLoading, error, data } = useQuery({
+	const { isLoading, data } = useQuery({
 		queryKey: ["storyData"],
 		queryFn: () =>
 			fetch("https://dummyjson.com/users?limit=23&skip=30&select=username,image,id").then((res) =>

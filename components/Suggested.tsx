@@ -8,14 +8,15 @@ interface suggestion {
 	id: number;
 	username: string;
 	image: string;
+	following: string[];
+	followers: string[];
+	posts: string[];
 }
 
 const Suggested = async () => {
 	const user = await currentUser();
 
-	const userName = user?.username
-		? user?.username
-		: `${user?.firstName ?? "no "}${user?.lastName ?? "username"}`;
+	const userName = user?.username ?? `${user?.firstName ?? "no "}${user?.lastName ?? "username"}`;
 
 	const fullName = `${user?.firstName ?? "no"} ${user?.lastName ?? "fullname"}`;
 
@@ -30,7 +31,7 @@ const Suggested = async () => {
 	return (
 		<aside className="w-[319px] mt-9 ml-16 flex flex-col max-[999px]:hidden">
 			<section className="flex items-center px-4">
-				<Link href="/profile">
+				<Link href={`/profile/${userName}`}>
 					<Avatar size={44} />
 				</Link>
 
@@ -59,7 +60,7 @@ const Suggested = async () => {
 			</article>
 
 			<p className="opacity-50 mt-[11px] text-secondary-text font-normal text-[12px] uppercase px-4">
-				© {currentYear} Instagram clone from me
+				© {currentYear} Instagram clone from <Link href="https://twitter.com/_stevecodes">me</Link>
 			</p>
 		</aside>
 	);

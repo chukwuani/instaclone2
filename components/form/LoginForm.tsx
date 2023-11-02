@@ -1,23 +1,28 @@
 "use client";
-import Image from "next/image";
 
+import Image from "next/image";
 import { useState } from "react";
-import { useSignIn } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
+
+import { useSignIn } from "@clerk/nextjs";
 import { toast } from "react-hot-toast";
+
 import { icons } from "@/constants";
 import { cn } from "@/lib/utils";
 
 const LoginForm = () => {
 	const router = useRouter();
 	const { signIn, setActive, isLoaded } = useSignIn();
+
 	const [loading, setLoading] = useState(false);
+	const [showPassword, setShowPassword] = useState(false);
 	const [userName, setUserName] = useState("");
 	const [password, setPassword] = useState("");
 
 	const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		if (!isLoaded) return;
+
 		try {
 			const result = await signIn.create({
 				identifier: userName,
@@ -26,11 +31,9 @@ const LoginForm = () => {
 
 			if (result.status === "complete") {
 				await setActive({ session: result.createdSessionId });
-
+				setLoading(true);
 				router.push(`${window.location.origin}/`);
 			}
-
-			setLoading(true);
 		} catch (err: any) {
 			setLoading(false);
 			err.errors.map((msg: { message: string }) => {
@@ -44,7 +47,7 @@ const LoginForm = () => {
 			onSubmit={handleLogin}
 			method="post"
 			className="flex flex-col justify-center w-full mt-6">
-			<section className="min-h-[38px] border border-transparent md:border-separator bg-secondary-background rounded-[3px] flex flex-col mx-10 mb-[6px] w-auto text-sm leading-normal relative">
+			<section className="min-h-[38px] border border-separator-divider bg-secondary-background rounded-[3px] flex flex-col mx-10 mb-[6px] w-auto text-sm leading-normal relative">
 				<label
 					className={cn("form-label", userName.length > 0 && "login-label")}
 					htmlFor="text">
@@ -70,19 +73,28 @@ const LoginForm = () => {
 				</label>
 
 				<input
-					type="password"
+					type={showPassword ? "text" : "password"}
 					id="password"
 					value={password}
 					onChange={(e) => setPassword(e.target.value)}
 					name="password"
 					className={cn("form-input", password.length > 0 && "login-input")}
 				/>
+
+				{password.length > 0 && (
+					<button
+						type="button"
+						onClick={() => setShowPassword(!showPassword)}
+						className="absolute right-0 top-0 text-[10px] text-primary-text bg-secondary-background h-full p-2 font-semibold">
+						{showPassword ? "HIDE" : "SHOW"}
+					</button>
+				)}
 			</section>
 
 			<button
-				disabled={loading}
+				aria-disabled={loading}
 				type="submit"
-				className="login-btn">
+				className="login-btn disabled:opacity-70 disabled:cursor-auto">
 				{loading && (
 					<Image
 						className="mr-2 w-4 h-4 animate-spin"

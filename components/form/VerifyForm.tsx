@@ -1,12 +1,16 @@
 "use client";
 
-import { icons } from "@/constants";
-import { cn } from "@/lib/utils";
-import { useSignUp } from "@clerk/nextjs";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
+
+import { currentUser, useSignUp } from "@clerk/nextjs";
 import toast from "react-hot-toast";
+import { UserResource } from "@clerk/types";
+
+import { icons } from "@/constants";
+import { cn } from "@/lib/utils";
+import { addUserToFirestore } from "@/lib/firebaseService";
 
 const VerifyForm = () => {
 	const router = useRouter();
@@ -24,21 +28,27 @@ const VerifyForm = () => {
 				const completeSignUp = await signUp.attemptEmailAddressVerification({
 					code,
 				});
+
 				if (completeSignUp.status !== "complete") {
-					/*  investigate the response, to see if there was an error
-             or if the user needs to complete more steps.*/
 					toast(JSON.stringify(completeSignUp, null, 2));
 				}
+
 				if (completeSignUp.status === "complete") {
 					await setActive({ session: completeSignUp.createdSessionId });
+
+					// // Send user info to firestore database
+					// const user = await currentUser();
+
+					// await addUserToFirestore(user);
 
 					router.push(`${window.location.origin}/`);
 					localStorage.removeItem("userData");
 				}
 			} catch (err: any) {
-				err.errors.map((msg: { message: string }) => {
+				err?.errors?.map((msg: { message: string }) => {
 					toast.error(msg.message);
 				});
+				7;
 			}
 		});
 	}
@@ -69,9 +79,9 @@ const VerifyForm = () => {
 				</section>
 
 				<button
-					disabled={isPending}
+					aria-disabled={isPending}
 					type="submit"
-					className="login-btn">
+					className="login-btn disabled:opacity-70 disabled:cursor-auto">
 					{isPending && (
 						<Image
 							className="mr-2 w-4 h-4 animate-spin"

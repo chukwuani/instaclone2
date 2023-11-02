@@ -7,11 +7,9 @@ import Comments from "./Comments";
 interface Props {
 	saved: boolean;
 	liked: boolean;
-	toggleSave: () => void;
-	toggleLike: () => void;
 }
 
-const PostReaction = ({ saved, liked, toggleSave, toggleLike }: Props) => {
+const PostReaction = ({ saved, liked }: Props) => {
 	return (
 		<section className="flex items-center justify-between mt-1">
 			<section className="flex items-center">
@@ -25,7 +23,6 @@ const PostReaction = ({ saved, liked, toggleSave, toggleLike }: Props) => {
 							animate={{ scale: 1 }}
 							exit={{ scale: 0, opacity: 0 }}
 							transition={{ type: "spring", stiffness: 100 }}
-							onClick={toggleLike}
 							className="like-btn p-2">
 							<Image
 								title="Unlike"
@@ -46,7 +43,6 @@ const PostReaction = ({ saved, liked, toggleSave, toggleLike }: Props) => {
 							animate={{ scale: 1 }}
 							exit={{ scale: 0, opacity: 0 }}
 							transition={{ type: "spring", stiffness: 100 }}
-							onClick={toggleLike}
 							className="like-btn p-2">
 							<Image
 								className="icons"
@@ -83,9 +79,7 @@ const PostReaction = ({ saved, liked, toggleSave, toggleLike }: Props) => {
 				</button>
 			</section>
 
-			<button
-				onClick={toggleSave}
-				className="save-btn p-2">
+			<button className="save-btn p-2">
 				<Image
 					className="icons"
 					src={saved ? icons.saved : icons.save}

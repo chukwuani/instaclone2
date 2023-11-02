@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Terms from "./Terms";
-import SignUpWithGoogle from "./SignUpWithGoogle";
+import SignUpWithFaceBook from "./SignUpWithFaceBook";
 import FormDivider from "./FormDivider";
 
 import { useSignUp } from "@clerk/nextjs";
@@ -16,12 +16,15 @@ const SignupForm = () => {
 	const router = useRouter();
 
 	const { signUp, isLoaded } = useSignUp();
+
 	const [user, setUser] = useState({
 		email: "",
 		password: "",
 		username: "",
 		fullname: "",
 	});
+
+	const [showPassword, setShowPassword] = useState(false);
 
 	const [isPending, startTransition] = useTransition();
 
@@ -39,7 +42,6 @@ const SignupForm = () => {
 					lastName: user.fullname.split(" ")[1],
 				});
 
-				// Send email verification code
 				await signUp.prepareEmailAddressVerification({
 					strategy: "email_code",
 				});
@@ -49,7 +51,7 @@ const SignupForm = () => {
 				router.push("/signup/verify-email");
 				toast.success("Check your email. We sent you a 6-digit verification code.");
 			} catch (err: any) {
-				err.errors.map((msg: { message: string }) => {
+				err?.errors?.map((msg: { message: string }) => {
 					toast.error(msg.message);
 				});
 			}
@@ -61,11 +63,11 @@ const SignupForm = () => {
 			method="post"
 			onSubmit={handleSignUp}
 			className="flex flex-col justify-center w-full mb-6 !mt-0 signin-form">
-			<SignUpWithGoogle />
+			<SignUpWithFaceBook />
 
 			<FormDivider />
 
-			<section className="min-h-[38px] border border-transparent md:border-separator bg-secondary-background rounded-[3px] flex flex-col mx-10 mb-[6px] w-auto text-sm leading-normal relative">
+			<section className="min-h-[38px] border border-separator-divider bg-secondary-background rounded-[3px] flex flex-col mx-10 mb-[6px] w-auto text-sm leading-normal relative">
 				<label
 					htmlFor="email"
 					className={cn("form-label", user.email && "login-label")}>
@@ -78,7 +80,6 @@ const SignupForm = () => {
 					id="email"
 					name="email"
 					required
-					autoComplete="true"
 					value={user.email}
 					onChange={(e) => setUser({ ...user, email: e.target.value })}
 				/>
@@ -131,22 +132,32 @@ const SignupForm = () => {
 				</label>
 
 				<input
-					type="password"
+					type={showPassword ? "text" : "password"}
 					id="password"
 					required
 					name="password"
 					minLength={8}
+					autoComplete="new-password"
 					className={cn("form-input", user.password && "login-input")}
 					value={user.password}
 					onChange={(e) => setUser({ ...user, password: e.target.value })}
 				/>
+
+				{user.password.length > 0 && (
+					<button
+						type="button"
+						onClick={() => setShowPassword(!showPassword)}
+						className="absolute right-0 top-0 text-[10px] text-primary-text bg-secondary-background h-full p-2 font-semibold">
+						{showPassword ? "HIDE" : "SHOW"}
+					</button>
+				)}
 			</section>
 
 			<Terms />
 
 			<button
-				disabled={isPending}
-				className="!opacity-70 login-btn"
+				aria-disabled={isPending}
+				className="!opacity-70 login-btn  disabled:!opacity-50 disabled:cursor-auto"
 				type="submit">
 				{isPending && (
 					<Image

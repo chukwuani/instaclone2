@@ -7,7 +7,6 @@ export function Toaster() {
 		<RadToaster
 			position="top-center"
 			toastOptions={{
-				// Define default options
 				style: {
 					background: "rgb(var(--primary-background))",
 					color: "rgb(var(--primary-text))",

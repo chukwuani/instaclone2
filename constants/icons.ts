@@ -16,8 +16,8 @@ import more from "public/icons/moreOptions.svg";
 import moreActive from "public/icons/moreOptionsFilled.svg";
 import textLogo from "public/icons/instatextlogo.svg";
 import camLogo from "public/icons/instaCamLogo.svg";
-import google from "public/icons/google.svg";
-import googleWithBg from "public/icons/google-white-bg.svg";
+import fbIcon from "public/icons/fb-icon.svg";
+import facebookTransparent from "public/icons/fb-icon-transparent.svg";
 import gear from "public/icons/gear.svg";
 import clock from "public/icons/clock.svg";
 import saved from "public/icons/saved.svg";
@@ -58,8 +58,8 @@ export default {
 	moreActive,
 	textLogo,
 	camLogo,
-	google,
-	googleWithBg,
+	fbIcon,
+	facebookTransparent,
   	gear,
 	clock,
 	saved,

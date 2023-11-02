@@ -45,7 +45,7 @@ const MoreOption = () => {
 					</span>
 				</button>
 			</PopoverTrigger>
-			<PopoverContent className="p-0 border-none z-[1500] ml-6 w-full">
+			<PopoverContent className="p-0 border-none w-fit shadow-none z-[1500] ml-6 bg-primary-background">
 				<nav className="more-option-list">
 					<Link
 						href="#"

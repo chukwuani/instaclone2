@@ -66,7 +66,8 @@ const Navbar = () => {
 				<span className="flex-auto flex flex-col">
 					<Link
 						className="nav-links"
-						href="/">
+						href="/"
+						scroll>
 						<span className="flex items-center gap-4">
 							<Image
 								className="icons"

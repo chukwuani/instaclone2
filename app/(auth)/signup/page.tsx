@@ -1,11 +1,12 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import SignupForm from "@/components/form/SignupForm";
-
-import type { Metadata } from "next";
-import { icons } from "@/constants";
-import { currentUser } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
+
+import { currentUser } from "@clerk/nextjs";
+
+import SignupForm from "@/components/form/SignupForm";
+import { icons } from "@/constants";
 
 export const metadata: Metadata = {
 	title: "Sign up • Instagram",
@@ -66,7 +67,6 @@ export const metadata: Metadata = {
 const Home = async () => {
 	const user = await currentUser();
 
-	// if user manually enters this URL send them back to home if user exists
 	if (user) redirect("/");
 
 	return (

@@ -32,6 +32,7 @@ export const metadata: Metadata = {
 		description:
 			"Create an account or log into Instagram - A simple, fun & creative way to capture, edit & share photos, videos & messages with friends & family.",
 		siteName: "Instagram",
+		url: "https://instaglone.vercel.app",
 	},
 	keywords: [
 		"Next.js",

@@ -4,13 +4,11 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 
-import { currentUser, useSignUp } from "@clerk/nextjs";
+import { useSignUp } from "@clerk/nextjs";
 import toast from "react-hot-toast";
-import { UserResource } from "@clerk/types";
 
 import { icons } from "@/constants";
 import { cn } from "@/lib/utils";
-import { addUserToFirestore } from "@/lib/firebaseService";
 
 const VerifyForm = () => {
 	const router = useRouter();
@@ -24,32 +22,25 @@ const VerifyForm = () => {
 		if (!isLoaded) return;
 
 		startTransition(async () => {
-			try {
-				const completeSignUp = await signUp.attemptEmailAddressVerification({
+			await signUp
+				.attemptEmailAddressVerification({
 					code,
-				});
-
-				if (completeSignUp.status !== "complete") {
-					toast(JSON.stringify(completeSignUp, null, 2));
-				}
-
-				if (completeSignUp.status === "complete") {
-					await setActive({ session: completeSignUp.createdSessionId });
-
-					// // Send user info to firestore database
-					// const user = await currentUser();
-
-					// await addUserToFirestore(user);
+				})
+				.then((result) => {
+					if (result.status === "complete") {
+						localStorage.removeItem("userData");
+						setActive({ session: result.createdSessionId });
+					} else {
+						toast(JSON.stringify(result, null, 2));
+					}
 
 					router.push(`${window.location.origin}/`);
-					localStorage.removeItem("userData");
-				}
-			} catch (err: any) {
-				err?.errors?.map((msg: { message: string }) => {
-					toast.error(msg.message);
-				});
-				7;
-			}
+				})
+				.catch((err) =>
+					err?.errors?.map((msg: { message: string }) => {
+						toast.error(msg.message);
+					})
+				);
 		});
 	}
 

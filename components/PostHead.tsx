@@ -7,16 +7,16 @@ import FeedMenu from "./FeedMenu";
 // no-post-story-ring;
 // 👆🏼 style for removing story ring in feed
 
-const PostHead = ({ user, verified }: { user: any; verified: boolean }) => {
+const PostHead = ({ user }: { user: any }) => {
 	return (
 		<section className="flex items-center justify-between my-2 mx-2">
 			<Link
-				href={`/profile/${user?.username}`}
+				href={`${user?.username}`}
 				className="flex gap-[3px] items-center">
 				<span className="post-story-ring no-post-story-ring">
 					<span className="post-profile-pic">
 						<Image
-							src={user?.image ?? "/images/placeholder.png"}
+							src={user?.imageUrl ?? "/images/placeholder.png"}
 							alt="profile-pic"
 							width={32}
 							height={32}
@@ -31,7 +31,7 @@ const PostHead = ({ user, verified }: { user: any; verified: boolean }) => {
 							{user?.username}
 						</p>
 
-						{verified ? (
+						{user?.isVerified ? (
 							<Image
 								className="ml-1"
 								src={icons.verifiedBadge}
@@ -41,7 +41,9 @@ const PostHead = ({ user, verified }: { user: any; verified: boolean }) => {
 						) : null}
 					</section>
 
-					<p className="text-xs font-normal ml-[10px] text-secondary-text">{user?.fullname}</p>
+					<p className="text-xs font-normal ml-[10px] text-secondary-text">
+						{user?.firstName} {user?.lastName}
+					</p>
 				</section>
 			</Link>
 

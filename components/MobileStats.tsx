@@ -1,19 +1,26 @@
-import { useUser } from "@clerk/nextjs";
+import { DocumentData } from "firebase/firestore";
 import React from "react";
 
-const MobileStats = () => {
-	const { user } = useUser();
+interface MobileStatsProps {
+	user: DocumentData;
+	following: DocumentData;
+	followers: DocumentData;
+	postNumber: number;
+	isFollowing: boolean;
+}
+
+const MobileStats = ({ postNumber, user, followers, following, isFollowing }: MobileStatsProps) => {
 	return (
 		<>
 			<article className="flex flex-col p-5 pt-0 text-sm text-primary-text md:hidden">
-				<p className="name">
-					{user?.firstName ?? "no"} {user?.lastName ?? "name"}
-				</p>
+				<span className="flex items-center gap-3">
+					<p className="name">
+						{user?.firstName} {user?.lastName ?? ""}
+					</p>
+					{isFollowing && <p className="text-xs text-secondary-text font-medium">Follows you</p>}
+				</span>
 
-				<p>
-					I&apos;m a mysterious individual who has yet to fill out my bio. One thing&apos;s for
-					certain: I will fill it out one day!
-				</p>
+				<p>{user?.bio}</p>
 			</article>
 
 			<div className="mobile-stats-two">
@@ -21,15 +28,16 @@ const MobileStats = () => {
 					<a
 						className="cursor-auto"
 						href="#">
-						0
+						{postNumber}
 					</a>
 					posts
 				</p>
 				<p>
-					<a href="#">0</a> followers
+					<a href="#">{followers?.length}</a>{" "}
+					{followers.length === 0 ? "followers" : followers.length === 1 ? "follower" : "followers"}
 				</p>
 				<p>
-					<a href="#">0</a> following
+					<a href="#">{following?.length}</a> following
 				</p>
 			</div>
 		</>

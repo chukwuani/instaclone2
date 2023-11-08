@@ -3,13 +3,14 @@ import Link from "next/link";
 import Image from "next/image";
 import ProfileAvatar from "../Avatar";
 import CreatePost from "./CreatePost";
+import { useUser } from "@clerk/nextjs";
 
 interface Props {
 	activeLink: string;
-	toggleSearch: () => void;
 }
 
-const MobileNavbar = ({ activeLink, toggleSearch }: Props) => {
+const MobileNavbar = ({ activeLink }: Props) => {
+	const { user } = useUser();
 	return (
 		<nav className="w-screen h-[50px] hidden items-center justify-evenly fixed bottom-0 z-[1000] border-t border-separator-divider bg-primary-background max-[768px]:flex">
 			<Link
@@ -48,10 +49,10 @@ const MobileNavbar = ({ activeLink, toggleSearch }: Props) => {
 			</Link>
 
 			<Link
-				href="/profile"
+				href={`${user?.username}`}
 				className="p-3">
 				<span className="flex items-center gap-4">
-					{activeLink === "/profile" ? (
+					{activeLink === `/${user?.username}` ? (
 						<span className="profile-active">
 							<ProfileAvatar size={24} />
 						</span>

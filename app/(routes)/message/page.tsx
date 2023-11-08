@@ -26,6 +26,7 @@ export const metadata: Metadata = {
 		description:
 			"Share your moments with Instagram, the app that lets you send private photos and messages to a friend or group. You can also explore millions of other photos and videos from people you follow or discover.",
 		siteName: "Inbox • Chats",
+		url: "https://instaglone.vercel.app/message",
 	},
 	keywords: [
 		"Next.js",

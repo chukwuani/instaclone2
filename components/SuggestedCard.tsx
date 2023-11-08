@@ -1,45 +1,26 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
+import { DocumentData } from "firebase/firestore";
 
-interface User {
-	id: number;
-	image: string;
-	username: string;
-}
-
-const SuggestedCard = ({ user }: { user: User }) => {
+const SuggestedCard = ({ user }: DocumentData) => {
 	return (
 		<section className="flex items-center py-2 px-4">
-			<HoverCard>
-				<HoverCardTrigger asChild>
-					<Image
-						className="rounded-full object-cover mr-3 bg-highlight cursor-pointer"
-						src={user?.image}
-						alt="avatar"
-						width={44}
-						height={44}
-						quality={100}
-					/>
-				</HoverCardTrigger>
-				<HoverCardContent className="w-80 bg-primary-background border-0">
-					<div className="flex justify-between space-x-4">
-						<div className="space-y-1">
-							<h4 className="text-sm font-semibold">@nextjs</h4>
-							<p className="text-sm">The React Framework - created and maintained by @vercel.</p>
-							<div className="flex items-center pt-2">
-								<span className="text-xs text-muted-foreground">Joined December 2021</span>
-							</div>
-						</div>
-					</div>
-				</HoverCardContent>
-			</HoverCard>
+			<Link href={`${user?.username}`}>
+				<Image
+					className="rounded-full object-cover mr-3 bg-highlight cursor-pointer"
+					src={user?.imageUrl}
+					alt="avatar"
+					width={44}
+					height={44}
+					quality={100}
+				/>
+			</Link>
 
 			<article className="ml-3 flex-auto flex flex-col text-sm">
 				<Link
 					className="font-semibold"
-					href="/profile">
+					href={`${user?.username}`}>
 					{user?.username}
 				</Link>
 

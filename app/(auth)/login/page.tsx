@@ -7,7 +7,7 @@ import { currentUser } from "@clerk/nextjs";
 
 import { icons } from "@/constants";
 import LoginForm from "@/components/form/LoginForm";
-import LoginWithFaceBook from "@/components/form/LoginWithFaceBook";
+import LoginWithGithub from "@/components/form/LoginWithGithub";
 import FormDivider from "@/components/form/FormDivider";
 
 export const metadata: Metadata = {
@@ -86,10 +86,10 @@ export default async function Home() {
 				<FormDivider />
 
 				<section className="flex flex-col items-center justify-center gap-[10px] mb-[10px] py-[10px]">
-					<LoginWithFaceBook />
+					<LoginWithGithub />
 
 					<Link
-						href="#"
+						href="/login/reset-password"
 						className="text-xs font-normal text-link">
 						Forgot password?
 					</Link>

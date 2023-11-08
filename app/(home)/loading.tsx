@@ -19,6 +19,7 @@ const Loading = () => {
 				width={80}
 				height={80}
 				src="/images/from-meta.png"
+				className="w-auto h-auto"
 				alt="from meta"
 				aria-label="from meta"
 			/>

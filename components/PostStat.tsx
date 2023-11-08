@@ -8,39 +8,45 @@ interface Props {
 	caption: string;
 	createdAt: number;
 	user: any;
+	comments: string[];
 }
 
-const PostStat = ({ likeCount, user, caption, createdAt }: Props) => {
+const PostStat = ({ likeCount, user, caption, createdAt, comments }: Props) => {
 	return (
-		<article className="flex flex-col gap-[13px] py-2 px-3">
-			<p className="text-sm leading-normal font-semibold text-primary-text">
-				{likeCount?.toLocaleString()} {likeCount > 0 ? "likes" : "like"}
+		<article className="flex flex-col gap-[10px] py-2 px-3">
+			<p className="text-sm leading-none font-semibold text-primary-text">
+				{likeCount?.toLocaleString()} {likeCount > 1 ? "likes" : "like"}
 			</p>
 
-			<p className="text-sm leading-[23px] text-primary-text">
-				<Link
-					className="mr-1 no-underline text-secondary-button font-semibold fast hover:opacity-50"
-					href="#">
-					{user?.username}
-				</Link>
-				{caption}
-			</p>
+			{caption.length > 0 ? (
+				<p className="text-sm leading-[23px] text-primary-text">
+					<Link
+						className="mr-1 no-underline text-secondary-button font-semibold fast hover:opacity-50"
+						href={`${user?.username}`}>
+						{user?.username}
+					</Link>
+					{caption}
+				</p>
+			) : null}
 
-			<Sheet>
-				<SheetTrigger asChild>
-					<button className="w-fit text-sm leading-normal no-underline hover:underline text-secondary-text">
-						View all 42,958 comments
-					</button>
-				</SheetTrigger>
+			{comments.length > 0 ? (
+				<Sheet>
+					<SheetTrigger asChild>
+						<button className="w-fit text-sm leading-none no-underline hover:underline text-secondary-text">
+							View {comments.length > 1 && "all"} {comments?.length}{" "}
+							{comments?.length > 1 ? "comments" : "comment"}
+						</button>
+					</SheetTrigger>
 
-				<SheetContent>
-					<Comments />
-				</SheetContent>
-			</Sheet>
+					<SheetContent>
+						<Comments />
+					</SheetContent>
+				</Sheet>
+			) : null}
 
 			<time
 				dateTime={`${createdAt}`}
-				className="text-secondary-text text-[10px] uppercase">
+				className="text-secondary-text text-[10px] uppercase leading-none">
 				{formatTimeDifference(createdAt)}
 			</time>
 		</article>

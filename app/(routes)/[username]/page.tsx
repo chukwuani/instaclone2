@@ -5,6 +5,8 @@ import { Metadata } from "next";
 import Footer from "@/components/layout/Footer";
 import ProfileBottom from "@/components/profile/ProfileBottom";
 import ProfileTop from "@/components/profile/ProfileTop";
+import { getUserByUsername, getUserPost, getUserSaves } from "@/lib/firebaseService";
+import { currentUser } from "@clerk/nextjs";
 
 export const metadata: Metadata = {
 	title: "Profile • Instagram photos and videos",
@@ -59,12 +61,27 @@ export const metadata: Metadata = {
 	creator: "Stephen Chukwuani",
 };
 
-export default function Page() {
+export default async function Page({ params }: { params: { username: string } }) {
+	const loggedInUser = await currentUser();
+	const user = await getUserByUsername(params.username);
+	const posts = await getUserPost(user[0]?.userId);
+	const saves = await getUserSaves(user[0]?.userId);
+
 	return (
 		<main className="main-content">
 			<section className="user-profile">
-				<ProfileTop />
-				<ProfileBottom />
+				<ProfileTop
+					user={user[0]}
+					postNumber={posts.length}
+					showFollow={loggedInUser?.id !== user[0]?.userId}
+					loggedInUserId={loggedInUser?.id}
+				/>
+
+				<ProfileBottom
+					posts={posts}
+					saves={saves}
+					showSaved={loggedInUser?.id === user[0]?.userId}
+				/>
 
 				<Footer />
 			</section>

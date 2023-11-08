@@ -114,8 +114,9 @@ export default function FileCard({ i, file, files, setFiles }: FileCardProps) {
 									background={false}
 									responsive={true}
 									autoCropArea={1}
-									checkOrientation={false} // https://github.com/fengyuanchen/cropperjs/issues/671
+									checkOrientation={false}
 									guides={true}
+									cropBoxResizable={false}
 								/>
 								<div className="flex items-center justify-center space-x-2">
 									<button

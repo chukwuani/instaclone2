@@ -1,110 +1,29 @@
+import { icons } from "@/constants";
+import { DocumentData } from "firebase/firestore";
 import Image from "next/image";
+import Link from "next/link";
 
-const ExploreCard = () => {
+const ExploreCard = ({ post }: { post: DocumentData }) => {
 	return (
-		<section className="discover-page-one">
-			<section className="discover-item-span">
-				<Image
-					width={309}
-					height={300}
-					className="discover-item"
-					id="image"
-					src="https://source.unsplash.com/random?sig=1"
-					alt="unsplash"
-				/>
-			</section>
+		<Link
+			href={`post/${post.id}`}
+			className="h-auto w-full relative">
+			<Image
+				src={post.images[0]}
+				alt={post.altTexts[0]}
+				width={309}
+				height={309}
+				className="w-full h-full object-cover aspect-square"
+			/>
 
-			<section className="discover-item-span">
+			{post?.images?.length > 1 && (
 				<Image
-					width={309}
-					height={300}
-					className="discover-item"
-					alt="random"
-					src="https://source.unsplash.com/random?sig=2"
+					className="absolute invert top-2 right-2"
+					src={icons.collection}
+					alt="Post has many images"
 				/>
-			</section>
-
-			<section className="discover-item-span">
-				<Image
-					width={309}
-					height={300}
-					className="discover-item"
-					id="image"
-					src="https://source.unsplash.com/random?sig=3"
-					alt="unsplash"
-				/>
-			</section>
-
-			<section className="discover-item-span">
-				<Image
-					width={309}
-					height={300}
-					className="discover-item"
-					alt="random"
-					src="https://source.unsplash.com/random?sig=4"
-				/>
-			</section>
-
-			<section className="discover-item-span reel-1">
-				<Image
-					width={309}
-					height={300}
-					className="discover-item span-1"
-					alt="random"
-					src="https://source.unsplash.com/random?sig=5"
-				/>
-			</section>
-
-			<section className="discover-item-span">
-				<Image
-					width={309}
-					height={300}
-					className="discover-item"
-					alt="random"
-					src="https://source.unsplash.com/random?sig=6"
-				/>
-			</section>
-
-			<section className="discover-item-span">
-				<Image
-					width={309}
-					height={300}
-					className="discover-item"
-					alt="random"
-					src="https://source.unsplash.com/random?sig=7"
-				/>
-			</section>
-
-			<section className="discover-item-span">
-				<Image
-					width={309}
-					height={300}
-					className="discover-item"
-					alt="random"
-					src="https://source.unsplash.com/random?sig=8"
-				/>
-			</section>
-
-			<section className="discover-item-span">
-				<Image
-					width={309}
-					height={300}
-					className="discover-item"
-					alt="random"
-					src="https://source.unsplash.com/random?sig=9"
-				/>
-			</section>
-
-			<section className="discover-item-span reel-2">
-				<Image
-					width={309}
-					height={300}
-					className="discover-item span-2"
-					alt="random"
-					src="https://source.unsplash.com/random?sig=10"
-				/>
-			</section>
-		</section>
+			)}
+		</Link>
 	);
 };
 

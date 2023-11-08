@@ -37,6 +37,9 @@ import nodm from "public/icons/nodm.svg";
 import media from "public/icons/media.svg";
 import bmc from "public/icons/bmc.svg";
 import newMessage from "public/icons/new-message.svg";
+import collection from "public/icons/collection.svg";
+import github from "public/icons/github.svg";
+import githubBg from "public/icons/githubBg.svg";
 
 export default {
 	bmc,
@@ -78,4 +81,7 @@ export default {
 	nodm,
 	media,
 	newMessage,
+	collection,
+	github,
+	githubBg,
 };

@@ -9,9 +9,10 @@ interface Props {
 	images: Array<string>;
 	alt: Array<string>;
 	options?: EmblaOptionsType;
+	likePost: () => void;
 }
 
-const PostContent = ({ images, options, alt }: Props) => {
+const PostContent = ({ images, options, alt, likePost }: Props) => {
 	const [emblaRef, emblaApi] = useEmblaCarousel(options);
 	const [prevBtnDisabled, setPrevBtnDisabled] = React.useState(true);
 	const [nextBtnDisabled, setNextBtnDisabled] = React.useState(true);
@@ -55,6 +56,7 @@ const PostContent = ({ images, options, alt }: Props) => {
 							key={index}
 							className="post-content-item relative">
 							<Image
+								onDoubleClick={likePost}
 								className="bg-highlight"
 								src={item}
 								alt={alt[index]}

@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Terms from "./Terms";
-import SignUpWithFaceBook from "./SignUpWithFaceBook";
+import SignUpWithFaceBook from "./SignUpWithGithub";
 import FormDivider from "./FormDivider";
 
 import { useSignUp } from "@clerk/nextjs";

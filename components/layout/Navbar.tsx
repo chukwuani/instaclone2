@@ -15,8 +15,10 @@ import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import CreatePost from "./CreatePost";
 import { cn } from "@/lib/utils";
+import { useUser } from "@clerk/nextjs";
 
 const Navbar = () => {
+	const { user } = useUser();
 	const pathname = usePathname();
 
 	const [activeLink, setActiveLink] = useState(pathname);
@@ -183,8 +185,8 @@ const Navbar = () => {
 
 					<Link
 						className="nav-links"
-						href="/profile">
-						{pathname === "/profile" ? (
+						href={`${user?.username}`}>
+						{pathname === `/${user?.username}` ? (
 							<span className="flex items-center gap-4">
 								<span className="profile-active">
 									<Avatar size={24} />
@@ -209,10 +211,7 @@ const Navbar = () => {
 
 			{pathname === "/" ? <TopMobileNavbar /> : null}
 
-			<MobileNavbar
-				activeLink={pathname}
-				toggleSearch={toggleSearchbar}
-			/>
+			<MobileNavbar activeLink={pathname} />
 		</header>
 	);
 };

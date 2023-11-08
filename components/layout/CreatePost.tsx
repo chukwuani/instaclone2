@@ -1,5 +1,5 @@
 import Image from "next/image";
-import React, { useState, useTransition } from "react";
+import React, { useState } from "react";
 
 import { useDropzone, type FileWithPath } from "react-dropzone";
 import { FilePlus2 } from "lucide-react";
@@ -29,8 +29,6 @@ export default function CreatePost() {
 	const [files, setFiles] = React.useState<FileWithPreview[] | null>(null);
 	const [caption, setCaption] = useState("");
 
-	const [isPending, startTransition] = useTransition();
-
 	const onDrop = React.useCallback(
 		(acceptedFiles: FileWithPath[]) => {
 			acceptedFiles.forEach((file) => {
@@ -54,52 +52,52 @@ export default function CreatePost() {
 		},
 	});
 
-	const handleCreatePost = (e: React.FormEvent<HTMLFormElement>) => {
+	const handleCreatePost = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		const altTexts = files?.map((file: any) => file.altText);
 
 		const storageRef = ref(storage, "posts");
 
-		startTransition(async () => {
-			const toastId = toast.loading("Loading do not close window");
-			try {
-				if (files == null) return;
-				const uploadPromises = files.map(async (file) => {
-					const filename = file.name;
-					const fileRef = ref(storageRef, filename);
-					const snapshot = await uploadBytes(fileRef, file);
-					return getDownloadURL(snapshot.ref);
-				});
+		const toastId = toast.loading("Loading do not close window");
+		try {
+			if (files == null) return;
+			const uploadPromises = files.map(async (file) => {
+				const filename = file.name;
+				const fileRef = ref(storageRef, filename);
+				const snapshot = await uploadBytes(fileRef, file);
+				return getDownloadURL(snapshot.ref);
+			});
 
-				const downloadURLs = await Promise.all(uploadPromises);
+			const downloadURLs = await Promise.all(uploadPromises);
 
-				await addDoc(collection(firestore, "posts"), {
-					caption: caption,
-					createdAt: serverTimestamp(),
-					images: downloadURLs,
-					altTexts: altTexts,
-					likes: [],
-					saved: [],
-					comments: [],
-					user: {
-						id: user?.id,
-						image: user?.imageUrl,
-						username: user?.username,
-						fullname: user?.fullName,
-					},
-				});
+			await addDoc(collection(firestore, "posts"), {
+				caption: caption,
+				createdAt: serverTimestamp(),
+				images: downloadURLs,
+				altTexts: altTexts,
+				comments: [],
+				creatorId: user?.id,
+				likes: [],
+				saves: [],
+				user: {
+					imageUrl: user?.imageUrl,
+					username: user?.username,
+					firstName: user?.firstName,
+					lastName: user?.lastName,
+					isVerified: false,
+				},
+			});
 
-				setOpen(false);
-				toast.dismiss(toastId);
-				toast.success("Got the data");
+			setOpen(false);
+			toast.dismiss(toastId);
+			toast.success("Got the data");
 
-				queryClient.invalidateQueries({ queryKey: ["postData"] });
-			} catch (error) {
-				toast.dismiss(toastId);
-				console.error("Error uploading files: ", error);
-				toast.error("Error when fetching");
-			}
-		});
+			// queryClient.invalidateQueries({ queryKey: ["postData"] });
+		} catch (error) {
+			toast.dismiss(toastId);
+			console.error("Error uploading files: ", error);
+			toast.error("Error when fetching");
+		}
 	};
 
 	React.useEffect(() => {

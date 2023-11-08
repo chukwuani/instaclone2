@@ -4,41 +4,32 @@ import Link from "next/link";
 import Avatar from "./Avatar";
 import SuggestedCard from "./SuggestedCard";
 
-interface suggestion {
-	id: number;
-	username: string;
-	image: string;
-	following: string[];
-	followers: string[];
-	posts: string[];
-}
+import { getSuggestedUsers } from "@/lib/firebaseService";
+import { DocumentData } from "firebase/firestore";
 
 const Suggested = async () => {
 	const user = await currentUser();
 
-	const userName = user?.username ?? `${user?.firstName ?? "no "}${user?.lastName ?? "username"}`;
+	const userName = user?.username ?? `${user?.firstName}${user?.lastName ?? ""}`;
 
-	const fullName = `${user?.firstName ?? "no"} ${user?.lastName ?? "fullname"}`;
+	const fullName = `${user?.firstName} ${user?.lastName ?? ""}`;
 
 	const currentYear = new Date().getFullYear();
 
-	const data = await fetch(
-		"https://dummyjson.com/users?limit=5&skip=20&select=username,image,id"
-	).then((res) => res.json());
-
-	const suggestion: suggestion[] = data?.users;
+	const data = await getSuggestedUsers(user?.id as string);
+	const suggestion: DocumentData[] = data;
 
 	return (
 		<aside className="w-[319px] mt-9 ml-16 flex flex-col max-[999px]:hidden">
 			<section className="flex items-center px-4">
-				<Link href={`/profile/${userName}`}>
+				<Link href={`${userName}`}>
 					<Avatar size={44} />
 				</Link>
 
 				<article className="flex-auto flex flex-col text-sm ml-3">
 					<Link
 						className="font-semibold lowercase"
-						href="/profile">
+						href={`${userName}`}>
 						{userName}
 					</Link>
 
@@ -54,7 +45,7 @@ const Suggested = async () => {
 				{suggestion.map((list) => (
 					<SuggestedCard
 						user={list}
-						key={list.id}
+						key={list?.userId}
 					/>
 				))}
 			</article>

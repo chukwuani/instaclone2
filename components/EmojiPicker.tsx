@@ -5,11 +5,12 @@ import { icons } from "@/constants";
 import Image from "next/image";
 
 import Picker from "@emoji-mart/react";
-import data from "@emoji-mart/data";
+import data from "@emoji-mart/data/sets/14/facebook.json";
 import { useTheme } from "next-themes";
+import { Dispatch, SetStateAction } from "react";
 
 interface EmojiPickerProps {
-	onChange?: (value: string) => void;
+	onChange: Dispatch<SetStateAction<string>>;
 }
 
 const EmojiPicker = ({ onChange }: EmojiPickerProps) => {
@@ -29,7 +30,8 @@ const EmojiPicker = ({ onChange }: EmojiPickerProps) => {
 				<Picker
 					theme={resolvedTheme}
 					data={data}
-					// onEmojiSelect={(emoji: any) => onChange(emoji.native)}
+					onEmojiSelect={(emoji: any) => onChange((prev) => prev + emoji.native)}
+					set="facebook"
 				/>
 			</PopoverContent>
 		</Popover>

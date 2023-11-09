@@ -11,7 +11,7 @@ const AddComment = () => {
 	useAutosizeTextArea(textAreaRef.current, text);
 
 	return (
-		<form className="px-3 py-[6px] mt-[6px] flex items-center justify-between border-t border-separator-divider max-md:border max-md:rounded-b-[8px]">
+		<form className="px-3 py-[6px] flex items-center justify-between border-separator-divider border-y">
 			<EmojiPicker onChange={setText} />
 
 			<label

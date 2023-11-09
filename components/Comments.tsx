@@ -1,5 +1,11 @@
+import AddComment from "./form/AddComment";
+
 const Comments = () => {
-	return <div>Comments</div>;
+	return (
+		<section>
+			<AddComment />
+		</section>
+	);
 };
 
 export default Comments;

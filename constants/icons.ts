@@ -40,6 +40,7 @@ import newMessage from "public/icons/new-message.svg";
 import collection from "public/icons/collection.svg";
 import github from "public/icons/github.svg";
 import githubBg from "public/icons/githubBg.svg";
+import pose from "public/icons/Posing-For-A-Photo.svg";
 
 export default {
 	bmc,
@@ -84,4 +85,5 @@ export default {
 	collection,
 	github,
 	githubBg,
+	pose,
 };

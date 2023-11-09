@@ -39,6 +39,35 @@ export const getPost = async () => {
 	// return doc;
 };
 
+export const getExplorePost = async (userId: string) => {
+	const postsRef = collection(firestore, "posts");
+	const q = query(postsRef,  where("creatorId", "!=", userId));
+
+	return new Promise<DocumentData[]>((resolve) => {
+		const unsubscribe = onSnapshot(q, (snapshot) => {
+			const updatedPosts: DocumentData[] = [];
+			snapshot.forEach((doc) => {
+				updatedPosts.push({ id: doc.id, ...doc.data() });
+			});
+
+			resolve(updatedPosts);
+		});
+
+		// Return a cleanup function to unsubscribe when the component unmounts
+		return () => {
+			unsubscribe();
+		};
+	});
+
+	// The code below is another way to fetch posts update
+	// const doc = await getDocs(q).then((querySnapshot) => {
+	// 	const newData = querySnapshot.docs.map((doc) => ({ ...doc.data() }));
+	// 	return newData;
+	// });
+
+	// return doc;
+};
+
 export const getUserByUsername = async (username: string) => {
 	const userRef = collection(firestore, "users");
 	const q = query(userRef, where("username", "==", username));
@@ -77,14 +106,19 @@ export const getUserSaves = async (userId: string) => {
 
 export const getSuggestedUsers = async (userId: string) => {
 	const usersRef = collection(firestore, "users");
-	const q = query(usersRef, where("followers", "not-in", [userId]), limit(6));
+	const q = query(usersRef, where("followers", "not-in", [[userId]]), limit(6));
 
 	const doc = await getDocs(q).then((querySnapshot) => {
 		const newData = querySnapshot.docs.map((doc) => ({ ...doc.data() }));
+		console.log(newData);
+		
 		return newData.filter((item) => item.userId !== userId);
 	});
 
 	return doc;
+
+	
+	
 };
 
 // export async function likePost(postId: string, likesArray: string[]) {

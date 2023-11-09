@@ -25,8 +25,8 @@ const EmojiPicker = ({ onChange }: EmojiPickerProps) => {
 				/>
 			</PopoverTrigger>
 			<PopoverContent
-				side="right"
-				className="bg-transparent border-none shadow-none drop-shadow-none mb-16">
+				side="bottom"
+				className="bg-transparent border-none shadow-none drop-shadow-none mb-16 z-[9999]">
 				<Picker
 					theme={resolvedTheme}
 					data={data}

@@ -4,7 +4,6 @@ import PostHead from "./PostHead";
 import PostContent from "./PostContent";
 import PostReaction from "./PostReaction";
 import PostStat from "./PostStat";
-import AddComment from "./form/AddComment";
 import { useState } from "react";
 
 import {
@@ -50,7 +49,6 @@ const PostCard = ({ post, currentUser }: PostCardProps) => {
 
 		onSnapshot(doc(firestore, "posts", postId), (doc) => {
 			setLikes(doc.data()?.likes);
-			console.log("Current data: ", doc.data()?.likes);
 		});
 	};
 
@@ -102,8 +100,6 @@ const PostCard = ({ post, currentUser }: PostCardProps) => {
 					comments={post?.comments}
 					createdAt={post?.createdAt?.seconds}
 				/>
-
-				<AddComment />
 			</article>
 		</>
 	);

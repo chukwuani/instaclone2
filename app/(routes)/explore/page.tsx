@@ -1,8 +1,12 @@
 import ExploreCard from "@/components/ExploreCard";
-import { getPost } from "@/lib/firebaseService";
+import { icons } from "@/constants";
+import { getExplorePost } from "@/lib/firebaseService";
+import { currentUser } from "@clerk/nextjs";
+import Image from "next/image";
 
 const Home = async () => {
-	const posts = await getPost();
+	const user = await currentUser();
+	const posts = await getExplorePost(user?.id as string);
 
 	if (!posts) return <p>No post to explore</p>;
 
@@ -62,7 +66,20 @@ const Home = async () => {
 					</section>
 				</section>
 			) : (
-				<p>No posts to explore</p>
+				<main className="max-h-[calc(100dvh - 50px)] h-full items-center justify-center">
+					<article className="max-w-[600px] h-[100dvh] w-full flex-auto flex flex-col items-center justify-center gap-4 py-5 px-10 text-center">
+						<Image
+							src={icons.pose}
+							className="icons"
+							alt="Cartoon person posing for a photo"
+						/>
+						<h1 className="text-secondary-text text-sm">Explore the Void: No Suggestions Yet</h1>
+						<p className="text-secondary-text text-sm max-w-[400px]">
+							Oh no, it looks like the suggestion well is temporarily dry! Fear not, intrepid
+							explorer.
+						</p>
+					</article>
+				</main>
 			)}
 		</main>
 	);

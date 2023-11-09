@@ -1,9 +1,50 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 
-import { DocumentData } from "firebase/firestore";
+import { DocumentData, arrayRemove, arrayUnion, doc, updateDoc } from "firebase/firestore";
+import { useState } from "react";
+import { firestore } from "@/lib/firebaseConfig";
+import { cn } from "@/lib/utils";
 
-const SuggestedCard = ({ user }: DocumentData) => {
+type SuggestedCardProps = {
+	user: DocumentData;
+	loggedInUserId: string | undefined;
+};
+
+const SuggestedCard = ({ user, loggedInUserId }: SuggestedCardProps) => {
+	const [followText, setFollowText] = useState("Follow");
+	const [followed, setFollowed] = useState(false);
+
+	const handleFollow = async () => {
+		const userRef = doc(firestore, "users", user?.userId);
+		const currentUserRef = doc(firestore, "users", loggedInUserId as string);
+
+		if (followed) {
+			setFollowed(false);
+			setFollowText("Follow");
+
+			await updateDoc(userRef, {
+				followers: arrayRemove(loggedInUserId as string),
+			});
+
+			await updateDoc(currentUserRef, {
+				following: arrayRemove(user?.userId),
+			});
+		} else {
+			setFollowed(true);
+			setFollowText("Following");
+
+			await updateDoc(userRef, {
+				followers: arrayUnion(loggedInUserId as string),
+			});
+
+			await updateDoc(currentUserRef, {
+				following: arrayUnion(user?.userId),
+			});
+		}
+	};
+
 	return (
 		<section className="flex items-center py-2 px-4">
 			<Link href={`${user?.username}`}>
@@ -27,11 +68,14 @@ const SuggestedCard = ({ user }: DocumentData) => {
 				<p className="text-[12px] text-secondary-text font-normal">Suggested for you</p>
 			</article>
 
-			<Link
-				className="text-[12px] ml-2 no-underline capitalize text-primary-button hover:text-link transition-colors duration-300 font-semibold"
-				href="#">
-				Follow
-			</Link>
+			<button
+				className={cn(
+					"text-[12px] ml-2 no-underline capitalize text-primary-button hover:text-link transition-colors duration-300 font-semibold",
+					followed && "text-link hover:opacity-50"
+				)}
+				onClick={handleFollow}>
+				{followText}
+			</button>
 		</section>
 	);
 };

@@ -192,14 +192,14 @@ body {
 	animation: loaderGradient 5s ease infinite;
 } */
 
-/* .indicator {
+.indicator {
 	width: 6px;
 	height: 6px;
 	border-radius: 50%;
 	opacity: 0.4;
 	margin-right: 4px;
 	background-color: white;
-} */
+}
 
 .verify-email {
 	background-image: url(/images/collection-2.png);

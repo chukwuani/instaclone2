@@ -19,6 +19,8 @@ const Suggested = async () => {
 	const data = await getSuggestedUsers(user?.id as string);
 	const suggestion: DocumentData[] = data;
 
+	console.log(user?.id);
+
 	return (
 		<aside className="w-[319px] mt-9 ml-16 flex flex-col max-[999px]:hidden">
 			<section className="flex items-center px-4">
@@ -45,6 +47,7 @@ const Suggested = async () => {
 				{suggestion.map((list) => (
 					<SuggestedCard
 						user={list}
+						loggedInUserId={user?.id}
 						key={list?.userId}
 					/>
 				))}

@@ -69,7 +69,7 @@ const PostReaction = ({ saved, liked, likePost, savePost }: Props) => {
 						</button>
 					</SheetTrigger>
 
-					<SheetContent>
+					<SheetContent className="p-0">
 						<Comments />
 					</SheetContent>
 				</Sheet>

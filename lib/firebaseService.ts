@@ -12,7 +12,7 @@ import { firestore } from "./firebaseConfig";
 
 export const getPost = async () => {
 	const postsRef = collection(firestore, "posts");
-	const q = query(postsRef, orderBy("createdAt", "desc"));
+	const q = query(postsRef, orderBy("createdAt"));
 
 	return new Promise<DocumentData[]>((resolve) => {
 		const unsubscribe = onSnapshot(q, (snapshot) => {

@@ -4,38 +4,36 @@ import Link from "next/link";
 import Avatar from "./Avatar";
 import SuggestedCard from "./SuggestedCard";
 
-import { getSuggestedUsers } from "@/lib/firebaseService";
+import { getSuggestedUsers } from "@/firebase/firebaseService";
 import { DocumentData } from "firebase/firestore";
 
 const Suggested = async () => {
 	const user = await currentUser();
-
-	const userName = user?.username ?? `${user?.firstName}${user?.lastName ?? ""}`;
-
-	const fullName = `${user?.firstName} ${user?.lastName ?? ""}`;
+	const userId = user?.id as string;
+	const userName = user?.username as string;
 
 	const currentYear = new Date().getFullYear();
 
-	const data = await getSuggestedUsers(user?.id as string);
+	const data = await getSuggestedUsers(userId, userName);
 	const suggestion: DocumentData[] = data;
-
-	console.log(user?.id);
 
 	return (
 		<aside className="w-[319px] mt-9 ml-16 flex flex-col max-[999px]:hidden">
 			<section className="flex items-center px-4">
-				<Link href={`${userName}`}>
+				<Link href={`${user?.username}`}>
 					<Avatar size={44} />
 				</Link>
 
 				<article className="flex-auto flex flex-col text-sm ml-3">
 					<Link
 						className="font-semibold lowercase"
-						href={`${userName}`}>
-						{userName}
+						href={`${user?.username}`}>
+						{user?.username}
 					</Link>
 
-					<p className="text-secondary-text">{fullName}</p>
+					<p className="text-secondary-text">
+						{user?.firstName} {user?.lastName}
+					</p>
 				</article>
 			</section>
 
@@ -51,6 +49,12 @@ const Suggested = async () => {
 						key={list?.userId}
 					/>
 				))}
+
+				{suggestion.length <= 0 && (
+					<p className="opacity-50 mt-[11px] text-secondary-text font-normal text-[12px] uppercase px-4">
+						No suggested users
+					</p>
+				)}
 			</article>
 
 			<p className="opacity-50 mt-[11px] text-secondary-text font-normal text-[12px] uppercase px-4">

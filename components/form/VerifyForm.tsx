@@ -19,6 +19,7 @@ const VerifyForm = () => {
 
 	function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault();
+
 		if (!isLoaded) return;
 
 		startTransition(async () => {
@@ -32,6 +33,7 @@ const VerifyForm = () => {
 						setActive({ session: result.createdSessionId });
 					} else {
 						toast(JSON.stringify(result, null, 2));
+						console.log(result);
 					}
 
 					router.push(`${window.location.origin}/`);

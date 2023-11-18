@@ -1,9 +1,11 @@
 "use client";
 
-import { icons } from "@/constants";
+import Image from "next/image";
+
 import { useSignUp } from "@clerk/nextjs";
 import { type OAuthStrategy } from "@clerk/types";
-import Image from "next/image";
+
+import { icons } from "@/constants";
 import { toast } from "react-hot-toast";
 
 const SignUpWithGithub = () => {
@@ -11,6 +13,7 @@ const SignUpWithGithub = () => {
 
 	const OAuthSignUp = async (provider: OAuthStrategy) => {
 		if (!isLoaded) return null;
+
 		try {
 			await signUp.authenticateWithRedirect({
 				strategy: provider,

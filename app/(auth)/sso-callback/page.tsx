@@ -1,7 +1,7 @@
 import { AuthenticateWithRedirectCallback } from "@clerk/nextjs";
 
-const page = () => {
+const Home = () => {
 	return <AuthenticateWithRedirectCallback />;
 };
 
-export default page;
+export default Home;

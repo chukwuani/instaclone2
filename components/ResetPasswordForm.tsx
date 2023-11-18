@@ -1,5 +1,5 @@
 "use client";
-import React, { SyntheticEvent, useState } from "react";
+import React, { useState } from "react";
 import { useSignIn } from "@clerk/nextjs";
 import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
@@ -22,7 +22,7 @@ const ResetPasswordForm = () => {
 		return null;
 	}
 
-	async function create(e: SyntheticEvent) {
+	async function create(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault();
 		await signIn
 			?.create({
@@ -40,7 +40,7 @@ const ResetPasswordForm = () => {
 			);
 	}
 
-	async function reset(e: SyntheticEvent) {
+	async function reset(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault();
 		await signIn
 			?.attemptFirstFactor({

@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 
 import { useSignIn } from "@clerk/nextjs";
@@ -13,33 +13,34 @@ import { cn } from "@/lib/utils";
 const LoginForm = () => {
 	const router = useRouter();
 	const { signIn, setActive, isLoaded } = useSignIn();
+	const [isPending, startTransition] = useTransition();
 
-	const [loading, setLoading] = useState(false);
 	const [showPassword, setShowPassword] = useState(false);
 	const [userName, setUserName] = useState("");
 	const [password, setPassword] = useState("");
 
-	const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
+	const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		if (!isLoaded) return;
 
-		try {
-			const result = await signIn.create({
-				identifier: userName,
-				password,
-			});
+		startTransition(async () => {
+			try {
+				const result = await signIn.create({
+					identifier: userName,
+					password,
+				});
 
-			if (result.status === "complete") {
-				await setActive({ session: result.createdSessionId });
-				setLoading(true);
-				router.push(`${window.location.origin}/`);
+				if (result.status === "complete") {
+					await setActive({ session: result.createdSessionId });
+
+					router.push(`${window.location.origin}/`);
+				}
+			} catch (err: any) {
+				err.errors.map((msg: { message: string }) => {
+					toast.error(msg.message);
+				});
 			}
-		} catch (err: any) {
-			setLoading(false);
-			err.errors.map((msg: { message: string }) => {
-				toast.error(msg.message);
-			});
-		}
+		});
 	};
 
 	return (
@@ -92,10 +93,10 @@ const LoginForm = () => {
 			</section>
 
 			<button
-				aria-disabled={loading}
+				aria-disabled={isPending}
 				type="submit"
 				className="login-btn disabled:opacity-70 disabled:cursor-auto">
-				{loading && (
+				{isPending && (
 					<Image
 						className="mr-2 w-4 h-4 animate-spin"
 						src={icons.spinner}

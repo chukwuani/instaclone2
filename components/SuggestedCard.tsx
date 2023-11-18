@@ -4,7 +4,7 @@ import Link from "next/link";
 
 import { DocumentData, arrayRemove, arrayUnion, doc, updateDoc } from "firebase/firestore";
 import { useState } from "react";
-import { firestore } from "@/lib/firebaseConfig";
+import { firestore } from "@/firebase/firebaseConfig";
 import { cn } from "@/lib/utils";
 
 type SuggestedCardProps = {
@@ -21,9 +21,6 @@ const SuggestedCard = ({ user, loggedInUserId }: SuggestedCardProps) => {
 		const currentUserRef = doc(firestore, "users", loggedInUserId as string);
 
 		if (followed) {
-			setFollowed(false);
-			setFollowText("Follow");
-
 			await updateDoc(userRef, {
 				followers: arrayRemove(loggedInUserId as string),
 			});
@@ -31,10 +28,10 @@ const SuggestedCard = ({ user, loggedInUserId }: SuggestedCardProps) => {
 			await updateDoc(currentUserRef, {
 				following: arrayRemove(user?.userId),
 			});
-		} else {
-			setFollowed(true);
-			setFollowText("Following");
 
+			setFollowed(false);
+			setFollowText("Follow");
+		} else {
 			await updateDoc(userRef, {
 				followers: arrayUnion(loggedInUserId as string),
 			});
@@ -42,6 +39,9 @@ const SuggestedCard = ({ user, loggedInUserId }: SuggestedCardProps) => {
 			await updateDoc(currentUserRef, {
 				following: arrayUnion(user?.userId),
 			});
+
+			setFollowed(true);
+			setFollowText("Following");
 		}
 	};
 

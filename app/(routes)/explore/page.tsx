@@ -1,6 +1,6 @@
 import ExploreCard from "@/components/ExploreCard";
 import { icons } from "@/constants";
-import { getExplorePost } from "@/lib/firebaseService";
+import { getExplorePost } from "@/firebase/firebaseService";
 import { currentUser } from "@clerk/nextjs";
 import Image from "next/image";
 

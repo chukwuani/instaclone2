@@ -15,7 +15,7 @@ import {
 	updateDoc,
 } from "firebase/firestore";
 import { useState } from "react";
-import { firestore } from "@/lib/firebaseConfig";
+import { firestore } from "@/firebase/firebaseConfig";
 import { cn } from "@/lib/utils";
 
 interface ProfileTopProps {
@@ -61,8 +61,6 @@ const ProfileTop = ({ user, postNumber, showFollow, loggedInUserId }: ProfileTop
 		});
 	};
 
-	const userName = user?.username ? user?.username : `${user?.firstName}${user?.lastName ?? ""}`;
-
 	return (
 		<>
 			<section className="user-profile-head-container">
@@ -79,7 +77,7 @@ const ProfileTop = ({ user, postNumber, showFollow, loggedInUserId }: ProfileTop
 				<section className="flex flex-col basis-[30px] gap-5 grow-[2] max-w-[613px] w-full">
 					<section className="flex items-center max-md:flex-col max-md:items-start max-md:gap-3">
 						<section className="lowercase flex items-center gap-[5px]">
-							<h1 className="font-normal h-min text-xl">{userName}</h1>
+							<h1 className="font-normal h-min text-xl">{user?.username}</h1>
 
 							{user?.isVerified && (
 								<Image
@@ -205,9 +203,7 @@ const ProfileTop = ({ user, postNumber, showFollow, loggedInUserId }: ProfileTop
 
 					<article className="hidden md:flex flex-col leading-7">
 						<span className="flex items-center gap-3">
-							<p className="name">
-								{user?.firstName} {user?.lastName ?? ""}
-							</p>
+							<p className="name">{user?.name}</p>
 							{isFollowing && (
 								<p className="text-xs text-secondary-text font-medium">Follows you</p>
 							)}

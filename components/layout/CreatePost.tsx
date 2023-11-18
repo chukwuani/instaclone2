@@ -1,5 +1,5 @@
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useState, useTransition } from "react";
 
 import { useDropzone, type FileWithPath } from "react-dropzone";
 import { FilePlus2 } from "lucide-react";
@@ -11,12 +11,12 @@ import NewPost from "../NewPost";
 import CaptionForm from "../CaptionForm";
 import FileCard from "../FileCard";
 
-import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import { firestore, storage } from "@/lib/firebaseConfig";
-import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import { deleteObject, getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { storage } from "@/firebase/firebaseConfig";
+
 import { useUser } from "@clerk/nextjs";
-import { useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
+import createPost from "@/firebase/actions";
 
 export type FileWithPreview = FileWithPath & {
 	preview: string;
@@ -24,10 +24,12 @@ export type FileWithPreview = FileWithPath & {
 
 export default function CreatePost() {
 	const { user } = useUser();
-	const queryClient = useQueryClient();
+
 	const [open, setOpen] = React.useState(false);
 	const [files, setFiles] = React.useState<FileWithPreview[] | null>(null);
 	const [caption, setCaption] = useState("");
+
+	const [isPending, startTransition] = useTransition();
 
 	const onDrop = React.useCallback(
 		(acceptedFiles: FileWithPath[]) => {
@@ -58,7 +60,7 @@ export default function CreatePost() {
 
 		const storageRef = ref(storage, "posts");
 
-		const toastId = toast.loading("Loading do not close window");
+		const toastId = toast.loading("Creating post");
 		try {
 			if (files == null) return;
 			const uploadPromises = files.map(async (file) => {
@@ -70,33 +72,30 @@ export default function CreatePost() {
 
 			const downloadURLs = await Promise.all(uploadPromises);
 
-			await addDoc(collection(firestore, "posts"), {
-				caption: caption,
-				createdAt: serverTimestamp(),
-				images: downloadURLs,
-				altTexts: altTexts,
-				comments: [],
-				creatorId: user?.id,
-				likes: [],
-				saves: [],
-				user: {
-					imageUrl: user?.imageUrl,
-					username: user?.username,
-					firstName: user?.firstName,
-					lastName: user?.lastName,
-					isVerified: false,
-				},
+			startTransition(async () => {
+				await createPost(caption, downloadURLs, altTexts, JSON.parse(JSON.stringify(user)));
 			});
 
 			setOpen(false);
-			toast.dismiss(toastId);
-			toast.success("Got the data");
 
-			// queryClient.invalidateQueries({ queryKey: ["postData"] });
+			toast.dismiss(toastId);
+			toast.success("Created Post");
 		} catch (error) {
+			if (files == null) return;
+
 			toast.dismiss(toastId);
 			console.error("Error uploading files: ", error);
-			toast.error("Error when fetching");
+			toast.error("Error creating post");
+
+			// // Delete files from storage
+			// files.map(async (file) => {
+			// 	const filename = file.name;
+			// 	const fileRef = ref(storageRef, filename);
+			// 	await deleteObject(fileRef);
+			// });
+
+			// // Delete posts from firestore
+			// await deleteDoc(doc(db, "cities", "DC"));
 		}
 	};
 

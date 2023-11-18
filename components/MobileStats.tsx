@@ -14,9 +14,7 @@ const MobileStats = ({ postNumber, user, followers, following, isFollowing }: Mo
 		<>
 			<article className="flex flex-col p-5 pt-0 text-sm text-primary-text md:hidden">
 				<span className="flex items-center gap-3">
-					<p className="name">
-						{user?.firstName} {user?.lastName ?? ""}
-					</p>
+					<p className="name">{user?.name}</p>
 					{isFollowing && <p className="text-xs text-secondary-text font-medium">Follows you</p>}
 				</span>
 

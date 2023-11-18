@@ -41,9 +41,7 @@ const PostHead = ({ user }: { user: any }) => {
 						) : null}
 					</section>
 
-					<p className="text-xs font-normal ml-[10px] text-secondary-text">
-						{user?.firstName} {user?.lastName}
-					</p>
+					<p className="text-xs font-normal ml-[10px] text-secondary-text">{user?.name}</p>
 				</section>
 			</Link>
 

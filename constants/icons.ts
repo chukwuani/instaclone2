@@ -1,3 +1,5 @@
+/* eslint-disable import/no-anonymous-default-export */
+
 import home from "public/icons/home.svg";
 import homeActive from "public/icons/homeFilled.svg";
 import search from "public/icons/search.svg";

@@ -8,22 +8,40 @@ import { useState } from "react";
 
 import {
 	DocumentData,
+	Timestamp,
 	arrayRemove,
 	arrayUnion,
 	doc,
 	onSnapshot,
 	updateDoc,
 } from "firebase/firestore";
-import { firestore } from "@/lib/firebaseConfig";
+import { firestore } from "@/firebase/firebaseConfig";
 
 interface PostCardProps {
 	post: DocumentData;
-	currentUser: string | undefined;
+	currentUserId: string | undefined;
 }
 
-const PostCard = ({ post, currentUser }: PostCardProps) => {
+type PostType = {
+	altTexts: string[];
+	caption: string;
+	comments: string[];
+	createdAt: Timestamp;
+	creatorId: string;
+	images: string[];
+	likes: string[];
+	saves: string[];
+	user: {
+		imageUrl: string;
+		isVerified: boolean;
+		name: string;
+		username: string;
+	};
+};
+
+const PostCard = ({ post, currentUserId }: PostCardProps) => {
 	const postId = post.id;
-	const userId = currentUser as string;
+	const userId = currentUserId as string;
 
 	const [likes, setLikes] = useState<string[]>(post.likes);
 	const [isLikedByYou, setIsLikedByYou] = useState(likes.includes(userId));
@@ -78,11 +96,11 @@ const PostCard = ({ post, currentUser }: PostCardProps) => {
 	return (
 		<>
 			<article className="max-w-[470px] w-full h-auto overflow-hidden flex flex-col bg-primary-background rounded-[4px] border border-separator max-md:border-transparent mb-3">
-				<PostHead user={post?.user} />
+				<PostHead user={post.user} />
 
 				<PostContent
-					images={post?.images}
-					alt={post?.altTexts}
+					images={post.images}
+					alt={post.altTexts}
 					likePost={handleLikePost}
 				/>
 
@@ -94,11 +112,11 @@ const PostCard = ({ post, currentUser }: PostCardProps) => {
 				/>
 
 				<PostStat
-					user={post?.user}
+					user={post.user}
 					likeCount={likes.length}
-					caption={post?.caption}
-					comments={post?.comments}
-					createdAt={post?.createdAt?.seconds}
+					caption={post.caption}
+					comments={post.comments}
+					createdAt={post.createdAt?.seconds}
 				/>
 			</article>
 		</>

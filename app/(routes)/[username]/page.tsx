@@ -5,7 +5,7 @@ import { Metadata } from "next";
 import Footer from "@/components/layout/Footer";
 import ProfileBottom from "@/components/profile/ProfileBottom";
 import ProfileTop from "@/components/profile/ProfileTop";
-import { getUserByUsername, getUserPost, getUserSaves } from "@/lib/firebaseService";
+import { getUserByUsername, getUserPost, getUserSaves } from "@/firebase/firebaseService";
 import { currentUser } from "@clerk/nextjs";
 
 export const metadata: Metadata = {

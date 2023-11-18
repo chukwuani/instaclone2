@@ -1,12 +1,12 @@
 import "../globals.css";
 
 import ThemeProvider from "@/utils/ThemeProvider";
-
-import { ClerkProvider } from "@clerk/nextjs";
 import { Toaster } from "@/utils/Toaster";
 
-import type { Metadata } from "next";
 import LoadingBar from "@/components/LoadingBar";
+
+import { ClerkProvider } from "@clerk/nextjs";
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
 	title: "Instagram",

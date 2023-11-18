@@ -1,16 +1,17 @@
 "use client";
 
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useTransition, useState } from "react";
+
 import Terms from "./Terms";
 import SignUpWithFaceBook from "./SignUpWithGithub";
 import FormDivider from "./FormDivider";
-
-import { useSignUp } from "@clerk/nextjs";
-import { useTransition, useState } from "react";
-import { useRouter } from "next/navigation";
-import { toast } from "react-hot-toast";
 import { icons } from "@/constants";
 import { cn } from "@/lib/utils";
+
+import { useSignUp } from "@clerk/nextjs";
+import { toast } from "react-hot-toast";
 
 const SignupForm = () => {
 	const router = useRouter();
@@ -47,9 +48,8 @@ const SignupForm = () => {
 				});
 
 				localStorage.setItem("userData", JSON.stringify(user));
-
-				router.push("/signup/verify-email");
 				toast.success("Check your email. We sent you a 6-digit verification code.");
+				router.push("/signup/verify-email");
 			} catch (err: any) {
 				err?.errors?.map((msg: { message: string }) => {
 					toast.error(msg.message);

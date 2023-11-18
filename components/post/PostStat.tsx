@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
+import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet";
 import Comments from "./Comments";
 import { formatTimeDifference } from "@/lib/utils";
 

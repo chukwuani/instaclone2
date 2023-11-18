@@ -1,4 +1,4 @@
-import AddComment from "./form/AddComment";
+import AddComment from "../form/AddComment";
 
 const Comments = () => {
 	return (

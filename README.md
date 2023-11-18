@@ -1,6 +1,25 @@
+![App Homepage Screenshot](public/images/homepage.png)
+
 # [Instagram clone](https://instaglone.vercel.app/)
 
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+A clone of the popular Instagram web application UI. Built with Nextjs, Tailwindcss and Firebase.
+
+> **Warning**
+> This project is still in development.
+
+## Features
+- [x]  Authentication with Clerk
+- [x]  Light/dark mode toggle
+- [x]  Responsive design
+- [x]  Create, like, and save post
+- [x]  Explore page
+- [x]  User Profile
+- [x]  Suggested Users
+- [x]  Follow and Unfollow
+- [ ]  Edit, Delete, Comment on post
+- [ ]  Messaging
+- [ ]  Notification
+- [ ]  Post detail page
 
 
 ## Tech Stack
@@ -8,31 +27,32 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 - **Framework:** [Next.js](https://nextjs.org)
 - **Styling:** [Tailwind CSS](https://tailwindcss.com)
 - **User Management:** [Clerk](https://clerk.com)
+- **UI Components:** [shadcn/ui](https://ui.shadcn.com)
+- **Backend:** [Firebase](https://firebase.com)
 
 
-> **Warning**
-> Currently only frontend and some mock data.
-> Feel free to contribute.
+## Run Locally
 
-
-## Getting Started
-
-Firstly, Clone the repository
+Clone the project
 
 ```bash
-git clone https://github.com/chukwuani/instaclone
+  git clone https://github.com/chukwuani/instaclone
 ```
 
-Secondly, install project dependencies:
+Go to the project directory
 
 ```bash
-npm install
+  cd instaclone
 ```
 
-Lastly, run the development server:
+Install dependencies
 
 ```bash
-npm run dev
+  npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Start the development server
+
+```bash
+  npm run dev
+```

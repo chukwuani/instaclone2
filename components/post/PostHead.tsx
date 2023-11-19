@@ -3,11 +3,17 @@ import Image from "next/image";
 import Link from "next/link";
 import { icons } from "@/constants";
 import FeedMenu from "./FeedMenu";
+import { DocumentData } from "firebase/firestore";
 
 // no-post-story-ring;
 // 👆🏼 style for removing story ring in feed
 
-const PostHead = ({ user }: { user: any }) => {
+type PostHeadProps = {
+	user: DocumentData;
+	isUserPost: boolean;
+};
+
+const PostHead = ({ user, isUserPost }: PostHeadProps) => {
 	return (
 		<section className="flex items-center justify-between my-2 mx-2">
 			<Link
@@ -57,7 +63,7 @@ const PostHead = ({ user }: { user: any }) => {
 				</DialogTrigger>
 
 				<DialogContent className="p-0">
-					<FeedMenu />
+					<FeedMenu isUserPost={isUserPost} />
 				</DialogContent>
 			</Dialog>
 		</section>

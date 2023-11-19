@@ -17,6 +17,7 @@ import {
 import { useState } from "react";
 import { firestore } from "@/firebase/firebaseConfig";
 import { cn } from "@/lib/utils";
+import { UserPlusIcon } from "lucide-react";
 
 interface ProfileTopProps {
 	user: DocumentData;
@@ -123,58 +124,76 @@ const ProfileTop = ({ user, postNumber, showFollow, loggedInUserId }: ProfileTop
 							)}
 						</section>
 
-						{showFollow ? (
-							<button
-								className={cn(
-									isFollower
-										? "edit-profile"
-										: isFollowing
-										? "!bg-primary-button !text-white edit-profile"
-										: "!bg-primary-button !text-white edit-profile"
-								)}
-								onClick={handleFollow}>
-								{isFollower ? "Unfollow" : isFollowing ? "Follow Back" : "Follow"}
+						<section className="flex w-auto items-center">
+							{showFollow ? (
+								<button
+									className={cn(
+										isFollower
+											? "edit-profile"
+											: isFollowing
+											? "!bg-primary-button !text-white edit-profile"
+											: "!bg-primary-button !text-white edit-profile"
+									)}
+									onClick={handleFollow}>
+									{isFollower ? "Following" : isFollowing ? "Follow Back" : "Follow"}
+								</button>
+							) : (
+								<Link
+									className="edit-profile"
+									href="#">
+									Edit profile
+								</Link>
+							)}
+
+							{showFollow ? (
+								<button className="!ml-2 !mr-0 !w-fit edit-profile flex items-center justify-center">
+									Message
+								</button>
+							) : null}
+
+							<button className="!p-2 !rounded-[8px] !ml-2 !mr-0 !w-fit edit-profile flex items-center justify-center">
+								<Image
+									className="max-w-none icons"
+									src={"/icons/user.svg"}
+									width={16}
+									height={16}
+									alt=""
+								/>
 							</button>
-						) : (
-							<Link
-								className="edit-profile"
-								href="#">
-								Edit profile
-							</Link>
-						)}
 
-						{showFollow ? (
-							<Dialog>
-								<DialogTrigger asChild>
-									<button className="p-2 cursor-pointer icons max-[768px]:hidden">
-										<Image
-											src={icons.dotMenu}
-											alt="gear icon"
-											className="w-8 h-8"
-										/>
-									</button>
-								</DialogTrigger>
+							{showFollow ? (
+								<Dialog>
+									<DialogTrigger asChild>
+										<button className="p-2 cursor-pointer icons max-[768px]:hidden">
+											<Image
+												src={icons.dotMenu}
+												alt="gear icon"
+												className="w-8 h-8"
+											/>
+										</button>
+									</DialogTrigger>
 
-								<DialogContent className="p-0">
-									<ProfileMenu />
-								</DialogContent>
-							</Dialog>
-						) : (
-							<Dialog>
-								<DialogTrigger asChild>
-									<button className="p-2 cursor-pointer icons max-[768px]:hidden">
-										<Image
-											src={icons.gear}
-											alt="gear icon"
-										/>
-									</button>
-								</DialogTrigger>
+									<DialogContent className="p-0">
+										<ProfileMenu />
+									</DialogContent>
+								</Dialog>
+							) : (
+								<Dialog>
+									<DialogTrigger asChild>
+										<button className="p-2 cursor-pointer icons max-[768px]:hidden">
+											<Image
+												src={icons.gear}
+												alt="gear icon"
+											/>
+										</button>
+									</DialogTrigger>
 
-								<DialogContent className="p-0">
-									<ProfileMenu />
-								</DialogContent>
-							</Dialog>
-						)}
+									<DialogContent className="p-0">
+										<ProfileMenu />
+									</DialogContent>
+								</Dialog>
+							)}
+						</section>
 					</section>
 
 					<article className="profile-stats-2">

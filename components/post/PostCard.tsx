@@ -96,7 +96,10 @@ const PostCard = ({ post, currentUserId }: PostCardProps) => {
 	return (
 		<>
 			<article className="max-w-[470px] w-full h-auto overflow-hidden flex flex-col bg-primary-background rounded-[4px] border border-separator max-md:border-transparent mb-3">
-				<PostHead user={post.user} />
+				<PostHead
+					user={post.user}
+					isUserPost={post.creatorId === userId}
+				/>
 
 				<PostContent
 					images={post.images}

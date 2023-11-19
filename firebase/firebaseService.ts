@@ -12,7 +12,7 @@ import { firestore } from "./firebaseConfig";
 
 export const getPost = async () => {
 	const postsRef = collection(firestore, "posts");
-	const q = query(postsRef, orderBy("createdAt"));
+	const q = query(postsRef, orderBy("createdAt", "desc"));
 
 	const doc = await getDocs(q).then((querySnapshot) => {
 		const newData = querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));

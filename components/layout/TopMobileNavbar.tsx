@@ -6,6 +6,7 @@ const TopMobileNavbar = () => {
 	return (
 		<section className="flex w-full h-[60px] justify-between px-1 pl-4 bg-primary-background fixed top-0 z-[600] border-separator-divider border-b md:hidden">
 			<Link
+				scroll
 				href="/"
 				className="flex items-center justify-center">
 				<Image

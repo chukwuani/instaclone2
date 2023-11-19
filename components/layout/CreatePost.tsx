@@ -87,15 +87,15 @@ export default function CreatePost() {
 			console.error("Error uploading files: ", error);
 			toast.error("Error creating post");
 
-			// // Delete files from storage
-			// files.map(async (file) => {
-			// 	const filename = file.name;
-			// 	const fileRef = ref(storageRef, filename);
-			// 	await deleteObject(fileRef);
-			// });
+			// Delete files from storage
+			files.map(async (file) => {
+				const filename = file.name;
+				const fileRef = ref(storageRef, filename);
+				await deleteObject(fileRef);
+			});
 
 			// // Delete posts from firestore
-			// await deleteDoc(doc(db, "cities", "DC"));
+			// await deleteDoc(doc(firestore, "posts", post.id));
 		}
 	};
 

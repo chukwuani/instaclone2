@@ -1,7 +1,7 @@
 import { DialogClose } from "@radix-ui/react-dialog";
 import Link from "next/link";
 
-const FeedMenu = ({ isUserPost }: { isUserPost: any }) => {
+const FeedMenu = ({ isUserPost }: { isUserPost: boolean }) => {
 	return (
 		<section className="bg-banner w-[400px] max-h-[100vh - 40px] rounded-xl fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 overflow-hidden max-[500px]:w-[260px]">
 			<section className="flex flex-col">

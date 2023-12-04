@@ -22,9 +22,6 @@ export function formatBytes(
 export function formatTimeDifference(createdTimeInSeconds: number): string {
 	const nowInSeconds = Math.floor(new Date().getTime() / 1000);
 	const differenceInSeconds = nowInSeconds - createdTimeInSeconds;
-export function formatTimeDifference(createdTimeInSeconds: number): string {
-	const nowInSeconds = Math.floor(new Date().getTime() / 1000);
-	const differenceInSeconds = nowInSeconds - createdTimeInSeconds;
 
 	const minute = 60;
 	const hour = 60 * minute;
@@ -34,20 +31,13 @@ export function formatTimeDifference(createdTimeInSeconds: number): string {
 	const year = 365 * day;
 
 	if (differenceInSeconds < minute) {
-	if (differenceInSeconds < minute) {
 		return "just now";
-	} else if (differenceInSeconds < hour) {
-		const minutes = Math.floor(differenceInSeconds / minute);
 	} else if (differenceInSeconds < hour) {
 		const minutes = Math.floor(differenceInSeconds / minute);
 		return `${minutes} minute${minutes > 1 ? "s" : ""} ago`;
 	} else if (differenceInSeconds < day) {
 		const hours = Math.floor(differenceInSeconds / hour);
-	} else if (differenceInSeconds < day) {
-		const hours = Math.floor(differenceInSeconds / hour);
 		return `${hours} hour${hours > 1 ? "s" : ""} ago`;
-	} else if (differenceInSeconds < week) {
-		const days = Math.floor(differenceInSeconds / day);
 	} else if (differenceInSeconds < week) {
 		const days = Math.floor(differenceInSeconds / day);
 		if (days === 1) {
@@ -60,21 +50,11 @@ export function formatTimeDifference(createdTimeInSeconds: number): string {
 		const remainingDays = Math.floor((differenceInSeconds % week) / day);
 		if (remainingDays === 0) {
 			return `${weeks} week${weeks > 1 ? "s" : ""} ago`;
-	} else if (differenceInSeconds < month) {
-		const weeks = Math.floor(differenceInSeconds / week);
-		const remainingDays = Math.floor((differenceInSeconds % week) / day);
-		if (remainingDays === 0) {
-			return `${weeks} week${weeks > 1 ? "s" : ""} ago`;
 		} else {
 			const date = new Date(createdTimeInSeconds * 1000);
 
 			return date.toLocaleDateString("en-us", { year: "numeric", month: "long", day: "numeric" });
 		}
-	} else if (differenceInSeconds < year) {
-		const months = Math.floor(differenceInSeconds / month);
-		const remainingDays = Math.floor((differenceInSeconds % month) / day);
-		if (remainingDays === 0) {
-			return `${months} month${months > 1 ? "s" : ""} ago`;
 	} else if (differenceInSeconds < year) {
 		const months = Math.floor(differenceInSeconds / month);
 		const remainingDays = Math.floor((differenceInSeconds % month) / day);

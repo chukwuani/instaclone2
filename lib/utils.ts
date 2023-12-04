@@ -19,11 +19,10 @@ export function formatBytes(
 	}`;
 }
 
-export function formatTimeDifference(postCreatedAtInSeconds: number): string {
-	const nowInSeconds = Math.floor(Date.now() / 1000);
-	const timeDifferenceInSeconds = nowInSeconds - postCreatedAtInSeconds;
+export function formatTimeDifference(createdTimeInSeconds: number): string {
+	const nowInSeconds = Math.floor(new Date().getTime() / 1000);
+	const differenceInSeconds = nowInSeconds - createdTimeInSeconds;
 
-	// Define time intervals in seconds
 	const minute = 60;
 	const hour = 60 * minute;
 	const day = 24 * hour;
@@ -31,51 +30,44 @@ export function formatTimeDifference(postCreatedAtInSeconds: number): string {
 	const month = 30 * day;
 	const year = 365 * day;
 
-	if (timeDifferenceInSeconds < minute) {
+	if (differenceInSeconds < minute) {
 		return "just now";
-	} else if (timeDifferenceInSeconds < hour) {
-		const minutes = Math.floor(timeDifferenceInSeconds / minute);
+	} else if (differenceInSeconds < hour) {
+		const minutes = Math.floor(differenceInSeconds / minute);
 		return `${minutes} minute${minutes > 1 ? "s" : ""} ago`;
-	} else if (timeDifferenceInSeconds < day) {
-		const hours = Math.floor(timeDifferenceInSeconds / hour);
+	} else if (differenceInSeconds < day) {
+		const hours = Math.floor(differenceInSeconds / hour);
 		return `${hours} hour${hours > 1 ? "s" : ""} ago`;
-	} else if (timeDifferenceInSeconds < week) {
-		const days = Math.floor(timeDifferenceInSeconds / day);
+	} else if (differenceInSeconds < week) {
+		const days = Math.floor(differenceInSeconds / day);
 		if (days === 1) {
 			return "1 day ago";
 		} else {
 			return `${days} days ago`;
 		}
-	} else if (timeDifferenceInSeconds < month) {
-		const weeks = Math.floor(timeDifferenceInSeconds / week);
-		if (weeks === 1) {
-			return "1 week ago";
+	} else if (differenceInSeconds < month) {
+		const weeks = Math.floor(differenceInSeconds / week);
+		const remainingDays = Math.floor((differenceInSeconds % week) / day);
+		if (remainingDays === 0) {
+			return `${weeks} week${weeks > 1 ? "s" : ""} ago`;
 		} else {
-			const date = new Date(postCreatedAtInSeconds * 1000);
-			return `${date.toLocaleDateString("en-US", {
-				month: "long",
-				day: "numeric",
-				year: "numeric",
-			})}`;
+			const date = new Date(createdTimeInSeconds * 1000);
+
+			return date.toLocaleDateString("en-us", { year: "numeric", month: "long", day: "numeric" });
 		}
-	} else if (timeDifferenceInSeconds < year) {
-		const months = Math.floor(timeDifferenceInSeconds / month);
-		if (months === 1) {
-			return "1 month ago";
+	} else if (differenceInSeconds < year) {
+		const months = Math.floor(differenceInSeconds / month);
+		const remainingDays = Math.floor((differenceInSeconds % month) / day);
+		if (remainingDays === 0) {
+			return `${months} month${months > 1 ? "s" : ""} ago`;
 		} else {
-			const date = new Date(postCreatedAtInSeconds * 1000);
-			return `${date.toLocaleDateString("en-US", {
-				month: "long",
-				day: "numeric",
-				year: "numeric",
-			})}`;
+			const date = new Date(createdTimeInSeconds * 1000);
+
+			return date.toLocaleDateString("en-us", { year: "numeric", month: "long", day: "numeric" });
 		}
 	} else {
-		const date = new Date(postCreatedAtInSeconds * 1000);
-		return `${date.toLocaleDateString("en-US", {
-			month: "long",
-			day: "numeric",
-			year: "numeric",
-		})}`;
+		const date = new Date(createdTimeInSeconds * 1000);
+
+		return date.toLocaleDateString("en-us", { year: "numeric", month: "long", day: "numeric" });
 	}
 }

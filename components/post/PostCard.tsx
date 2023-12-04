@@ -20,6 +20,7 @@ import { firestore } from "@/firebase/firebaseConfig";
 interface PostCardProps {
 	post: DocumentData;
 	currentUserId: string | undefined;
+	userProfile: DocumentData;
 }
 
 type PostType = {
@@ -39,15 +40,17 @@ type PostType = {
 	};
 };
 
-const PostCard = ({ post, currentUserId }: PostCardProps) => {
+const PostCard = ({ post, currentUserId, userProfile }: PostCardProps) => {
 	const postId = post.id;
 	const userId = currentUserId as string;
 
-	const [likes, setLikes] = useState<string[]>(post.likes);
-	const [isLikedByYou, setIsLikedByYou] = useState(likes.includes(userId));
+	const [likes, setLikes] = useState<string[]>(post?.likes);
+	const [isLikedByYou, setIsLikedByYou] = useState(likes?.includes(userId));
 
-	const [saves, setSaves] = useState<string[]>(post.saves);
-	const [isSavedByYou, setIsSavedByYou] = useState(saves.includes(userId));
+	const [saves, setSaves] = useState<string[]>(post?.saves);
+	const [isSavedByYou, setIsSavedByYou] = useState(saves?.includes(userId));
+
+	const isFollowing = userProfile.following.includes(post?.creatorId);
 
 	const handleLikePost = async () => {
 		const postRef = doc(firestore, "posts", postId);
@@ -99,6 +102,11 @@ const PostCard = ({ post, currentUserId }: PostCardProps) => {
 				<PostHead
 					user={post.user}
 					isUserPost={post.creatorId === userId}
+					isFollowing={isFollowing}
+					postId={postId}
+					creatorId={post.creatorId}
+					userId={userId}
+					filePaths={post?.filePaths}
 				/>
 
 				<PostContent

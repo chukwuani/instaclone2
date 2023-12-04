@@ -11,12 +11,12 @@ A clone of the popular Instagram web application UI. Built with Nextjs, Tailwind
 - [x]  Authentication with Clerk
 - [x]  Light/dark mode toggle
 - [x]  Responsive design
-- [x]  Create, like, and save post
+- [x]  Create, Delete, like, and save post
 - [x]  Explore page
-- [x]  User Profile
+- [x]  Users Profile
 - [x]  Suggested Users
 - [x]  Follow and Unfollow
-- [ ]  Edit, Delete, Comment on post
+- [ ]  Edit and Comment on post
 - [ ]  Messaging
 - [ ]  Notification
 - [ ]  Post detail page

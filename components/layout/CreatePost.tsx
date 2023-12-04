@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React, { useState, useTransition } from "react";
 
-import { useDropzone, type FileWithPath } from "react-dropzone";
+import { useDropzone, type FileWithPath, FileRejection } from "react-dropzone";
 import { FilePlus2 } from "lucide-react";
 import { ScrollArea } from "../ui/scroll-area";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
@@ -32,7 +32,7 @@ export default function CreatePost() {
 	const [isPending, startTransition] = useTransition();
 
 	const onDrop = React.useCallback(
-		(acceptedFiles: FileWithPath[]) => {
+		(acceptedFiles: FileWithPath[], rejectedFiles: FileRejection[]) => {
 			acceptedFiles.forEach((file) => {
 				const fileWithPreview = Object.assign(file, {
 					preview: URL.createObjectURL(file),
@@ -41,6 +41,13 @@ export default function CreatePost() {
 
 				setFiles((prev) => [...(prev ?? []), fileWithPreview]);
 			});
+
+			console.log(acceptedFiles);
+
+			if (rejectedFiles.length > 0) {
+				rejectedFiles[0].errors[0].message &&
+					toast.error(`${rejectedFiles[0].errors[0].message}. Max files is 10.`);
+			}
 		},
 
 		[setFiles]
@@ -48,6 +55,7 @@ export default function CreatePost() {
 
 	const { getRootProps, getInputProps } = useDropzone({
 		onDrop,
+		maxFiles: 10,
 		accept: {
 			"image/jpeg": [],
 			"image/png": [],
@@ -57,6 +65,7 @@ export default function CreatePost() {
 	const handleCreatePost = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		const altTexts = files?.map((file: any) => file.altText);
+		const filePaths: string[] = [];
 
 		const storageRef = ref(storage, "posts");
 
@@ -64,7 +73,9 @@ export default function CreatePost() {
 		try {
 			if (files == null) return;
 			const uploadPromises = files.map(async (file) => {
-				const filename = file.name;
+				const filename = `${user?.id}/${file.name}`;
+				filePaths.push(filename);
+
 				const fileRef = ref(storageRef, filename);
 				const snapshot = await uploadBytes(fileRef, file);
 				return getDownloadURL(snapshot.ref);
@@ -73,7 +84,13 @@ export default function CreatePost() {
 			const downloadURLs = await Promise.all(uploadPromises);
 
 			startTransition(async () => {
-				await createPost(caption, downloadURLs, altTexts, JSON.parse(JSON.stringify(user)));
+				await createPost(
+					caption,
+					downloadURLs,
+					altTexts,
+					JSON.parse(JSON.stringify(user)),
+					filePaths
+				);
 			});
 
 			setOpen(false);
@@ -89,7 +106,7 @@ export default function CreatePost() {
 
 			// Delete files from storage
 			files.map(async (file) => {
-				const filename = file.name;
+				const filename = `${user?.id}/${file.name}`;
 				const fileRef = ref(storageRef, filename);
 				await deleteObject(fileRef);
 			});

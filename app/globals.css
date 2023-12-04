@@ -294,7 +294,8 @@ body {
 }
 
 .profile-active {
-	border: 2px solid rgb(var(--primary-text));
+	outline: 2px solid rgb(var(--primary-text));
+	outline-offset: -2px;
 	border-radius: 50%;
 	width: 28px;
 	height: 28px;
@@ -684,7 +685,7 @@ input[type="search"]::-webkit-search-cancel-button {
 }
 
 .post-content-item img {
-	object-fit: cover;
+	/* object-fit: cover; */
 	aspect-ratio: 1 / 1;
 	scroll-snap-align: start;
 	max-width: calc(470px - 2px);
@@ -742,6 +743,10 @@ input[type="search"]::-webkit-search-cancel-button {
 	height: 30vw;
 	object-fit: cover;
 	cursor: pointer;
+}
+
+.no-explore {
+	height: calc(100dvh);
 }
 
 /* Message page styles */
@@ -991,6 +996,10 @@ input[type="search"]::-webkit-search-cancel-button {
 
 	.discover-page {
 		min-height: calc(100dvh - 50px);
+	}
+
+	.no-explore {
+		height: calc(100dvh - 50px);
 	}
 
 	.chat-list:hover {

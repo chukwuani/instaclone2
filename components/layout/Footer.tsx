@@ -20,7 +20,7 @@ const Footer = () => {
 	];
 
 	return (
-		<footer className="hidden max-md:flex w-auto mb-[52px] leading-5">
+		<footer className="hidden md:flex w-auto mb-[52px] leading-5">
 			<ul className="flex gap-5 text-center items-center justify-center flex-wrap break-words max-w-[982px] w-full leading-[45px]">
 				{footerLinks.map((links) => (
 					<li

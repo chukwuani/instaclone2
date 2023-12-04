@@ -1,15 +1,51 @@
+"use client";
+
+import { useState, useTransition } from "react";
+import SearchLoading from "../SearchLoading";
+import { getSearch } from "@/firebase/firebaseService";
+import { DocumentData } from "firebase/firestore";
+import Link from "next/link";
+import Image from "next/image";
+
+interface ResultType {
+	name: string;
+	username: string;
+	imageUrl: string;
+}
+
 const SearchSideBar = ({ activeLink }: { activeLink: string }) => {
+	const [search, setSearch] = useState("");
+	const [result, setResult] = useState<DocumentData>([]);
+	const [isPending, startTransition] = useTransition();
+
+	const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
+		e.preventDefault();
+
+		if (search.length == 0) return;
+
+		startTransition(async () => {
+			try {
+				const result = await getSearch(search);
+				setResult(result);
+			} catch (err: any) {
+				console.log(err);
+			}
+		});
+	};
+
 	return (
 		<section
 			className={
 				activeLink === "search" ? "showing-search-sidebar search-sidebar" : "search-sidebar"
 			}>
 			<article className="flex flex-col pb-6 border-b border-separator-divider">
-				<h1 className="pt-3 pb-9 pr-[14px] pl-6 my-2 text-[24px] leading-[30px] font-semibold text-primary-text">
+				<h3 className="pt-3 pb-9 pr-[14px] pl-6 my-2 text-[24px] leading-[30px] font-semibold text-primary-text">
 					Search
-				</h1>
+				</h3>
 
-				<div className="search-container mx-4">
+				<form
+					onSubmit={handleSearch}
+					className="search-container mx-4">
 					<span className="mr-3">
 						<svg
 							aria-label="Search"
@@ -41,26 +77,51 @@ const SearchSideBar = ({ activeLink }: { activeLink: string }) => {
 					</span>
 
 					<input
+						autoComplete="off"
+						autoCorrect="off"
+						value={search}
+						onChange={(e) => setSearch(e.target.value)}
 						className="search"
 						type="search"
 						name="search"
 						id="search"
 						placeholder="search"
 					/>
-				</div>
+				</form>
 			</article>
 
-			<div className="flex flex-col grow">
-				<div className="flex items-center justify-between mx-6 mt-[6px] pt-4 mb-2">
-					<p className="font-semibold text-base">Recent</p>
+			<div className="flex flex-col grow overflow-y-auto">
+				<div className="flex flex-col items-center w-full text-center grow">
+					{!isPending ? (
+						result?.map((item: ResultType) => (
+							<Link
+								className="flex justify-start w-full px-6 py-2 hover:bg-hover-overlay"
+								href={item.username}
+								key={item.username}>
+								<Image
+									src={item.imageUrl}
+									alt={`${item.username} profile photo`}
+									width={44}
+									height={44}
+									quality={100}
+									className="rounded-full mr-3 h-fit"
+								/>
 
-					{/* <Link className="font-semibold text-sm primary-btn" href="#">Clear all</Link> */}
-				</div>
+								<section className="flex flex-col justify-start items-start">
+									<h4 className="text-sm text-primary-text font-semibold">{item.username}</h4>
+									<p className="text-sm text-secondary-text font-normal">{item.name}</p>
+								</section>
+							</Link>
+						))
+					) : (
+						<SearchLoading />
+					)}
 
-				<div className="flex items-center justify-center w-full text-center grow">
-					<p className="text-sm font-semibold text-secondary-text text-center w-full">
-						No recent searches.
-					</p>
+					{result?.length == 0 && !isPending && (
+						<p className="text-sm font-semibold text-secondary-text text-center my-auto w-full">
+							No search results found.
+						</p>
+					)}
 				</div>
 			</div>
 		</section>

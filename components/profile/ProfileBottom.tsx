@@ -5,16 +5,20 @@ import Saved from "@/components/profile/Saved";
 import Tagged from "@/components/profile/Tagged";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { DocumentData } from "firebase/firestore";
+import { createContext, useContext } from "react";
+import { PostType } from "../post/Feed";
 
-interface ProfileBottomProps {
-	posts: DocumentData[];
+type ProfileBottomProps = {
+	posts: PostType[];
 	showSaved: boolean;
-	saves: DocumentData[];
-}
+	saves: PostType[];
+};
+
+const profileBottomContext = createContext<ProfileBottomProps | null>(null);
 
 const ProfileBottom = ({ posts, showSaved, saves }: ProfileBottomProps) => {
 	const searchParams = useSearchParams();
+	const activeTab = searchParams.get("tab") || "posts";
 
 	const tabs = showSaved
 		? [
@@ -250,39 +254,44 @@ const ProfileBottom = ({ posts, showSaved, saves }: ProfileBottomProps) => {
 				},
 		  ];
 
-	const activeTab = searchParams.get("tab") || "posts";
-
 	return (
-		<div className="border-t border-separator-divider">
-			<div className="w-full h-[52px]">
-				<section className="user-profile-bottom-cta-list-item flex items-center justify-center gap-[60px] h-[52px] max-md:gap-0">
-					{tabs.map((tab, index) => {
-						return (
-							<Link
-								key={index}
-								href={`?tab=${tab.name}`}
-								className={
-									activeTab === tab.name ? "active-profile-tab profile-tab" : "profile-tab"
-								}>
-								<span>{tab.icon}</span>
+		<profileBottomContext.Provider value={{ posts, showSaved, saves }}>
+			<div className="border-t border-separator-divider">
+				<div className="w-full h-[52px]">
+					<section className="user-profile-bottom-cta-list-item flex items-center justify-center gap-[60px] h-[52px] max-md:gap-0">
+						{tabs.map((tab, index) => {
+							return (
+								<Link
+									key={index}
+									href={`?tab=${tab.name}`}
+									className={
+										activeTab === tab.name ? "active-profile-tab profile-tab" : "profile-tab"
+									}>
+									<span>{tab.icon}</span>
 
-								<p className="uppercase">{tab.name}</p>
-							</Link>
-						);
-					})}
-				</section>
+									<p className="uppercase">{tab.name}</p>
+								</Link>
+							);
+						})}
+					</section>
+				</div>
+
+				{activeTab === "posts" && <Share />}
+				{activeTab === "saved" && showSaved && <Saved />}
+				{activeTab === "tagged" && <Tagged />}
 			</div>
-
-			{activeTab === "posts" && (
-				<Share
-					posts={posts}
-					showSaved={showSaved}
-				/>
-			)}
-			{activeTab === "saved" && showSaved && <Saved saves={saves} />}
-			{activeTab === "tagged" && <Tagged showSaved={showSaved} />}
-		</div>
+		</profileBottomContext.Provider>
 	);
 };
 
 export default ProfileBottom;
+
+export const useProfileBottomContext = () => {
+	const context = useContext(profileBottomContext);
+
+	if (!context) {
+		throw new Error("useProfileBottomContext must be used within a profileBottomContext");
+	}
+
+	return context;
+};

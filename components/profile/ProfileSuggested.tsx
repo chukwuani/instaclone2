@@ -1,25 +1,17 @@
 import * as React from "react";
-import Image from "next/image";
+
 import useEmblaCarousel, {
 	type EmblaCarouselType,
 	type EmblaOptionsType,
 } from "embla-carousel-react";
-import { cn } from "@/lib/utils";
-import { usePostContext } from "./PostCard";
 
-type PostContentProps = {
-	options?: EmblaOptionsType;
-	likePost: () => void;
-};
+import ProfileSuggestedCard from "./ProfileSuggestedCard";
+import { useProfileTopContext } from "./ProfileTop";
 
-const PostContent = ({ options, likePost }: PostContentProps) => {
-	const {
-		post: { images, altTexts },
-	} = usePostContext();
-
+const ProfileSuggested = ({ options }: { options?: EmblaOptionsType }) => {
+	const { suggestion } = useProfileTopContext();
 	const [emblaRef, emblaApi] = useEmblaCarousel(options);
 
-	const [selectedIndex, setSelectedIndex] = React.useState(0);
 	const [prevBtnDisabled, setPrevBtnDisabled] = React.useState(true);
 	const [nextBtnDisabled, setNextBtnDisabled] = React.useState(true);
 
@@ -39,7 +31,6 @@ const PostContent = ({ options, likePost }: PostContentProps) => {
 	);
 
 	const onSelect = React.useCallback((emblaApi: EmblaCarouselType) => {
-		setSelectedIndex(emblaApi.selectedScrollSnap());
 		setPrevBtnDisabled(!emblaApi.canScrollPrev());
 		setNextBtnDisabled(!emblaApi.canScrollNext());
 	}, []);
@@ -53,44 +44,19 @@ const PostContent = ({ options, likePost }: PostContentProps) => {
 	}, [emblaApi, onSelect]);
 
 	return (
-		<section className="overflow-hidden max-w-[470px] w-full flex relative">
-			<section
-				ref={emblaRef}
-				className="w-full flex max-h-[470px]">
-				<ul className="post-content relative">
-					{images.map((item, index) => (
-						<li
-							key={index}
-							className="post-content-item relative group">
-							<Image
-								onDoubleClick={likePost}
-								className="bg-highlight object-cover"
-								src={item}
-								alt={altTexts[index]}
-								priority={index === 0}
-								width={470}
-								height={470}
-								quality={100}
-							/>
+		<section className="overflow-hidden w-full relative max-md:px-5 mb-10">
+			<p className="text-sm text-secondary-text font-semibold mb-3">Suggested</p>
 
-							<span className="md:hidden opacity-0 group-hover:opacity-100 transition-opacity bg-black/80 text-white absolute rounded-[24px] p-1 px-3 top-3 right-3 text-xs">
-								{index + 1 + "/" + images.length}
-							</span>
-						</li>
+			<section ref={emblaRef}>
+				<ul className="flex gap-3 items-center">
+					{suggestion.map((item, i) => (
+						<ProfileSuggestedCard
+							key={i}
+							suggestion={item}
+						/>
 					))}
 				</ul>
 			</section>
-
-			{images.length > 1 && (
-				<section className="absolute left-0 bottom-0 flex items-center justify-center w-full h-auto py-4">
-					{images.map((_, index) => (
-						<span
-							key={index}
-							className={cn("indicator", selectedIndex === index && "!opacity-100")}
-						/>
-					))}
-				</section>
-			)}
 
 			<button
 				onKeyDown={handleKeyDown}
@@ -113,4 +79,4 @@ const PostContent = ({ options, likePost }: PostContentProps) => {
 	);
 };
 
-export default PostContent;
+export default ProfileSuggested;

@@ -7,8 +7,8 @@ const Loading = () => {
 
 			<Image
 				priority
-				width={70}
-				height={70}
+				width={80}
+				height={80}
 				src="/images/loader-logo.png"
 				alt="Instagram"
 				aria-label="Instagram"
@@ -16,10 +16,10 @@ const Loading = () => {
 
 			<Image
 				priority
-				width={80}
-				height={80}
+				width={72}
+				height={37}
 				src="/images/from-meta.png"
-				className="w-auto h-auto"
+				className="w-[72px] h-[37px]"
 				alt="from meta"
 				aria-label="from meta"
 			/>

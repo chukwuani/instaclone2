@@ -16,11 +16,7 @@ const ResetPasswordForm = () => {
 	const [complete, setComplete] = useState(false);
 	const [showPassword, setShowPassword] = useState(false);
 
-	const { isLoaded, signIn, setActive } = useSignIn();
-
-	if (!isLoaded) {
-		return null;
-	}
+	const { signIn, setActive } = useSignIn();
 
 	async function create(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault();

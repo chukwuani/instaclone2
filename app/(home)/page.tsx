@@ -1,10 +1,11 @@
-// import Stories from "@/components/Stories";
 import Suggested from "@/components/Suggested";
 import Feed from "@/components/post/Feed";
 
 import { currentUser } from "@clerk/nextjs";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { firestore } from "@/firebase/firebaseConfig";
+import { Suspense } from "react";
+import SuggestedLoading from "@/components/SuggestedLoading";
 
 export default async function Home() {
 	const user = await currentUser();
@@ -30,18 +31,15 @@ export default async function Home() {
 		<>
 			<main className="main-content pt-[76px] md:pt-[22px]">
 				<section className="flex flex-col items-center max-w-[470px] w-full mt-4">
-					{/* <Stories
-						options={{
-							slidesToScroll: "auto",
-							skipSnaps: true,
-							dragFree: true,
-						}}
-					/> */}
-
-					<Feed />
+					<Feed
+						username={user?.username as string}
+						id={user?.id as string}
+					/>
 				</section>
 
-				<Suggested />
+				<Suspense fallback={<SuggestedLoading />}>
+					<Suggested />
+				</Suspense>
 			</main>
 		</>
 	);

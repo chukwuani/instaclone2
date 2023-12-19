@@ -291,6 +291,7 @@ body {
 
 .sidebar-is-active .nav-links-text {
 	opacity: 0;
+	visibility: hidden;
 }
 
 .profile-active {

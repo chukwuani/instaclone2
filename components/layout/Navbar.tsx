@@ -9,11 +9,11 @@ import MobileNavbar from "./MobileNavbar";
 import NotificationBar from "./NotificationBar";
 import SearchSideBar from "./SearchSideBar";
 import TopMobileNavbar from "./TopMobileNavbar";
+import CreatePost from "./CreatePost";
 
 import { icons } from "@/constants";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
-import CreatePost from "./CreatePost";
 import { cn } from "@/lib/utils";
 import { useUser } from "@clerk/nextjs";
 
@@ -70,7 +70,7 @@ const Navbar = () => {
 						className="nav-links"
 						href="/"
 						scroll>
-						<span className="flex items-center gap-4">
+						<span className="flex items-center gap-4 w-full">
 							<Image
 								className="icons"
 								src={activeLink === "/" ? icons.homeActive : icons.home}
@@ -85,7 +85,7 @@ const Navbar = () => {
 						onClick={toggleSearchbar}
 						className="nav-links">
 						{activeLink === "search" ? (
-							<span className="flex items-center gap-4">
+							<span className="flex items-center gap-4 w-full">
 								<Image
 									className="icons"
 									src={icons.searchActive}
@@ -95,7 +95,7 @@ const Navbar = () => {
 								<p className="nav-links-text">Search</p>
 							</span>
 						) : (
-							<span className="flex items-center gap-4">
+							<span className="flex items-center gap-4 w-full">
 								<Image
 									className="icons"
 									src={icons.search}
@@ -109,8 +109,9 @@ const Navbar = () => {
 
 					<Link
 						className="nav-links"
-						href="/explore">
-						<span className="flex items-center gap-4">
+						href="/explore"
+						scroll>
+						<span className="flex items-center gap-4 w-full">
 							<Image
 								className="icons"
 								src={activeLink === "/explore" ? icons.exploreActive : icons.explore}
@@ -125,8 +126,9 @@ const Navbar = () => {
 
 					<Link
 						className="nav-links"
-						href="/reels">
-						<span className="flex items-center gap-4">
+						href="/reels"
+						scroll>
+						<span className="flex items-center gap-4 w-full">
 							<Image
 								className="icons"
 								src={activeLink === "/reels" ? icons.reelsActive : icons.reels}
@@ -141,8 +143,9 @@ const Navbar = () => {
 
 					<Link
 						className="nav-links"
-						href="/message">
-						<span className="flex items-center gap-4">
+						href="/message"
+						scroll>
+						<span className="flex items-center gap-4 w-full">
 							<Image
 								className="icons"
 								src={activeLink === "/message" ? icons.messageActive : icons.message}
@@ -159,7 +162,7 @@ const Navbar = () => {
 						onClick={toggleNotification}
 						className="nav-links">
 						{activeLink === "notification" ? (
-							<span className="flex items-center gap-4">
+							<span className="flex items-center gap-4 w-full">
 								<Image
 									className="icons"
 									src={icons.notificationActive}
@@ -169,7 +172,7 @@ const Navbar = () => {
 								<p className="nav-links-text">Notifications</p>
 							</span>
 						) : (
-							<span className="flex items-center gap-4">
+							<span className="flex items-center gap-4 w-full">
 								<Image
 									className="icons"
 									src={icons.notification}
@@ -185,9 +188,10 @@ const Navbar = () => {
 
 					<Link
 						className="nav-links"
-						href={`${user?.username}`}>
+						href={`${user?.username}`}
+						scroll>
 						{pathname === `/${user?.username}` ? (
-							<span className="flex items-center gap-4">
+							<span className="flex items-center gap-4 w-full">
 								<span className="profile-active">
 									<Avatar size={24} />
 								</span>
@@ -195,7 +199,7 @@ const Navbar = () => {
 								<p className="font-bold nav-links-text">Profile</p>
 							</span>
 						) : (
-							<span className="flex items-center gap-4">
+							<span className="flex items-center gap-4 w-full">
 								<Avatar size={24} />
 								<p className="nav-links-text">Profile</p>
 							</span>

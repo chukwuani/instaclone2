@@ -1,15 +1,8 @@
-import { DocumentData } from "firebase/firestore";
 import React from "react";
+import { useProfileTopContext } from "./profile/ProfileTop";
 
-interface MobileStatsProps {
-	user: DocumentData;
-	following: DocumentData;
-	followers: DocumentData;
-	postNumber: number;
-	isFollowing: boolean;
-}
-
-const MobileStats = ({ postNumber, user, followers, following, isFollowing }: MobileStatsProps) => {
+const MobileStats = () => {
+	const { isFollowing, user, postNumber, followers, following } = useProfileTopContext();
 	return (
 		<>
 			<article className="flex flex-col p-5 pt-0 text-sm text-primary-text md:hidden">

@@ -1,11 +1,13 @@
 import { icons } from "@/constants";
-import { DocumentData } from "firebase/firestore";
 import { HeartIcon, MessageCircleIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import { useProfileBottomContext } from "./ProfileBottom";
 
-const Saved = ({ saves }: { saves: DocumentData[] }) => {
+const Saved = () => {
+	const { saves } = useProfileBottomContext();
+
 	return (
 		<section className="flex flex-col items-center relative gap-6 mt-5 mb-7 max-w-[950px] max-md:h-full max-md:mb-[70px]">
 			<p className="font-normal text-[13px] text-secondary-text">
@@ -44,7 +46,7 @@ const Saved = ({ saves }: { saves: DocumentData[] }) => {
 
 									<p className="text-white font-bold text-lg uppercase flex items-center gap-2 max-md:text-sm">
 										<MessageCircleIcon className="rotate-[270deg] fill-white w-5" />
-										{item.comments?.length}
+										{item.commentCount}
 									</p>
 								</span>
 							</Link>

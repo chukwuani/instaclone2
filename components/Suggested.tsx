@@ -1,3 +1,4 @@
+// million-ignore
 import { currentUser } from "@clerk/nextjs";
 
 import Link from "next/link";
@@ -10,12 +11,10 @@ import { DocumentData } from "firebase/firestore";
 const Suggested = async () => {
 	const user = await currentUser();
 	const userId = user?.id as string;
-	const userName = user?.username as string;
 
 	const currentYear = new Date().getFullYear();
 
-	const data = await getSuggestedUsers(userId, userName);
-	const suggestion: DocumentData[] = data;
+	const suggestion: DocumentData[] = await getSuggestedUsers(userId, 5);
 
 	return (
 		<aside className="w-[319px] mt-9 ml-16 flex flex-col max-[999px]:hidden">

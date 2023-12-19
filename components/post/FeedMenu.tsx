@@ -9,26 +9,22 @@ import { Dispatch, SetStateAction, useState } from "react";
 import { firestore } from "@/firebase/firebaseConfig";
 
 import { useRouter } from "next/navigation";
+import { usePostContext } from "./PostCard";
 
 type FeedMenuProps = {
-	isUserPost: boolean;
-	postId: string;
-	userId: string;
-	creatorId: string;
-	isFollowing: boolean;
 	setOpen: Dispatch<SetStateAction<boolean>>;
 };
 
-const FeedMenu = ({
-	isUserPost,
-	creatorId,
-	userId,
-	postId,
-	isFollowing,
-	setOpen,
-}: FeedMenuProps) => {
+const FeedMenu = ({ setOpen }: FeedMenuProps) => {
+	const {
+		post: { creatorId, id: postId },
+		userId,
+		isFollowingCreator,
+		isUserPost,
+	} = usePostContext();
+
 	const router = useRouter();
-	const [Following, setFollowing] = useState(isFollowing);
+	const [Following, setFollowing] = useState(isFollowingCreator);
 
 	const handleFollow = async () => {
 		const userRef = doc(firestore, "users", creatorId);

@@ -1,8 +1,14 @@
+// million-ignore
+
 import Image from "next/image";
 import { icons } from "@/constants";
 import { AnimatePresence, motion } from "framer-motion";
 import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet";
-import Comments from "./Comments";
+import AddComment from "../form/AddComment";
+import { getPostComments } from "@/firebase/firebaseService";
+import { useQuery } from "@tanstack/react-query";
+import { usePostContext } from "./PostCard";
+import CommentCard from "./CommentCard";
 
 interface Props {
 	saved: boolean;
@@ -12,6 +18,15 @@ interface Props {
 }
 
 const PostReaction = ({ saved, liked, likePost, savePost }: Props) => {
+	const {
+		post: { id },
+	} = usePostContext();
+
+	const { isLoading, error, data, refetch } = useQuery({
+		queryKey: ["commentData"],
+		queryFn: async () => await getPostComments(id),
+	});
+
 	return (
 		<section className="flex items-center justify-between mt-1">
 			<section className="flex items-center">
@@ -60,7 +75,9 @@ const PostReaction = ({ saved, liked, likePost, savePost }: Props) => {
 
 				<Sheet>
 					<SheetTrigger asChild>
-						<button className="comment-btn p-2">
+						<button
+							onClick={() => refetch()}
+							className="comment-btn p-2">
 							<Image
 								className="icons"
 								src={icons.comment}
@@ -70,7 +87,14 @@ const PostReaction = ({ saved, liked, likePost, savePost }: Props) => {
 					</SheetTrigger>
 
 					<SheetContent className="p-0">
-						<Comments />
+						<AddComment />
+
+						<CommentCard
+							data={data}
+							isLoading={isLoading}
+							error={error}
+							refetch={refetch}
+						/>
 					</SheetContent>
 				</Sheet>
 

@@ -1,6 +1,9 @@
 import React from "react";
+import { useProfileBottomContext } from "./ProfileBottom";
 
-const Tagged = ({ showSaved }: { showSaved: boolean }) => {
+const Tagged = () => {
+	const { showSaved } = useProfileBottomContext();
+
 	return (
 		<div className="flex flex-col gap-4 mx-11 my-[60px] items-center justify-center text-center">
 			<div className="tagged-icon" />

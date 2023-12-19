@@ -1,17 +1,24 @@
 import Link from "next/link";
 import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet";
-import Comments from "./Comments";
 import { formatTimeDifference } from "@/lib/utils";
+import { usePostContext } from "./PostCard";
+import AddComment from "../form/AddComment";
+import { getPostComments } from "@/firebase/firebaseService";
+import { useQuery } from "@tanstack/react-query";
+import CommentCard from "./CommentCard";
 
-interface Props {
-	likeCount: number;
-	caption: string;
-	createdAt: number;
-	user: any;
-	comments: string[];
-}
+const PostStat = ({ likeCount }: { likeCount: number }) => {
+	const {
+		post: { caption, user, createdAt, commentCount, id },
+	} = usePostContext();
 
-const PostStat = ({ likeCount, user, caption, createdAt, comments }: Props) => {
+	const { isLoading, error, data, refetch } = useQuery({
+		queryKey: ["commentData"],
+		queryFn: async () => await getPostComments(id),
+	});
+
+	console.log(data, error, isLoading);
+
 	return (
 		<article className="flex flex-col gap-[10px] py-2 px-3">
 			<p className="text-sm leading-none font-semibold text-primary-text">
@@ -29,25 +36,34 @@ const PostStat = ({ likeCount, user, caption, createdAt, comments }: Props) => {
 				</p>
 			) : null}
 
-			{comments.length > 0 ? (
+			{commentCount > 0 ? (
 				<Sheet>
 					<SheetTrigger asChild>
-						<button className="w-fit text-sm leading-none no-underline hover:underline text-secondary-text">
-							View {comments.length > 1 && "all"} {comments?.length}{" "}
-							{comments?.length > 1 ? "comments" : "comment"}
+						<button
+							onClick={() => refetch()}
+							className="w-fit text-sm leading-none no-underline hover:underline text-secondary-text">
+							View {commentCount > 1 && "all"} {commentCount}{" "}
+							{commentCount > 1 ? "comments" : "comment"}
 						</button>
 					</SheetTrigger>
 
-					<SheetContent>
-						<Comments />
+					<SheetContent className="p-0">
+						<AddComment />
+
+						<CommentCard
+							data={data}
+							isLoading={isLoading}
+							error={error}
+							refetch={refetch}
+						/>
 					</SheetContent>
 				</Sheet>
 			) : null}
 
 			<time
-				dateTime={`${createdAt}`}
+				dateTime={`${createdAt.seconds}`}
 				className="text-secondary-text text-[10px] uppercase leading-none">
-				{formatTimeDifference(createdAt)}
+				{formatTimeDifference(createdAt.seconds)}
 			</time>
 		</article>
 	);

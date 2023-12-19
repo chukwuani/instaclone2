@@ -71,3 +71,4 @@ export function formatTimeDifference(createdTimeInSeconds: number): string {
 		return date.toLocaleDateString("en-us", { year: "numeric", month: "long", day: "numeric" });
 	}
 }
+

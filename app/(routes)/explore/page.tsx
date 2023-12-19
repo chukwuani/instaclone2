@@ -6,7 +6,7 @@ import Image from "next/image";
 
 const Home = async () => {
 	const user = await currentUser();
-	const posts = await getExplorePost(user?.username as string);
+	const posts: any[] = await getExplorePost(user?.username as string);
 
 	if (!posts) return <p>No post to explore</p>;
 

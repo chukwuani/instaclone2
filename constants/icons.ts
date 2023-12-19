@@ -43,6 +43,8 @@ import collection from "public/icons/collection.svg";
 import github from "public/icons/github.svg";
 import githubBg from "public/icons/githubBg.svg";
 import pose from "public/icons/Posing-For-A-Photo.svg";
+import allSeeingEye from "public/icons/all-seeing-eye.svg";
+import threads from "public/icons/threads.svg";
 
 export default {
 	bmc,
@@ -88,4 +90,6 @@ export default {
 	github,
 	githubBg,
 	pose,
+	allSeeingEye,
+	threads
 };

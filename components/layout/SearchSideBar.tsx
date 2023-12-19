@@ -21,12 +21,17 @@ const SearchSideBar = ({ activeLink }: { activeLink: string }) => {
 	const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 
-		if (search.length == 0) return;
+		if (search.length == 0) {
+			setResult([]);
+			return;
+		}
 
 		startTransition(async () => {
 			try {
 				const result = await getSearch(search);
 				setResult(result);
+
+				console.log(result);
 			} catch (err: any) {
 				console.log(err);
 			}
@@ -39,11 +44,12 @@ const SearchSideBar = ({ activeLink }: { activeLink: string }) => {
 				activeLink === "search" ? "showing-search-sidebar search-sidebar" : "search-sidebar"
 			}>
 			<article className="flex flex-col pb-6 border-b border-separator-divider">
-				<h3 className="pt-3 pb-9 pr-[14px] pl-6 my-2 text-[24px] leading-[30px] font-semibold text-primary-text">
+				<h4 className="pt-3 pb-9 pr-[14px] pl-6 my-2 text-[24px] leading-[30px] font-semibold text-primary-text">
 					Search
-				</h3>
+				</h4>
 
 				<form
+					autoComplete="off"
 					onSubmit={handleSearch}
 					className="search-container mx-4">
 					<span className="mr-3">
@@ -78,7 +84,6 @@ const SearchSideBar = ({ activeLink }: { activeLink: string }) => {
 
 					<input
 						autoComplete="off"
-						autoCorrect="off"
 						value={search}
 						onChange={(e) => setSearch(e.target.value)}
 						className="search"
@@ -117,9 +122,15 @@ const SearchSideBar = ({ activeLink }: { activeLink: string }) => {
 						<SearchLoading />
 					)}
 
-					{result?.length == 0 && !isPending && (
+					{/* {result?.length == 0 && !isPending && search.length !== 0 && (
 						<p className="text-sm font-semibold text-secondary-text text-center my-auto w-full">
 							No search results found.
+						</p>
+					)} */}
+
+					{search.length == 0 && !isPending && result?.length == 0 && (
+						<p className="text-sm font-semibold text-secondary-text text-center my-auto w-full">
+							No recent searches.
 						</p>
 					)}
 				</div>

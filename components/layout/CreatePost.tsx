@@ -1,5 +1,5 @@
 import Image from "next/image";
-import React, { useState, useTransition } from "react";
+import React, { useState } from "react";
 
 import { useDropzone, type FileWithPath, FileRejection } from "react-dropzone";
 import { FilePlus2 } from "lucide-react";
@@ -16,20 +16,22 @@ import { storage } from "@/firebase/firebaseConfig";
 
 import { useUser } from "@clerk/nextjs";
 import toast from "react-hot-toast";
-import createPost from "@/firebase/actions";
+import createPost from "@/firebase/firebaseService";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 export type FileWithPreview = FileWithPath & {
 	preview: string;
 };
 
 export default function CreatePost() {
+	const queryClient = useQueryClient();
 	const { user } = useUser();
 
 	const [open, setOpen] = React.useState(false);
+	const [loading, setLoading] = useState(false);
+
 	const [files, setFiles] = React.useState<FileWithPreview[] | null>(null);
 	const [caption, setCaption] = useState("");
-
-	const [isPending, startTransition] = useTransition();
 
 	const onDrop = React.useCallback(
 		(acceptedFiles: FileWithPath[], rejectedFiles: FileRejection[]) => {
@@ -64,14 +66,20 @@ export default function CreatePost() {
 
 	const handleCreatePost = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
+
 		const altTexts = files?.map((file: any) => file.altText);
+
 		const filePaths: string[] = [];
 
 		const storageRef = ref(storage, "posts");
 
 		const toastId = toast.loading("Creating post");
+
+		setLoading(true);
+
 		try {
 			if (files == null) return;
+
 			const uploadPromises = files.map(async (file) => {
 				const filename = `${user?.id}/${file.name}`;
 				filePaths.push(filename);
@@ -83,17 +91,16 @@ export default function CreatePost() {
 
 			const downloadURLs = await Promise.all(uploadPromises);
 
-			startTransition(async () => {
-				await createPost(
-					caption,
-					downloadURLs,
-					altTexts,
-					JSON.parse(JSON.stringify(user)),
-					filePaths
-				);
-			});
+			await createPost(
+				caption,
+				downloadURLs,
+				altTexts,
+				JSON.parse(JSON.stringify(user)),
+				filePaths
+			);
 
 			setOpen(false);
+			setLoading(false);
 
 			toast.dismiss(toastId);
 			toast.success("Created Post");
@@ -102,19 +109,23 @@ export default function CreatePost() {
 
 			toast.dismiss(toastId);
 			console.error("Error uploading files: ", error);
-			toast.error("Error creating post");
+			toast.error("Error creating post. Try again");
+			setLoading(false);
 
-			// Delete files from storage
 			files.map(async (file) => {
 				const filename = `${user?.id}/${file.name}`;
 				const fileRef = ref(storageRef, filename);
 				await deleteObject(fileRef);
 			});
-
-			// // Delete posts from firestore
-			// await deleteDoc(doc(firestore, "posts", post.id));
 		}
 	};
+
+	const mutation = useMutation({
+		mutationFn: (e: React.FormEvent<HTMLFormElement>) => handleCreatePost(e),
+		onSuccess: () => {
+			queryClient.invalidateQueries({ queryKey: ["feedData"] });
+		},
+	});
 
 	React.useEffect(() => {
 		setFiles(null);
@@ -127,7 +138,7 @@ export default function CreatePost() {
 			onOpenChange={setOpen}>
 			<DialogTrigger asChild>
 				<button className="nav-links">
-					<span className="flex items-center gap-4">
+					<span className="flex items-center gap-4 w-full">
 						<Image
 							className="icons"
 							src={open ? icons.createActive : icons.create}
@@ -147,7 +158,7 @@ export default function CreatePost() {
 
 					{files?.length ? (
 						<form
-							onSubmit={handleCreatePost}
+							onSubmit={(e) => mutation.mutate(e)}
 							className="flex flex-col gap-5 p-6 w-full h-full">
 							<ScrollArea className="h-[300px] w-full">
 								<CaptionForm
@@ -168,12 +179,14 @@ export default function CreatePost() {
 
 							<section className="flex items-center justify-between">
 								<button
+									disabled={loading}
 									type="submit"
 									className="text-primary-button font-semibold text-sm hover:text-link">
 									Post
 								</button>
 
 								<button
+									disabled={loading}
 									type="button"
 									{...getRootProps()}
 									className="bg-banner p-3 rounded-full">

@@ -5,12 +5,16 @@ import { icons } from "@/constants";
 import { useTheme } from "next-themes";
 
 import { useClerk } from "@clerk/clerk-react";
+import { useUser } from "@clerk/nextjs";
 import { toast } from "react-hot-toast";
 import { useState } from "react";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { cn } from "@/lib/utils";
 
 const MoreOption = () => {
+	const { user } = useUser();
+	const username = user?.username as string;
+
 	const [open, setOpen] = useState(false);
 	const { signOut } = useClerk();
 	const { setTheme, resolvedTheme } = useTheme();
@@ -34,7 +38,7 @@ const MoreOption = () => {
 			onOpenChange={setOpen}>
 			<PopoverTrigger asChild>
 				<button className="nav-links">
-					<span className="flex items-center gap-4">
+					<span className="flex items-center gap-4 w-full">
 						<Image
 							className="icons"
 							src={open ? icons.moreActive : icons.more}
@@ -48,7 +52,7 @@ const MoreOption = () => {
 			<PopoverContent className="p-0 border-none w-fit shadow-none z-[1500] ml-6 bg-primary-background">
 				<nav className="more-option-list">
 					<Link
-						href="#"
+						href={`/edit/accounts/${username}`}
 						className="py-[9px] px-4 text-primary-text flex flex-row-reverse items-center justify-between gap-3 grow-0 shrink-0 basis-auto hover:bg-hover-overlay">
 						<Image
 							className="icons"
@@ -58,7 +62,8 @@ const MoreOption = () => {
 						<p className="text-[14px] h-6 mr-1 font-normal capitalize no-underline">setting</p>
 					</Link>
 
-					<Link
+					<a
+						target="_blank"
 						href="https://www.buymeacoffee.com/chukwuanise"
 						className="py-[9px] px-4 text-primary-text flex flex-row-reverse items-center justify-between gap-3 border-t border-separator grow-0 shrink-0 basis-auto hover:bg-hover-overlay">
 						<Image
@@ -69,23 +74,22 @@ const MoreOption = () => {
 						<p className="text-[14px] h-6 mr-1 font-normal capitalize no-underline">
 							Buy me a coffee
 						</p>
-					</Link>
+					</a>
 
-					<Link
-						href="#"
+					<a
+						target="_blank"
+						href="https://www.threads.net/"
 						className="py-[9px] px-4 text-primary-text flex flex-row-reverse items-center justify-between gap-3 border-t border-separator grow-0 shrink-0 basis-auto hover:bg-hover-overlay">
 						<Image
 							className="icons"
-							src={icons.clock}
+							src={icons.threads}
 							alt=""
 						/>
-						<p className="text-[14px] h-6 mr-1 font-normal capitalize no-underline">
-							Your activity
-						</p>
-					</Link>
+						<p className="text-[14px] h-6 mr-1 font-normal capitalize no-underline">Threads</p>
+					</a>
 
 					<Link
-						href="#"
+						href={`/${username}?tab=saved`}
 						className="py-[9px] px-4 text-primary-text flex flex-row-reverse items-center justify-between gap-3 border-t border-separator grow-0 shrink-0 basis-auto hover:bg-hover-overlay">
 						<Image
 							className="icons"
@@ -113,8 +117,9 @@ const MoreOption = () => {
 						</p>
 					</button>
 
-					<Link
-						href="https://github.com/chukwuani"
+					<a
+						target="_blank"
+						href="https://twitter.com/_stevecodes"
 						className="py-[9px] px-4 text-primary-text flex flex-row-reverse items-center justify-between gap-3 border-t border-separator grow-0 shrink-0 basis-auto hover:bg-hover-overlay">
 						<Image
 							className="icons"
@@ -124,7 +129,7 @@ const MoreOption = () => {
 						<p className="text-[14px] h-6 mr-1 font-normal capitalize no-underline">
 							Report a problem
 						</p>
-					</Link>
+					</a>
 
 					<button
 						onClick={logOut}

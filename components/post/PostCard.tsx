@@ -4,53 +4,40 @@ import PostHead from "./PostHead";
 import PostContent from "./PostContent";
 import PostReaction from "./PostReaction";
 import PostStat from "./PostStat";
-import { useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
-import {
-	DocumentData,
-	Timestamp,
-	arrayRemove,
-	arrayUnion,
-	doc,
-	onSnapshot,
-	updateDoc,
-} from "firebase/firestore";
+import { arrayRemove, arrayUnion, doc, onSnapshot, updateDoc } from "firebase/firestore";
 import { firestore } from "@/firebase/firebaseConfig";
+import { PostType } from "./Feed";
+import { getUserByUsername } from "@/firebase/firebaseService";
 
 interface PostCardProps {
-	post: DocumentData;
-	currentUserId: string | undefined;
-	userProfile: DocumentData;
+	post: PostType;
+	userId: string;
+	username: string;
 }
 
-type PostType = {
-	altTexts: string[];
-	caption: string;
-	comments: string[];
-	createdAt: Timestamp;
-	creatorId: string;
-	images: string[];
-	likes: string[];
-	saves: string[];
-	user: {
-		imageUrl: string;
-		isVerified: boolean;
-		name: string;
-		username: string;
-	};
+type PostContextType = {
+	post: PostType;
+	isFollowingCreator: boolean;
+	isUserPost: boolean;
+	userId: string;
 };
 
-const PostCard = ({ post, currentUserId, userProfile }: PostCardProps) => {
-	const postId = post.id;
-	const userId = currentUserId as string;
+const PostContext = createContext<PostContextType | null>(null);
+
+const PostCard = ({ post, userId, username }: PostCardProps) => {
+	const postId = post?.id;
+
+	const isUserPost = post?.creatorId === userId;
+
+	const [isFollowingCreator, setIsFoolowingCreator] = useState(false);
 
 	const [likes, setLikes] = useState<string[]>(post?.likes);
 	const [isLikedByYou, setIsLikedByYou] = useState(likes?.includes(userId));
 
 	const [saves, setSaves] = useState<string[]>(post?.saves);
 	const [isSavedByYou, setIsSavedByYou] = useState(saves?.includes(userId));
-
-	const isFollowing = userProfile.following.includes(post?.creatorId);
 
 	const handleLikePost = async () => {
 		const postRef = doc(firestore, "posts", postId);
@@ -96,24 +83,21 @@ const PostCard = ({ post, currentUserId, userProfile }: PostCardProps) => {
 		});
 	};
 
-	return (
-		<>
-			<article className="max-w-[470px] w-full h-auto overflow-hidden flex flex-col bg-primary-background rounded-[4px] border border-separator max-md:border-transparent mb-3">
-				<PostHead
-					user={post.user}
-					isUserPost={post.creatorId === userId}
-					isFollowing={isFollowing}
-					postId={postId}
-					creatorId={post.creatorId}
-					userId={userId}
-					filePaths={post?.filePaths}
-				/>
+	useEffect(() => {
+		const getUserProfile = async () => {
+			const userProfile = await getUserByUsername(username);
+			setIsFoolowingCreator(userProfile[0]?.following.includes(post?.creatorId));
+		};
 
-				<PostContent
-					images={post.images}
-					alt={post.altTexts}
-					likePost={handleLikePost}
-				/>
+		getUserProfile();
+	});
+
+	return (
+		<PostContext.Provider value={{ post, isFollowingCreator, isUserPost, userId }}>
+			<article className="max-w-[470px] w-full h-auto overflow-hidden flex flex-col bg-primary-background rounded-[4px] border border-separator max-md:border-transparent mb-3">
+				<PostHead />
+
+				<PostContent likePost={handleLikePost} />
 
 				<PostReaction
 					saved={isSavedByYou}
@@ -122,16 +106,20 @@ const PostCard = ({ post, currentUserId, userProfile }: PostCardProps) => {
 					savePost={handleSavePost}
 				/>
 
-				<PostStat
-					user={post.user}
-					likeCount={likes.length}
-					caption={post.caption}
-					comments={post.comments}
-					createdAt={post.createdAt?.seconds}
-				/>
+				<PostStat likeCount={likes?.length} />
 			</article>
-		</>
+		</PostContext.Provider>
 	);
+};
+
+export const usePostContext = () => {
+	const context = useContext(PostContext);
+
+	if (!context) {
+		throw new Error("usePostContext must be used within a PostContextProvider");
+	}
+
+	return context;
 };
 
 export default PostCard;

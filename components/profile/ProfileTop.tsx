@@ -1,5 +1,5 @@
 "use client";
-// million-ignore
+
 import Image from "next/image";
 import { icons } from "@/constants";
 import MobileStats from "@/components/MobileStats";
@@ -14,24 +14,64 @@ import {
 	onSnapshot,
 	updateDoc,
 } from "firebase/firestore";
-import { useState } from "react";
+import { Dispatch, SetStateAction, createContext, useContext, useState } from "react";
 import { firestore } from "@/firebase/firebaseConfig";
 import { cn } from "@/lib/utils";
-import { UserPlusIcon } from "lucide-react";
+import ProfileSuggested from "./ProfileSuggested";
+
+export type UserType = {
+	bio: string;
+	createdAt: {
+		seconds: number;
+		nanoseconds: number;
+	};
+	followers: string[];
+	following: string[];
+	imageUrl: string;
+	isVerified: boolean;
+	name: string;
+	username: string;
+	userId: string;
+};
 
 interface ProfileTopProps {
-	user: DocumentData;
+	user: UserType;
+	profileSuggestion: UserType[];
 	postNumber: number;
 	showFollow: boolean;
-	loggedInUserId: string | undefined;
+	loggedInUserId: string;
 }
 
-const ProfileTop = ({ user, postNumber, showFollow, loggedInUserId }: ProfileTopProps) => {
-	const [followers, setFollowers] = useState<string[]>(user?.followers);
-	const [isFollower, setIsFollower] = useState(followers.includes(loggedInUserId as string));
+interface ProfileTopContextType {
+	user: UserType;
+	suggestion: UserType[];
+	postNumber: number;
+	showFollow: boolean;
+	loggedInUserId: string;
+	followers: string[];
+	following: string[];
+	isFollowing: boolean;
+	setFollowing: Dispatch<SetStateAction<string[]>>;
+}
 
-	const following = user?.following;
-	const isFollowing = following.includes(loggedInUserId as string);
+const profileTopContext = createContext<ProfileTopContextType | null>(null);
+
+const ProfileTop = ({
+	user,
+	profileSuggestion,
+	postNumber,
+	showFollow,
+	loggedInUserId,
+}: ProfileTopProps) => {
+	const suggestion = profileSuggestion.filter((item) => item.username !== user.username);
+	const [openSuggestion, setOpenSuggestion] = useState(false);
+
+	const [followers, setFollowers] = useState<string[]>(user?.followers);
+
+	const [isFollower, setIsFollower] = useState(followers.includes(loggedInUserId));
+
+	const [following, setFollowing] = useState(user?.following);
+	const isFollowing = following.includes(loggedInUserId);
 
 	const handleFollow = async () => {
 		const userRef = doc(firestore, "users", user?.userId);
@@ -63,7 +103,18 @@ const ProfileTop = ({ user, postNumber, showFollow, loggedInUserId }: ProfileTop
 	};
 
 	return (
-		<>
+		<profileTopContext.Provider
+			value={{
+				user,
+				suggestion,
+				postNumber,
+				showFollow,
+				loggedInUserId,
+				followers,
+				following,
+				isFollowing,
+				setFollowing,
+			}}>
 			<section className="user-profile-head-container">
 				<span className="user-profile-picture">
 					<Image
@@ -80,63 +131,42 @@ const ProfileTop = ({ user, postNumber, showFollow, loggedInUserId }: ProfileTop
 						<section className="lowercase flex items-center gap-[5px]">
 							<h1 className="font-normal h-min text-xl">{user?.username}</h1>
 
-							{user?.isVerified && (
-								<Image
-									src={icons.verifiedBadge}
-									width={18}
-									height={18}
-									alt="User is verified badge"
-									className="ml-2"
-								/>
-							)}
+							<Dialog>
+								<DialogTrigger asChild>
+									<button className="p-2 icons cursor-pointer hidden max-[768px]:flex">
+										<Image
+											src={showFollow ? icons.dotMenu : icons.gear}
+											alt={showFollow ? "Dot menu" : "gear icon"}
+											className={cn(showFollow && "w-8 h-8")}
+										/>
+									</button>
+								</DialogTrigger>
 
-							{showFollow ? (
-								<Dialog>
-									<DialogTrigger asChild>
-										<button className="p-2 icons cursor-pointer hidden max-[768px]:flex">
-											<Image
-												src={icons.dotMenu}
-												alt="gear icon"
-												className="w-8 h-8"
-											/>
-										</button>
-									</DialogTrigger>
-
-									<DialogContent className="p-0">
-										<ProfileMenu />
-									</DialogContent>
-								</Dialog>
-							) : (
-								<Dialog>
-									<DialogTrigger asChild>
-										<button className="p-2 icons cursor-pointer hidden max-[768px]:flex">
-											<Image
-												src={icons.gear}
-												alt="gear icon"
-											/>
-										</button>
-									</DialogTrigger>
-
-									<DialogContent className="p-0">
-										<ProfileMenu />
-									</DialogContent>
-								</Dialog>
-							)}
+								<DialogContent className="p-0">
+									<ProfileMenu />
+								</DialogContent>
+							</Dialog>
 						</section>
 
 						<section className="flex w-auto items-center">
 							{showFollow ? (
-								<button
-									className={cn(
-										isFollower
-											? "edit-profile"
-											: isFollowing
-											? "!bg-primary-button !text-white edit-profile"
-											: "!bg-primary-button !text-white edit-profile"
-									)}
-									onClick={handleFollow}>
-									{isFollower ? "Following" : isFollowing ? "Follow Back" : "Follow"}
-								</button>
+								<>
+									<button
+										className={cn(
+											isFollower
+												? "edit-profile"
+												: isFollowing
+												? "!bg-primary-button !text-white edit-profile"
+												: "!bg-primary-button !text-white edit-profile"
+										)}
+										onClick={handleFollow}>
+										{isFollower ? "Following" : isFollowing ? "Follow Back" : "Follow"}
+									</button>
+
+									<button className="!ml-2 !mr-0 !w-fit edit-profile flex items-center justify-center">
+										Message
+									</button>
+								</>
 							) : (
 								<Link
 									className="edit-profile"
@@ -145,54 +175,33 @@ const ProfileTop = ({ user, postNumber, showFollow, loggedInUserId }: ProfileTop
 								</Link>
 							)}
 
-							{showFollow ? (
-								<button className="!ml-2 !mr-0 !w-fit edit-profile flex items-center justify-center">
-									Message
-								</button>
-							) : null}
-
-							<button className="!p-2 !rounded-[8px] !ml-2 !mr-0 !w-fit edit-profile flex items-center justify-center">
+							<button
+								onClick={() => setOpenSuggestion(!openSuggestion)}
+								className="!p-2 !rounded-[8px] !ml-2 !mr-0 !w-fit edit-profile flex items-center justify-center">
 								<Image
 									className="max-w-none icons"
-									src={"/icons/user.svg"}
+									src={openSuggestion ? "/icons/userFilled.svg" : "/icons/user.svg"}
 									width={16}
 									height={16}
 									alt=""
 								/>
 							</button>
 
-							{showFollow ? (
-								<Dialog>
-									<DialogTrigger asChild>
-										<button className="p-2 cursor-pointer icons max-[768px]:hidden">
-											<Image
-												src={icons.dotMenu}
-												alt="gear icon"
-												className="w-8 h-8"
-											/>
-										</button>
-									</DialogTrigger>
+							<Dialog>
+								<DialogTrigger asChild>
+									<button className="p-2 cursor-pointer icons max-[768px]:hidden">
+										<Image
+											src={showFollow ? icons.dotMenu : icons.gear}
+											alt={showFollow ? "dot menu" : "gear icon"}
+											className={cn(showFollow && "w-8 h-8")}
+										/>
+									</button>
+								</DialogTrigger>
 
-									<DialogContent className="p-0">
-										<ProfileMenu />
-									</DialogContent>
-								</Dialog>
-							) : (
-								<Dialog>
-									<DialogTrigger asChild>
-										<button className="p-2 cursor-pointer icons max-[768px]:hidden">
-											<Image
-												src={icons.gear}
-												alt="gear icon"
-											/>
-										</button>
-									</DialogTrigger>
-
-									<DialogContent className="p-0">
-										<ProfileMenu />
-									</DialogContent>
-								</Dialog>
-							)}
+								<DialogContent className="p-0">
+									<ProfileMenu />
+								</DialogContent>
+							</Dialog>
 						</section>
 					</section>
 
@@ -233,15 +242,27 @@ const ProfileTop = ({ user, postNumber, showFollow, loggedInUserId }: ProfileTop
 				</section>
 			</section>
 
-			<MobileStats
-				postNumber={postNumber}
-				user={user}
-				followers={followers}
-				following={following}
-				isFollowing={isFollowing}
-			/>
-		</>
+			<section className={cn("hidden", openSuggestion && "flex")}>
+				<ProfileSuggested
+					options={{
+						slidesToScroll: "auto",
+					}}
+				/>
+			</section>
+
+			<MobileStats />
+		</profileTopContext.Provider>
 	);
 };
 
 export default ProfileTop;
+
+export const useProfileTopContext = () => {
+	const context = useContext(profileTopContext);
+
+	if (!context) {
+		throw new Error("useProfileToptContext must be used within a profileTopContextProvider");
+	}
+
+	return context;
+};

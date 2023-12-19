@@ -3,33 +3,19 @@ import Image from "next/image";
 import Link from "next/link";
 import { icons } from "@/constants";
 import FeedMenu from "./FeedMenu";
-import { DocumentData } from "firebase/firestore";
+
 import { useState } from "react";
 
 import DeletePost from "./DeletePost";
+import { usePostContext } from "./PostCard";
 
 // no-post-story-ring;
 // 👆🏼 style for removing story ring in feed
 
-type PostHeadProps = {
-	user: DocumentData;
-	isUserPost: boolean;
-	postId: string;
-	userId: string;
-	creatorId: string;
-	isFollowing: boolean;
-	filePaths: string[];
-};
-
-const PostHead = ({
-	user,
-	isUserPost,
-	postId,
-	userId,
-	creatorId,
-	isFollowing,
-	filePaths,
-}: PostHeadProps) => {
+const PostHead = () => {
+	const {
+		post: { user },
+	} = usePostContext();
 	const [open, setOpen] = useState(false);
 
 	return (
@@ -81,14 +67,7 @@ const PostHead = ({
 				</DialogTrigger>
 
 				<DialogContent className="p-0">
-					<FeedMenu
-						isUserPost={isUserPost}
-						postId={postId}
-						userId={userId}
-						creatorId={creatorId}
-						isFollowing={isFollowing}
-						setOpen={setOpen}
-					/>
+					<FeedMenu setOpen={setOpen} />
 				</DialogContent>
 			</Dialog>
 
@@ -96,10 +75,7 @@ const PostHead = ({
 				open={open}
 				onOpenChange={setOpen}>
 				<DialogContent className="p-0">
-					<DeletePost
-						postId={postId}
-						filePaths={filePaths}
-					/>
+					<DeletePost />
 				</DialogContent>
 			</Dialog>
 		</section>

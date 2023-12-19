@@ -1,10 +1,12 @@
 import { icons } from "@/constants";
-import { DocumentData } from "firebase/firestore";
+
 import { HeartIcon, MessageCircleIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
-const ExploreCard = ({ post }: { post: DocumentData }) => {
+import { PostType } from "./post/Feed";
+
+const ExploreCard = ({ post }: { post: PostType }) => {
 	return (
 		<Link
 			href={`post/${post.id}`}
@@ -33,7 +35,7 @@ const ExploreCard = ({ post }: { post: DocumentData }) => {
 
 				<p className="text-white font-bold text-lg uppercase flex items-center gap-2 max-md:text-sm">
 					<MessageCircleIcon className="rotate-[270deg] fill-white w-5" />
-					{post.comments?.length}
+					{post.commentCount}
 				</p>
 			</span>
 		</Link>

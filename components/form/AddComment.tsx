@@ -3,15 +3,44 @@
 import { useRef, useState } from "react";
 import EmojiPicker from "../EmojiPicker";
 import useAutosizeTextArea from "@/utils/useAutosizeTextArea";
+import { useQueryClient } from "@tanstack/react-query";
+import { addComment } from "@/firebase/firebaseService";
+import { usePostContext } from "../post/PostCard";
+import { useUser } from "@clerk/nextjs";
 
 const AddComment = () => {
+	const { post } = usePostContext();
+	const { user } = useUser();
+	const queryClient = useQueryClient();
+
 	const [text, setText] = useState("");
 	const textAreaRef = useRef<HTMLTextAreaElement>(null);
 
 	useAutosizeTextArea(textAreaRef.current, text);
 
+	const onCreateComment = async (e: React.FormEvent<HTMLFormElement>) => {
+		e.preventDefault();
+		try {
+			await addComment(
+				text,
+				user?.imageUrl as string,
+				post.id,
+				user?.id as string,
+				user?.username as string
+			);
+
+			setText("");
+
+			queryClient.invalidateQueries({ queryKey: ["commentData"] });
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
 	return (
-		<form className="px-3 py-[6px] flex items-center justify-between border-separator-divider border-y">
+		<form
+			onSubmit={onCreateComment}
+			className="px-3 py-[6px] flex items-center justify-between border-separator-divider border-y">
 			<EmojiPicker onChange={setText} />
 
 			<label

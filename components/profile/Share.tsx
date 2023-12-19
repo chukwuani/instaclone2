@@ -1,10 +1,11 @@
 import { icons } from "@/constants";
-import { DocumentData } from "firebase/firestore";
 import { HeartIcon, MessageCircleIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useProfileBottomContext } from "./ProfileBottom";
 
-const Share = ({ posts, showSaved }: { posts: DocumentData[]; showSaved: boolean }) => {
+const Share = () => {
+	const { posts, showSaved } = useProfileBottomContext();
 	return (
 		<>
 			{posts?.length > 0 ? (
@@ -38,7 +39,7 @@ const Share = ({ posts, showSaved }: { posts: DocumentData[]; showSaved: boolean
 
 								<p className="text-white font-bold text-lg uppercase flex items-center gap-2 max-md:text-sm">
 									<MessageCircleIcon className="rotate-[270deg] fill-white w-5" />
-									{item.comments?.length}
+									{item.commentCount}
 								</p>
 							</span>
 						</Link>

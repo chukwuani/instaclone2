@@ -1,13 +1,44 @@
-import { getFeedPost, getUserByUsername } from "@/firebase/firebaseService";
+"use client";
+
+import { getFeedPost } from "@/firebase/firebaseService";
 import PostCard from "./PostCard";
-import { currentUser } from "@clerk/nextjs";
+import { useQuery } from "@tanstack/react-query";
+import FeedSkeleton from "./FeedSkeleton";
 
-export default async function Feed() {
-	const user = await currentUser();
-	const posts = await getFeedPost(user?.username as string);
-	const userProfile = await getUserByUsername(user?.username as string);
+export type PostType = {
+	id: string;
+	altTexts: string[];
+	caption: string;
+	commentCount: number;
+	createdAt: {
+		seconds: number;
+		nanoseconds: number;
+	};
+	creatorId: string;
+	filePaths: string[];
+	images: string[];
+	likes: string[];
+	saves: string[];
+	user: {
+		imageUrl: string;
+		isVerified: boolean;
+		name: string;
+		username: string;
+	};
+};
 
-	//Warning: Only plain objects can be passed to Client Components from Server Components. Convert it manually to a simple value before passing it to props. Solution: JSON.parse(JSON.stringify(post)).
+type FeedProps = {
+	username: string;
+	id: string;
+};
+
+export default function Feed({ username, id }: FeedProps) {
+	const { isLoading, data: posts } = useQuery<PostType[]>({
+		queryKey: ["feedData"],
+		queryFn: async () => await getFeedPost(username),
+	});
+
+	if (isLoading) return <FeedSkeleton />;
 
 	return (
 		<>
@@ -16,8 +47,8 @@ export default async function Feed() {
 					<PostCard
 						key={post.id}
 						post={JSON.parse(JSON.stringify(post))}
-						currentUserId={user?.id}
-						userProfile={userProfile[0]}
+						userId={id}
+						username={username}
 					/>
 				);
 			})}
